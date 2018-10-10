@@ -1,0 +1,786 @@
+<?xml version="1.0" encoding="utf-8"?>
+<window type="dialog">
+
+    <onload condition="String.IsEmpty(Window(home).Property(channel_id))">SetProperty(channel_id,0,home)</onload>
+    <onunload>ClearProperty(channel_id,home)</onunload>
+
+    <coordinates>
+        <system>1</system>
+        <left>0</left>
+        <top>0</top>
+    </coordinates>
+
+    <defaultcontrol always="true">999</defaultcontrol>
+
+    <controls>
+
+        <control type="button" id="999">
+            <description>Dummy control used to set focus to on video start</description>
+            <left>-100</left>
+            <top>-100</top>
+            <height>0</height>
+            <width>0</width>
+            <aligny>center</aligny>
+            <align>center</align>
+            <font>font_MainMenu</font>
+            <textcolor>black</textcolor>
+            <texturefocus>white.png</texturefocus>
+            <texturenofocus>white.png</texturenofocus>
+            <onclick>-</onclick>
+            <onup>4003</onup>
+            <ondown>4003</ondown>
+            <onleft>4003</onleft>
+            <onright>4003</onright>
+        </control>
+        <control type="image" id="4009">
+            <description>Dummy image used for preload of icons</description>
+            <left>-100</left>
+            <top>-100</top>
+            <height>1</height>
+            <width>1</width>
+            <aspectratio>keep</aspectratio>
+        </control>
+
+        <!-- OSD for current playing program -->
+        <control type="group">
+            <description>OSD for current playing program</description>
+            <left>0</left>
+            <top>0</top>
+            <height>720</height>
+            <width>1280</width>
+            <visible allowhiddenfocus="true">Control.HasFocus(4003)</visible>
+            <animation type="Visible">
+                <effect type="fade" start="0" end="100" time="300"/>
+                <effect type="slide" start="0,200" end="0,0" time="300" tween="cubic" easing="out"/>
+            </animation>
+            <animation type="Hidden">
+                <effect type="fade" start="100" end="0" time="300"/>
+                <effect type="slide" start="0,0" end="0,200" time="300" tween="cubic" easing="in"/>
+            </animation>
+            <control type="image">
+                <description>Background</description>
+                <left>0</left>
+                <top>0</top>
+                <width>1280</width>
+                <height>720</height>
+                <texture>fade.png</texture>
+                <fadetime>300</fadetime>
+            </control>
+            <control type="label" id="4005">
+                <description>Skip time within playback</description>
+                <visible>!String.StartsWith(Control.GetLabel(4005),0 )</visible>
+                <centerleft>640</centerleft>
+                <top>400</top>
+                <height>50</height>
+                <width>350</width>
+                <align>center</align>
+                <font>font_MainMenu</font>
+                <textcolor>white</textcolor>
+                <shadowcolor>grey</shadowcolor>
+            </control>
+            <control type="image" id="4008">
+                <description>Channel icon</description>
+                <left>546</left>
+                <top>480</top>
+                <height>106</height>
+                <width>188</width>
+                <aspectratio>keep</aspectratio>
+                <texture fallback="default_channel.png">default_channel.png</texture>
+                <colordiffuse>FFFFFFFF</colordiffuse>
+            </control>
+            <control type="label" id="4006">
+                <description>Program start time</description>
+                <centerleft>640</centerleft>
+                <top>600</top>
+                <height>15</height>
+                <width>400</width>
+                <label>$INFO[System.Date(DDD)], $INFO[System.Date(d)] $INFO[System.Date(mmm)]., $INFO[System.Time]</label>
+                <font>font14</font>
+                <aligny>center</aligny>
+                <align>center</align>
+            </control>
+            <control type="label" id="4000">
+                <description>Program title</description>
+                <left>-100</left>
+                <top>-100</top>
+                <height>0</height>
+                <width>0</width>
+            </control>
+            <control type="label">
+                <description>Program title</description>
+                <left>150</left>
+                <top>630</top>
+                <height>15</height>
+                <width>980</width>
+                <label>[UPPERCASE]$INFO[Control.GetLabel(4000)][/UPPERCASE]</label>
+                <font>font30_title</font>
+                <aligny>center</aligny>
+                <align>center</align>
+            </control>
+            <control type="label" id="4001">
+                <description>Program playtime</description>
+                <left>10</left>
+                <top>670</top>
+                <height>15</height>
+                <width>110</width>
+                <label>1:34:11</label>
+                <font>font14</font>
+                <aligny>center</aligny>
+                <align>center</align>
+            </control>
+            <control type="progress" id="4002">
+                <description>Program playtime progress bar</description>
+                <left>150</left>
+                <top>670</top>
+                <width>980</width>
+                <height>15</height>
+                <texturebg border="3" colordiffuse="60FFFFFF">white50.png</texturebg>
+                <midtexture>white50.png</midtexture>
+            </control>
+            <control type="slider" id="4003">
+                <description>Program playtime progress bar slider</description>
+                <left>155</left>
+                <top>665</top>
+                <width>980</width>
+                <height>25</height>
+                <texturesliderbar colordiffuse="00FFFFFF">slider_bar.png</texturesliderbar>
+                <textureslidernib colordiffuse="FF12A0C7">slider_bar.png</textureslidernib>
+                <textureslidernibfocus colordiffuse="FF12A0C7">slider_bar.png</textureslidernibfocus>
+                <onup>4200</onup>
+            </control>
+            <control type="label" id="4004">
+                <description>Program duration</description>
+                <left>1150</left>
+                <top>670</top>
+                <height>15</height>
+                <width>110</width>
+                <label>1:50:00</label>
+                <font>font14</font>
+                <aligny>center</aligny>
+                <align>center</align>
+            </control>
+            <control type="button" id="4007">
+                <left>-100</left>
+                <top>-100</top>
+                <width>1</width>
+                <height>1</height>
+                <onup>4200</onup>
+            </control>
+        </control>
+
+
+        <control type="group">
+            <description>Group containing channelgroups, channels and program lists</description>
+            <left>0</left>
+            <top>0</top>
+            <height>720</height>
+            <width>1300</width>
+            <animation effect="fade" start="0" end="100" time="200">VisibleChange</animation>
+            <visible allowhiddenfocus="true">
+                Control.HasFocus(4100)|Control.HasFocus(4200)|Control.HasFocus(4300)
+            </visible>
+            <control type="image">
+                <description>Background for whole group</description>
+                <height>720</height>
+                <width>1280</width>
+                <texture>black.png</texture>
+                <colordiffuse>A6FFFFFF</colordiffuse>
+            </control>
+            <control type="group">
+                <description>Channelgroup list</description>
+                <control type="image">
+                    <description>List background</description>
+                    <height>720</height>
+                    <width>300</width>
+                    <texture>listitem-bg.png</texture>
+                    <colordiffuse>CC000000</colordiffuse>
+                    <!-- fade out list background if focus changes to other control -->
+                    <animation effect="fade" start="0" end="100" time="200" condition="Control.HasFocus(4100)">
+                        Conditional
+                    </animation>
+                    <animation effect="fade" start="100" end="0" time="200" condition="!Control.HasFocus(4100)">
+                        Conditional
+                    </animation>
+                </control>
+                <control type="wraplist" id="4100">
+                    <description>Channelgroups list</description>
+                    <onright>4200</onright>
+                    <orientation>vertical</orientation>
+                    <autoscroll>false</autoscroll>
+                    <focusposition>6</focusposition>
+                    <scrolltime tween="sine" easing="out">200</scrolltime>
+                    <itemlayout height="80" width="300">
+                        <control type="image">
+                            <description>Colored list item background</description>
+                            <left>0</left>
+                            <top>0</top>
+                            <height>78</height>
+                            <width>20</width>
+                            <texture>$INFO[ListItem.Property(icon)]</texture>
+                        </control>
+                        <control type="image">
+                            <description>Overlay over colored list item background (unfocused)</description>
+                            <left>0</left>
+                            <top>0</top>
+                            <height>78</height>
+                            <width>20</width>
+                            <texture>white50.png</texture>
+                            <colordiffuse>FF000000</colordiffuse>
+                        </control>
+                        <control type="image">
+                            <description>List item background</description>
+                            <left>20</left>
+                            <top>0</top>
+                            <width>280</width>
+                            <height>78</height>
+                            <texture>listitem-bg.png</texture>
+                            <colordiffuse>FF000000</colordiffuse>
+                            <!-- fade out if focus changes to other control -->
+                            <animation effect="fade" start="0" end="100" time="200" condition="Control.HasFocus(4100)">
+                                Conditional
+                            </animation>
+                            <animation effect="fade" start="100" end="0" time="200" condition="!Control.HasFocus(4100)">
+                                Conditional
+                            </animation>
+                        </control>
+                        <control type="label">
+                            <description>Group name</description>
+                            <left>48</left>
+                            <top>1</top>
+                            <width>252</width>
+                            <height>80</height>
+                            <font>font14</font>
+                            <aligny>center</aligny>
+                            <textcolor>white</textcolor>
+                            <align>left</align>
+                            <label>[UPPERCASE]$INFO[ListItem.Property(group_name)][/UPPERCASE]</label>
+                            <!--
+                            fade out if focus changes to other control -->
+                            <animation effect="fade" start="0" end="100" time="200" condition="Control.HasFocus(4100)">
+                                Conditional
+                            </animation>
+                            <animation effect="fade" start="100" end="0" time="200" condition="!Control.HasFocus(4100)">
+                                Conditional
+                            </animation>
+                        </control>
+                    </itemlayout>
+                    <focusedlayout height="80" width="300">
+                        <control type="image">
+                            <description>Colored list item background for selected group without focus</description>
+                            <left>0</left>
+                            <top>1</top>
+                            <width>20</width>
+                            <height>77</height>
+                            <texture>$INFO[ListItem.Property(icon)]</texture>
+                            <visible>!Control.HasFocus(4100)</visible>
+                            <animation effect="fade" start="0" end="100" time="200">VisibleChange</animation>
+                        </control>
+                        <control type="image">
+                            <description>Colored list item background for selected group</description>
+                            <left>0</left>
+                            <top>0</top>
+                            <width>300</width>
+                            <height>78</height>
+                            <texture>$INFO[ListItem.Property(icon)]</texture>
+                            <!-- fade out if focus changes to other control -->
+                            <animation effect="fade" start="0" end="100" time="200" condition="Control.HasFocus(4100)">
+                                Conditional
+                            </animation>
+                            <animation effect="fade" start="100" end="0" time="200" condition="!Control.HasFocus(4100)">
+                                Conditional
+                            </animation>
+                        </control>
+                        <control type="label">
+                            <description>Group name</description>
+                            <left>48</left>
+                            <top>1</top>
+                            <width>252</width>
+                            <height>80</height>
+                            <font>font14</font>
+                            <aligny>center</aligny>
+                            <textcolor>black</textcolor>
+                            <align>left</align>
+                            <label>[UPPERCASE]$INFO[ListItem.Property(group_name)][/UPPERCASE]</label>
+                            <!-- fade out if focus changes to other control -->
+                            <animation effect="fade" start="0" end="100" time="200" condition="Control.HasFocus(4100)">
+                                Conditional
+                            </animation>
+                            <animation effect="fade" start="100" end="0" time="200" condition="!Control.HasFocus(4100)">
+                                Conditional
+                            </animation>
+                        </control>
+                    </focusedlayout>
+                </control>
+            </control>
+            <control type="group">
+                <description>Container for channel and program list</description>
+                <left>20</left>
+                <top>0</top>
+                <height>720</height>
+                <width>500</width>
+                <animation effect="fade" start="0" end="100" time="200">VisibleChange</animation>
+                <animation effect="slide" end="280,0" time="300" condition="Control.HasFocus(4100)">Conditional</animation>
+                <control type="group">
+                    <description>Channel list</description>
+                    <control type="image">
+                        <description>Shadow</description>
+                        <texture>separator-y.png</texture>
+                        <left>-20</left>
+                        <top>0</top>
+                        <height>720</height>
+                        <width>20</width>
+                        <visible>Control.HasFocus(4200)|Control.HasFocus(4300)</visible>
+                    </control>
+                    <control type="image">
+                        <description>List background</description>
+                        <height>720</height>
+                        <width>500</width>
+                        <texture>listitem-bg.png</texture>
+                        <colordiffuse>CC000000</colordiffuse>
+                        <!-- fade out list background if focus changes to other control -->
+                        <animation effect="fade" start="0" end="100" time="200"
+                                   condition="Control.HasFocus(4100)|Control.HasFocus(4200)">Conditional
+                        </animation>
+                        <animation effect="fade" start="100" end="0" time="200"
+                                   condition="![Control.HasFocus(4100)|Control.HasFocus(4200)]">Conditional
+                        </animation>
+                    </control>
+                    <control type="wraplist" id="4200">
+                        <description>Channels list</description>
+                        <onleft>4100</onleft>
+                        <onright>4300</onright>
+                        <orientation>vertical</orientation>
+                        <autoscroll>false</autoscroll>
+                        <focusposition>6</focusposition>
+                        <scrolltime tween="sine" easing="out">200</scrolltime>
+                        <itemlayout height="80" width="500">
+                            <control type="image">
+                                <description>List item background for channel icon</description>
+                                <left>0</left>
+                                <top>0</top>
+                                <height>78</height>
+                                <width>150</width>
+                                <texture>listitem-bg.png</texture>
+                                <colordiffuse>FF000000</colordiffuse>
+                            </control>
+                            <control type="image">
+                                <description>List item background for text</description>
+                                <left>150</left>
+                                <top>0</top>
+                                <height>78</height>
+                                <width>350</width>
+                                <texture>listitem-bg.png</texture>
+                                <colordiffuse>FF000000</colordiffuse>
+                                <!-- fade out list background if focus changes to other control -->
+                                <animation effect="fade" start="0" end="100" time="200"
+                                           condition="Control.HasFocus(4100)|Control.HasFocus(4200)">Conditional
+                                </animation>
+                                <animation effect="fade" start="100" end="0" time="200"
+                                           condition="![Control.HasFocus(4100)|Control.HasFocus(4200)]">Conditional
+                                </animation>
+                            </control>
+                            <control type="image">
+                                <description>Channel icon</description>
+                                <left>5</left>
+                                <top>10</top>
+                                <height>60</height>
+                                <width>140</width>
+                                <aspectratio>keep</aspectratio>
+                                <texture fallback="default_channel.png">$INFO[ListItem.Property(icon)]</texture>
+                                <colordiffuse>FFFFFFFF</colordiffuse>
+                            </control>
+                            <control type="image">
+                                <description>Vertical bar (separator)</description>
+                                <left>150</left>
+                                <top>18</top>
+                                <height>44</height>
+                                <width>2</width>
+                                <texture>white.png</texture>
+                                <colordiffuse>33FFFFFF</colordiffuse>
+                                <!-- fade out list background if focus changes to other control -->
+                                <animation effect="fade" start="0" end="100" time="200"
+                                           condition="Control.HasFocus(4100)|Control.HasFocus(4200)">Conditional
+                                </animation>
+                                <animation effect="fade" start="100" end="0" time="200"
+                                           condition="![Control.HasFocus(4100)|Control.HasFocus(4200)]">Conditional
+                                </animation>
+                            </control>
+                            <control type="label">
+                                <description>Channel name</description>
+                                <left>170</left>
+                                <top>1</top>
+                                <height>80</height>
+                                <width>330</width>
+                                <font>font14</font>
+                                <aligny>center</aligny>
+                                <textcolor>white</textcolor>
+                                <align>left</align>
+                                <label>[UPPERCASE]$INFO[ListItem.Property(channel_name)][/UPPERCASE]</label>
+                                <!-- fade out list background if focus changes to other control -->
+                                <animation effect="fade" start="0" end="100" time="200"
+                                           condition="Control.HasFocus(4100)|Control.HasFocus(4200)">Conditional
+                                </animation>
+                                <animation effect="fade" start="100" end="0" time="200"
+                                           condition="![Control.HasFocus(4100)|Control.HasFocus(4200)]">Conditional
+                                </animation>
+                            </control>
+                            <control type="image">
+                                <description>Shadow</description>
+                                <texture flipx="true">separator-y.png</texture>
+                                <left>0</left>
+                                <top>0</top>
+                                <height>80</height>
+                                <width>20</width>
+                                <visible>Control.HasFocus(4100)</visible>
+                            </control>
+                        </itemlayout>
+                        <focusedlayout height="80" width="500">
+                            <control type="image">
+                                <description>Icon background</description>
+                                <left>0</left>
+                                <top>0</top>
+                                <height>78</height>
+                                <width>150</width>
+                                <texture>listitem-bg-fo.png</texture>
+                                <animation effect="fade" start="100" end="30" time="300"
+                                           condition="Control.HasFocus(4100)">Conditional</animation>
+                            </control>
+                            <control type="image">
+                                <description>Text background</description>
+                                <left>150</left>
+                                <top>0</top>
+                                <height>78</height>
+                                <width>350</width>
+                                <texture>listitem-bg-fo.png</texture>
+                                <!-- fade out list background if focus changes to other control -->
+                                <animation effect="fade" start="0" end="100" time="200"
+                                           condition="Control.HasFocus(4100)|Control.HasFocus(4200)">Conditional
+                                </animation>
+                                <animation effect="fade" start="100" end="0" time="200"
+                                           condition="![Control.HasFocus(4100)|Control.HasFocus(4200)]">Conditional
+                                </animation>
+                                <animation effect="fade" start="100" end="30" time="300"
+                                           condition="Control.HasFocus(4100)">Conditional</animation>
+                            </control>
+                            <control type="image">
+                                <description>Icon</description>
+                                <left>5</left>
+                                <top>10</top>
+                                <height>60</height>
+                                <width>140</width>
+                                <aspectratio>keep</aspectratio>
+                                <texture fallback="default_channel.png">$INFO[ListItem.Property(icon)]</texture>
+                                <colordiffuse>FFFFFFFF</colordiffuse>
+                            </control>
+                            <control type="image">
+                                <description>Vertical bar</description>
+                                <left>150</left>
+                                <top>18</top>
+                                <height>44</height>
+                                <width>2</width>
+                                <texture>black.png</texture>
+                                <colordiffuse>33FFFFFF</colordiffuse>
+                                <!-- fade out list background if focus changes to other control -->
+                                <animation effect="fade" start="0" end="100" time="200"
+                                           condition="Control.HasFocus(4100)|Control.HasFocus(4200)">Conditional
+                                </animation>
+                                <animation effect="fade" start="100" end="0" time="200"
+                                           condition="![Control.HasFocus(4100)|Control.HasFocus(4200)]">Conditional
+                                </animation>
+                            </control>
+                            <control type="label">
+                                <description>Label</description>
+                                <left>170</left>
+                                <top>1</top>
+                                <height>80</height>
+                                <width>330</width>
+                                <font>font14</font>
+                                <aligny>center</aligny>
+                                <textcolor>black</textcolor>
+                                <align>left</align>
+                                <label>[UPPERCASE]$INFO[ListItem.Property(channel_name)][/UPPERCASE]</label>
+                                <animation effect="fade" start="0" end="100" time="200"
+                                           condition="Control.HasFocus(4100)|Control.HasFocus(4200)">Conditional
+                                </animation>
+                                <animation effect="fade" start="100" end="0" time="200"
+                                           condition="![Control.HasFocus(4100)|Control.HasFocus(4200)]">Conditional
+                                </animation>
+                                <animation effect="fade" start="0" end="100" time="300"
+                                           condition="Control.HasFocus(4200)">Conditional</animation>
+                            </control>
+                            <control type="label">
+                                <description>Label</description>
+                                <left>170</left>
+                                <top>1</top>
+                                <height>80</height>
+                                <width>330</width>
+                                <font>font14</font>
+                                <aligny>center</aligny>
+                                <textcolor>white</textcolor>
+                                <align>left</align>
+                                <label>[UPPERCASE]$INFO[ListItem.Property(channel_name)][/UPPERCASE]</label>
+                                <animation effect="fade" start="0" end="100" time="200"
+                                           condition="Control.HasFocus(4100)|Control.HasFocus(4200)">Conditional
+                                </animation>
+                                <animation effect="fade" start="100" end="0" time="200"
+                                           condition="![Control.HasFocus(4100)|Control.HasFocus(4200)]">Conditional
+                                </animation>
+                                <animation effect="fade" start="100" end="0" time="300"
+                                           condition="Control.HasFocus(4200)">Conditional</animation>
+                            </control>
+                            <control type="image">
+                                <description>Shadow</description>
+                                <texture flipx="true">separator-y.png</texture>
+                                <left>0</left>
+                                <top>0</top>
+                                <height>80</height>
+                                <width>20</width>
+                                <visible>Control.HasFocus(4100)</visible>
+                            </control>
+                            <control type="button">
+                                <left>-100</left>
+                                <top>-100</top>
+                                <height>0</height>
+                                <width>0</width>
+                                <onclick>-</onclick>
+                                <onfocus>Skin.SetString(channel_id, 481)</onfocus>
+                            </control>
+                        </focusedlayout>
+                    </control>
+                </control>
+                <control type="group">
+                    <description>Program list</description>
+                    <left>150</left>
+                    <top>0</top>
+                    <height>720</height>
+                    <width>500</width>
+                    <!-- move over channel list on focus -->
+                    <animation effect="slide" end="350,0" time="300"
+                               condition="!Control.HasFocus(4300)">Conditional</animation>
+                    <!-- hide program list if focus is on channelgroup list -->
+                    <visible allowhiddenfocus="true">
+                        [Control.IsVisible(4200)|Control.IsVisible(4300)]
+                        +StringCompare(Container(4200).ListItem.Property(cid), Container(4300).ListItem.Property(cid))
+                    </visible>
+                    <animation type="Visible">
+                        <effect type="fade" start="0" end="100" time="300"/>
+                    </animation>
+                    <animation type="Hidden">
+                        <effect type="fade" start="100" end="0" time="300"/>
+                    </animation>
+                    <control type="image">
+                        <description>Shadow</description>
+                        <texture>separator-y.png</texture>
+                        <left>-20</left>
+                        <top>0</top>
+                        <width>20</width>
+                        <height>720</height>
+                        <visible>Control.HasFocus(4300)</visible>
+                    </control>
+                    <control type="image">
+                        <description>List background</description>
+                        <height>720</height>
+                        <width>500</width>
+                        <texture>listitem-bg.png</texture>
+                        <colordiffuse>CC000000</colordiffuse>
+                    </control>
+                    <control type="wraplist" id="4300">
+                        <onleft>4200</onleft>
+                        <onright>999</onright>
+                        <orientation>vertical</orientation>
+                        <autoscroll>false</autoscroll>
+                        <focusposition>6</focusposition>
+                        <movement>5</movement>
+                        <scrolltime tween="sine" easing="out">200</scrolltime>
+                        <itemlayout height="80" width="500">
+                            <control type="image">
+                                <description>List item background</description>
+                                <left>0</left>
+                                <top>0</top>
+                                <height>78</height>
+                                <width>500</width>
+                                <texture>listitem-bg.png</texture>
+                                <colordiffuse>FF000000</colordiffuse>
+                            </control>
+                            <control type="label">
+                                <description>Program start time</description>
+                                <left>12</left>
+                                <top>2</top>
+                                <height>80</height>
+                                <width>70</width>
+                                <font>font14</font>
+                                <aligny>top</aligny>
+                                <textcolor>white</textcolor>
+                                <align>left</align>
+                                <info>ListItem.Property(t_start)</info>
+                            </control>
+                            <control type="image">
+                                <description>Program status icon (Archive, Past, Live)</description>
+                                <left>28</left>
+                                <top>37</top>
+                                <height>25</height>
+                                <width>25</width>
+                                <texture>$INFO[Listitem.Property(status)]</texture>
+                            </control>
+                            <control type="textbox">
+                                <description>Program title</description>
+                                <left>85</left>
+                                <top>2</top>
+                                <height>76</height>
+                                <width>400</width>
+                                <font>font14</font>
+                                <aligny>top</aligny>
+                                <textcolor>white</textcolor>
+                                <align>left</align>
+                                <wrapmultiline>true</wrapmultiline>
+                                <label>$INFO[ListItem.Property(title_list)]</label>
+                            </control>
+                            <control type="image">
+                                <description>Shadow</description>
+                                <texture flipx="true">separator-y.png</texture>
+                                <left>0</left>
+                                <top>0</top>
+                                <height>80</height>
+                                <width>20</width>
+                                <visible>Control.HasFocus(4200)</visible>
+                            </control>
+                        </itemlayout>
+                        <focusedlayout height="80" width="500">
+                            <control type="image">
+                                <description>List item background</description>
+                                <left>0</left>
+                                <top>0</top>
+                                <height>78</height>
+                                <width>500</width>
+                                <texture>listitem-bg-fo.png</texture>
+                                <animation effect="fade" start="100" end="30" time="300"
+                                           condition="!Control.HasFocus(4300)">Conditional</animation>
+                            </control>
+                            <control type="label">
+                                <description>Selected Program start time (on focus)</description>
+                                <left>12</left>
+                                <top>2</top>
+                                <height>80</height>
+                                <width>70</width>
+                                <font>font14</font>
+                                <aligny>top</aligny>
+                                <textcolor>black</textcolor>
+                                <align>left</align>
+                                <info>ListItem.Property(t_start)</info>
+                                <animation effect="fade" start="0" end="100" time="300"
+                                           condition="Control.HasFocus(4300)">Conditional</animation>
+                            </control>
+                            <control type="image">
+                                <description>Program status icon (Archive, Past, Live)</description>
+                                <left>28</left>
+                                <top>37</top>
+                                <height>25</height>
+                                <width>25</width>
+                                <texture>$INFO[Listitem.Property(status)]</texture>
+                            </control>
+                            <control type="label">
+                                <description>Selected Program start time</description>
+                                <left>12</left>
+                                <top>2</top>
+                                <height>80</height>
+                                <width>70</width>
+                                <font>font14</font>
+                                <aligny>top</aligny>
+                                <textcolor>white</textcolor>
+                                <align>left</align>
+                                <info>ListItem.Property(t_start)</info>
+                                <animation effect="fade" start="100" end="0" time="300"
+                                           condition="Control.HasFocus(4300)">Conditional</animation>
+                            </control>
+                            <control type="textbox">
+                                <description>Selected Program title on focus</description>
+                                <left>85</left>
+                                <top>2</top>
+                                <height>76</height>
+                                <width>400</width>
+                                <font>font14</font>
+                                <aligny>top</aligny>
+                                <textcolor>black</textcolor>
+                                <align>left</align>
+                                <wrapmultiline>true</wrapmultiline>
+                                <label>$INFO[ListItem.Property(title_list)]</label>
+                                <animation effect="fade" start="0" end="100" time="300"
+                                           condition="Control.HasFocus(4300)">Conditional</animation>
+                            </control>
+                            <control type="textbox">
+                                <description>Selected Program title</description>
+                                <left>85</left>
+                                <top>2</top>
+                                <height>76</height>
+                                <width>400</width>
+                                <font>font14</font>
+                                <aligny>top</aligny>
+                                <textcolor>white</textcolor>
+                                <align>left</align>
+                                <wrapmultiline>true</wrapmultiline>
+                                <label>$INFO[ListItem.Property(title_list)]</label>
+                                <animation effect="fade" start="100" end="0" time="300"
+                                           condition="Control.HasFocus(4300)">Conditional</animation>
+                            </control>
+                            <control type="image">
+                                <description>Shadow</description>
+                                <texture flipx="true">separator-y.png</texture>
+                                <left>0</left>
+                                <top>0</top>
+                                <height>80</height>
+                                <width>20</width>
+                                <visible>Control.HasFocus(4200)</visible>
+                            </control>
+                        </focusedlayout>
+                    </control>
+                    <control type="group">
+                        <description>Detailed information of the selected program</description>
+                        <left>500</left>
+                        <top>0</top>
+                        <height>720</height>
+                        <width>780</width>
+                        <visible>Control.HasFocus(4300)</visible>
+                        <animation effect="fade" start="0" end="100" time="200">VisibleChange</animation>
+                        <control type="image">
+                            <description>List background</description>
+                            <height>720</height>
+                            <width>780</width>
+                            <texture>listitem-bg.png</texture>
+                            <colordiffuse>CC000000</colordiffuse>
+                        </control>
+                        <control type="image">
+                            <description>Program status icon (Archive, Past, Live)</description>
+                            <left>30</left>
+                            <top>55</top>
+                            <height>25</height>
+                            <width>25</width>
+                            <texture>$INFO[Container(4300).ListItem.Property(status)]</texture>
+                        </control>
+                        <control type="label">
+                            <description>Program start time and date</description>
+                            <left>28</left>
+                            <top>55</top>
+                            <height>30</height>
+                            <width>500</width>
+                            <font>font12</font>
+                            <label>         [UPPERCASE]$INFO[Container(4300).ListItem.Property(t_start)] - $INFO[Container(4300).ListItem.Property(t_end)], $INFO[Container(4300).ListItem.Property(d_start)][/UPPERCASE]</label>
+                        </control>
+                        <control type="textbox">
+                            <description>Program Information</description>
+                            <left>30</left>
+                            <top>100</top>
+                            <height>500</height>
+                            <width>500</width>
+                            <font>font30</font>
+                            <wrapmultiline>true</wrapmultiline>
+                            <label>[B]$INFO[Container(4300).ListItem.Property(title)][/B] [I][COLOR grey]$INFO[Container(4300).ListItem.Property(category)][/COLOR][/I][CR][CR]$INFO[Container(4300).ListItem.Property(descr)]</label>
+                        </control>
+                    </control>
+
+                </control>
+            </control>
+        </control>
+
+
+    </controls>
+</window>

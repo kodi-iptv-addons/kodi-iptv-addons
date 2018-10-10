@@ -1,0 +1,112 @@
+# XBMC Media Center language file
+# Addon Name: IPTV Library
+# Addon id: script.module.iptvlib
+# Addon version: 1.0.0
+# Addon Provider: Dmitry Vinogradov
+msgid ""
+msgstr ""
+
+# Empty string
+msgctxt "#30000"
+msgid " "
+msgstr " "
+
+# Dialogs & Error messages
+msgctxt "#30101"
+msgid "Subscription required"
+msgstr "Abonnement erforderlich"
+
+msgctxt "#30102"
+msgid "Set your subscription credentials for IPTV provider"
+msgstr "Geben Sie Ihre Zugangsdaten für Ihren IPTV Provider"
+
+msgctxt "#30103"
+msgid "Authentication failed"
+msgstr "Anmeldeversuch fehlgeschlagen"
+
+msgctxt "#30104"
+msgid "You should check your subscription credentials"
+msgstr "Bitte überprüfen Sie Ihre Zugangsdaten"
+
+msgctxt "#30105"
+msgid "Selected program is not playable"
+msgstr "Ausgewählte Programm kann nicht abgespielt werden"
+
+msgctxt "#30106"
+msgid "Service error occurred"
+msgstr "Service Fehler ist aufgetreten"
+
+msgctxt "#30107"
+msgid "Are you sure you want to exit application?"
+msgstr "Sind Sie sicher, dass Sie das Programm beenden möchten?"
+
+msgctxt "#30108"
+msgid "Archive is not available yet."
+msgstr "Archiv ist noch nicht verfügbar."
+
+msgctxt "#30109"
+msgid "Do you want to jump to the next available position?"
+msgstr "Soll der nächstmögliche Archiv-abschnitt angezeigt werden?"
+
+msgctxt "#30110"
+msgid "Archive on this channel is not available"
+msgstr "Archiv für diesen Kanal ist nicht verfügbar"
+
+msgctxt "#30111"
+msgid "Unable to skip forward on live TV"
+msgstr "Vorspulen innerhalb der Live-Sendungen ist nicht möglich"
+
+msgctxt "#30112"
+msgid "Implementation error"
+msgstr "Implementierungsfehler"
+
+msgctxt "#30113"
+msgid "No Api instance provided"
+msgstr "No Api instance provided"
+
+msgctxt "#30114"
+msgid "M3U Play List information required"
+msgstr "M3U Play List Information erforderlich"
+
+msgctxt "#30115"
+msgid "Please provide valid M3U Play List path"
+msgstr "Bitte korrigieren Sie den Pfad zur M3U Playliste"
+
+
+
+# Application's strings
+msgctxt "#30201"
+msgid "No information available"
+msgstr "Keine Information verfügbar"
+
+msgctxt "#30202"
+msgid "min."
+msgstr "min."
+
+msgctxt "#30203"
+msgid "sec."
+msgstr "sek."
+
+msgctxt "#30204"
+msgid "Loading EPG"
+msgstr "EPG wird geladen"
+
+msgctxt "#30205"
+msgid "Check XMLTV URL"
+msgstr "Untersuche XMLTV URL"
+
+msgctxt "#30206"
+msgid "Parse XMLTV"
+msgstr "Parse XMLTV"
+
+msgctxt "#30207"
+msgid "Cache XMLTV"
+msgstr "Cache XMLTV"
+
+msgctxt "#30208"
+msgid "Load XMLTV from cache"
+msgstr "Lade XMLTV aus dem cache"
+
+msgctxt "#30209"
+msgid "Download XMLTV"
+msgstr "Lade XMLTV runter"

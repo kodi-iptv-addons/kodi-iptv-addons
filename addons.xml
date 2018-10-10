@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<addons>
+  <addon id="repository.iptv" name="IPTV Add-ons repository" version="1.0.0" provider-name="Dmitry Vinogradov">
+    <extension point="xbmc.addon.repository" name="IPTV Add-ons repository">
+      <info compressed="false">https://github.com/dmitry-vinogradov/kodi-iptv-addons/raw/master/addons.xml</info>
+      <checksum>https://github.com/dmitry-vinogradov/kodi-iptv-addons/raw/master/addons.xml.md5</checksum>
+      <datadir zip="true">https://github.com/dmitry-vinogradov/kodi-iptv-addons/raw/master/</datadir>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+      <summary>IPTV Add-ons repository</summary>
+      <description>IPTV Add-ons repository</description>
+      <disclaimer>IPTV Add-ons repository</disclaimer>
+      <platform>all</platform>
+    </extension>
+  </addon>
+  <addon id="script.module.iptvlib" name="IPTV Library" version="1.0.0" provider-name="Dmitry Vinogradov">
+    <requires>
+      <import addon="xbmc.python" version="2.24.0"/>
+    </requires>
+    <extension point="xbmc.python.module" library="lib"/>
+    <extension point="xbmc.addon.metadata">
+      <assets>
+        <icon>resources/skins/Default/media/icon.png</icon>
+        <fanart/>
+        <screenshot/>
+      </assets>
+      <summary lang="en">Common library for IPTV Addons</summary>
+      <description lang="en">Common library for IPTV Addons</description>
+      <platform>all</platform>
+      <license>GNU LESSER GENERAL PUBLIC LICENSE Version 3, June 2007</license>
+      <source>https://github.com/dmitry-vinogradov/kodi-iptv-addons</source>
+      <news>[B]v1.0.0[/B] (2018-11-01)[CR] - Initial release</news>
+    </extension>
+  </addon>
+  <addon id="script.video.iptv.ottclub" name="OTTCLUB" version="1.0.0" provider-name="Dmitry Vinogradov">
+    <requires>
+      <import addon="xbmc.python" version="2.24.0"/>
+      <import addon="script.module.iptvlib" version="1.0.0"/>
+    </requires>
+    <extension point="xbmc.python.script" library="default.py">
+      <provides>video</provides>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+      <assets>
+        <icon>resources/icon.png</icon>
+        <fanart/>
+        <screenshot/>
+      </assets>
+      <platform>all</platform>
+      <summary lang="en">IPTV player for M3U8 playlists (visit ottplayer.org for more details)</summary>
+      <description lang="ru">OTTClub является универсальным приложением для просмотра онлайн телевидения (IPTV)</description>
+      <license>GNU LESSER GENERAL PUBLIC LICENSE Version 3, June 2007</license>
+      <source>https://github.com/dmitry-vinogradov/kodi-iptv-addons</source>
+      <news>[B]v1.0.0[/B] (2018-11-01)[CR]- Initial release</news>
+    </extension>
+  </addon>
+</addons>
