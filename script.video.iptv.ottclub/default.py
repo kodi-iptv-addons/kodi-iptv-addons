@@ -36,9 +36,13 @@ class Main(object):
             else:
                 return False
 
+        adult = addon.getSetting("adult") == 'true' or \
+                           addon.getSetting("adult") == True
+
         self.main_window.api = Ottclub(
             playlist,
             key,
+            adult,
             working_path=xbmc.translatePath(addon.getAddonInfo("profile"))
         )
 

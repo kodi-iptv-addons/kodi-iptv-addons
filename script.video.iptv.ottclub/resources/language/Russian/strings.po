@@ -18,3 +18,7 @@ msgstr "Ссылка на M3U"
 msgctxt "#30003"
 msgid "Playlist Key"
 msgstr "Ключ"
+
+msgctxt "#30004"
+msgid "Show adult channels"
+msgstr "Показывать каналы для взрослых"

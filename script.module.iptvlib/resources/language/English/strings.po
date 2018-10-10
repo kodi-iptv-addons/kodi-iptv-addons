@@ -57,12 +57,12 @@ msgid "Unable to skip forward on live TV"
 msgstr "Unable to skip forward on live TV"
 
 msgctxt "#30112"
-msgid "Implementation error"
-msgstr "Implementation error"
+msgid "Your playback will be stopped due to inactivity"
+msgstr "Your playback will be stopped due to inactivity"
 
 msgctxt "#30113"
-msgid "No Api instance provided"
-msgstr "No Api instance provided"
+msgid "in %s seconds"
+msgstr "in %s seconds"
 
 msgctxt "#30114"
 msgid "M3U Play List information required"

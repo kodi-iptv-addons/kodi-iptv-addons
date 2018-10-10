@@ -8,16 +8,18 @@ from iptvlib.models import *
 class Ottclub(Api):
     playlist = None  # type: str
     key = None  # type: str
+    adult = None  # type: bool
     hostname = None  # type: str
     epg_url = None  # type: str
     icon_url = None  # type: str
     m3u_groups = None  # type: OrderedDict[str, Group]
     m3u_channels = None  # type: OrderedDict[str, Channel]
 
-    def __init__(self, playlist, key, **kwargs):
+    def __init__(self, playlist, key, adult, **kwargs):
         super(Ottclub, self).__init__(**kwargs)
         self.playlist = playlist
         self.key = key
+        self.adult = adult
         self.auth_status = self.AUTH_STATUS_OK
         self.m3u_groups = OrderedDict()
         Model.API = self
@@ -37,6 +39,8 @@ class Ottclub(Api):
                     gid = str(len(self.m3u_groups) + 1)
                     self.m3u_groups[gid] = Group(gid, item["group-title"], OrderedDict())
                 group = self.m3u_groups[gid]
+                if self.adult is False and bool(item["adult"]) is True:
+                    return
                 channel = Channel(
                     item["tvg-id"],
                     group.gid,

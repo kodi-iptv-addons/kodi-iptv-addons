@@ -18,3 +18,7 @@ msgstr "Playlist URL"
 msgctxt "#30003"
 msgid "Playlist Key"
 msgstr "Playlist Key"
+
+msgctxt "#30004"
+msgid "Show adult channels"
+msgstr "Show adult channels"

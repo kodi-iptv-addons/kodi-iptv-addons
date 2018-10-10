@@ -44,14 +44,16 @@ class TvDialog(xbmcgui.WindowXMLDialog, WindowMixin):
     main_window = None
     player = None  # type: Player
     api = None  # type: Api
-    timer_refocus = None  # type: Timer
-    timer_slider_update = None  # type: Timer
-    timer_skip_playback = None  # type: Timer
-    timer_load_program_list = None  # type: Timer
     skip_secs = None  # type: int
     prev_skip_secs = None  # type: int
     prev_focused_id = None  # type: int
     playback_info_program = None  # type: Program
+
+    timer_refocus = None  # type: Timer
+    timer_slider_update = None  # type: Timer
+    timer_skip_playback = None  # type: Timer
+    timer_load_program_list = None  # type: Timer
+    timer_idle = None  # type: Timer
 
     def __init__(self, *args, **kwargs):
         self.main_window = kwargs.pop("main_window", None)
@@ -82,6 +84,11 @@ class TvDialog(xbmcgui.WindowXMLDialog, WindowMixin):
         if self.timer_load_program_list:
             self.timer_load_program_list.cancel()
             del self.timer_load_program_list
+
+        if self.timer_idle:
+            self.timer_idle.cancel()
+            del self.timer_idle
+
         super(TvDialog, self).close()
 
     def onInit(self):
@@ -104,6 +111,35 @@ class TvDialog(xbmcgui.WindowXMLDialog, WindowMixin):
         program = Program.factory(self.get_last_played_channel(), int(time_now()))
         self.play_program(program)
         self.load_lists()
+        self.reset_idle_timer()
+
+    def reset_idle_timer(self):
+        if self.timer_idle:
+            self.timer_idle.cancel()
+            del self.timer_idle
+        self.timer_idle = threading.Timer(HOUR, self.show_idle_dialog)
+        self.timer_idle.start()
+
+    def show_idle_dialog(self, time_to_wait=60):
+        # type: (int) -> None
+        dialog = xbmcgui.DialogProgress()
+        dialog.create(addon.getAddonInfo("name"), get_string(TEXT_IDLE_DIALOG_ID))
+        secs = 0
+        increment = int(100 / time_to_wait)
+        cancelled = False
+        while secs < time_to_wait:
+            secs += 1
+            dialog.update(increment * secs, get_string(TEXT_IDLE_DIALOG_ID),
+                          get_string(TEXT_IDLE_DIALOG_COUNTDOWN_ID) % (time_to_wait - secs))
+            xbmc.sleep(1000)
+            if dialog.iscanceled():
+                cancelled = True
+                break
+        if cancelled is True:
+            return
+
+        dialog.close()
+        self.main_window.close()
 
     def get_last_played_channel(self):
         # type: () -> Channel
@@ -115,7 +151,8 @@ class TvDialog(xbmcgui.WindowXMLDialog, WindowMixin):
     @run_async
     def load_lists(self):
         if self.ctrl_groups.size() == 0:
-            self.ctrl_groups.addItems([group.get_listitem() for group in self.api.groups.values()])
+            self.ctrl_groups.addItems(
+                [group.get_listitem() for group in self.api.groups.values() if len(group.channels) > 0])
         self.select_group_listitem(self.player.program.gid)
 
         if self.ctrl_channels.size() == 0:
@@ -255,7 +292,7 @@ class TvDialog(xbmcgui.WindowXMLDialog, WindowMixin):
     def onAction(self, action):
         action_id = action.getId()
         focused_id = self.getFocusId()
-
+        self.reset_idle_timer()
         if focused_id == self.CTRL_DUMMY:  # no controls are visible
 
             if action_id in [xbmcgui.ACTION_PREVIOUS_MENU, xbmcgui.ACTION_NAV_BACK]:
