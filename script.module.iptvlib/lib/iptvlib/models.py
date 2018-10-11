@@ -221,29 +221,6 @@ class Program(Model):
                and self.ut_start == other.ut_start \
                and self.ut_end == other.ut_end
 
-    def apply(self, other):
-        # type: (Program) -> None
-        self.cid = other.cid
-        self.gid = other.gid
-        self.ut_start = other.ut_start
-        self.ut_end = other.ut_end
-        self.length = self.ut_end - self.ut_start
-        self.title = other.title
-        self.descr = other.descr
-        self.archive = other.archive
-        self.data = {
-            "cid": self.cid,
-            "gid": self.gid,
-            "title": self.title,
-            "title_list": (self.title[:52] + '...') if len(self.title) > 55 else self.title,
-            "descr": self.descr,
-            "t_start": format_date(self.ut_start, custom_format="%H:%M"),
-            "t_end": format_date(self.ut_end, custom_format="%H:%M"),
-            "d_start": format_date(self.ut_start, custom_format="%A, %d.%m"),
-            "ut_start": self.ut_start,
-            "ut_end": self.ut_end
-        }
-
     def get_listitem(self):
         listitem = Model.get_listitem(self)
         status = " "
@@ -254,6 +231,6 @@ class Program(Model):
                 status = "prg_status_past.png"
         elif self.is_live_now():
             status = "prg_status_live.png"
-
         listitem.setProperty("status", status)
+        listitem.setProperty("day_color", "1%s.png" % format_date(self.ut_start, custom_format="%w"))
         return listitem

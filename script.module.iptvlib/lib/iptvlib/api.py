@@ -11,9 +11,10 @@ from iptvlib.models import Group, Program, Channel
 
 
 class ApiException(Exception):
-    def __init__(self, message, code):
+    def __init__(self, message, code, origin_error=None):
         self.message = message
         self.code = code
+        self.origin_error = origin_error
 
     def __repr__(self):
         return "ApiException: (%s) %s" % (self.code, self.message)

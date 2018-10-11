@@ -22,3 +22,7 @@ msgstr "Playlist Key"
 msgctxt "#30004"
 msgid "Show adult channels"
 msgstr "Show adult channels"
+
+msgctxt "#30005"
+msgid "Empty or invalid playlist"
+msgstr "Leere oder ungültige playliste"

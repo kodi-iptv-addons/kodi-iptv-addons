@@ -22,3 +22,7 @@ msgstr "Ключ"
 msgctxt "#30004"
 msgid "Show adult channels"
 msgstr "Показывать каналы для взрослых"
+
+msgctxt "#30005"
+msgid "Empty or invalid playlist"
+msgstr "Ошибка при обработке плейлиста"

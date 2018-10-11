@@ -25,8 +25,8 @@ msgid "Authentication failed"
 msgstr "Ошибка при авторизации"
 
 msgctxt "#30104"
-msgid "You should check your subscription credentials"
-msgstr "Проверьте данные о подписке для сервиса IPTV"
+msgid "You should check your addon settings"
+msgstr "Проверьте настройки проложения"
 
 msgctxt "#30105"
 msgid "Selected program is not playable"
@@ -65,14 +65,8 @@ msgid "in %s seconds"
 msgstr "через %s секунд"
 
 msgctxt "#30114"
-msgid "M3U Play List information required"
-msgstr "Необходима информация о M3U плейлисте"
-
-msgctxt "#30115"
-msgid "Please provide valid M3U Play List path"
-msgstr "Пожалуйста введите корректную информацию о M3U плейлисте"
-
-
+msgid "HTTP request failed"
+msgstr "Ошибка при выполнении ХТТП запроса"
 
 # Application's strings
 msgctxt "#30201"
@@ -87,26 +81,160 @@ msgctxt "#30203"
 msgid "sec."
 msgstr "сек."
 
-msgctxt "#30204"
-msgid "Loading EPG"
-msgstr "Скачиваю EPG"
+# Date formatting strings
 
-msgctxt "#30205"
-msgid "Check XMLTV URL"
-msgstr "Проверяю XMLTV URL"
+# Weekday as full name
+msgctxt "#30300"
+msgid "Sunday"
+msgstr "Воскресение"
 
-msgctxt "#30206"
-msgid "Parse XMLTV"
-msgstr "Анализирую XMLTV"
+msgctxt "#30301"
+msgid "Monday"
+msgstr "Понедельник"
 
-msgctxt "#30207"
-msgid "Cache XMLTV"
-msgstr "Кэширую XMLTV"
+msgctxt "#30302"
+msgid "Tuesday"
+msgstr "Вторник"
 
-msgctxt "#30208"
-msgid "Read XMLTV from cache"
-msgstr "Загружаю XMLTV из кэша"
+msgctxt "#30303"
+msgid "Wednesday"
+msgstr "Среда"
 
-msgctxt "#30209"
-msgid "Download XMLTV"
-msgstr "Скачиваю XMLTV"
+msgctxt "#30304"
+msgid "Thursday"
+msgstr "Четверг"
+
+msgctxt "#30305"
+msgid "Friday"
+msgstr "Пятница"
+
+msgctxt "#30306"
+msgid "Saturday"
+msgstr "Суббота"
+
+# Weekday as abbreviated name
+msgctxt "#30310"
+msgid "Sun"
+msgstr "Вс"
+
+msgctxt "#30311"
+msgid "Mon"
+msgstr "Пн"
+
+msgctxt "#30312"
+msgid "Tue"
+msgstr "Вт"
+
+msgctxt "#30313"
+msgid "Wed"
+msgstr "Ср"
+
+msgctxt "#30314"
+msgid "Thu"
+msgstr "Чт"
+
+msgctxt "#30315"
+msgid "Fri"
+msgstr "Пт"
+
+msgctxt "#30316"
+msgid "Sat"
+msgstr "Сб"
+
+# Month as full name
+msgctxt "#30401"
+msgid "January"
+msgstr "Январь"
+
+msgctxt "#30402"
+msgid "February"
+msgstr "Февраль"
+
+msgctxt "#30403"
+msgid "March"
+msgstr "Март"
+
+msgctxt "#30404"
+msgid "April"
+msgstr "Апрель"
+
+msgctxt "#30405"
+msgid "May"
+msgstr "Май"
+
+msgctxt "#30406"
+msgid "June"
+msgstr "Июнь"
+
+msgctxt "#30407"
+msgid "July"
+msgstr "Июль"
+
+msgctxt "#30408"
+msgid "August"
+msgstr "Август"
+
+msgctxt "#30409"
+msgid "September"
+msgstr "Сентябрь"
+
+msgctxt "#30410"
+msgid "October"
+msgstr "Октябрь"
+
+msgctxt "#30411"
+msgid "November"
+msgstr "Ноябрь"
+
+msgctxt "#30412"
+msgid "December"
+msgstr "Декабрь"
+
+# Month as abbreviated name
+msgctxt "#30501"
+msgid "Jan"
+msgstr "Янв"
+
+msgctxt "#30502"
+msgid "Feb"
+msgstr "Фев"
+
+msgctxt "#30503"
+msgid "Mar"
+msgstr "Мар"
+
+msgctxt "#30504"
+msgid "Apr"
+msgstr "Апр"
+
+msgctxt "#30505"
+msgid "May"
+msgstr "Май"
+
+msgctxt "#30506"
+msgid "Jun"
+msgstr "Июн"
+
+msgctxt "#30507"
+msgid "Jul"
+msgstr "Июл"
+
+msgctxt "#30508"
+msgid "Aug"
+msgstr "Авг"
+
+msgctxt "#30509"
+msgid "Sep"
+msgstr "Сен"
+
+msgctxt "#30510"
+msgid "Oct"
+msgstr "Окт"
+
+msgctxt "#30511"
+msgid "Nov"
+msgstr "Ноя"
+
+msgctxt "#30512"
+msgid "Dec"
+msgstr "Дек"

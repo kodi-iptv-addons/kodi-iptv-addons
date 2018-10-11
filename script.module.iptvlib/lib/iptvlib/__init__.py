@@ -35,7 +35,7 @@ TWOWEEKS = 1209600  # type: int
 TEXT_SUBSCRIPTION_REQUIRED_ID = 30101  # type: int
 TEXT_SET_CREDENTIALS_ID = 30102  # type: int
 TEXT_AUTHENTICATION_FAILED_ID = 30103  # type: int
-TEXT_CHECK_CREDENTIALS_ID = 30104  # type: int
+TEXT_CHECK_SETTINGS_ID = 30104  # type: int
 TEXT_NOT_PLAYABLE_ID = 30105  # type: int
 TEXT_SERVICE_ERROR_OCCURRED_ID = 30106  # type: int
 TEXT_SURE_TO_EXIT_ID = 30107  # type: int
@@ -45,18 +45,15 @@ TEXT_CHANNEL_HAS_NO_ARCHIVE_ID = 30110  # type: int
 TEXT_LIVE_NO_FORWARD_SKIP_ID = 30111  # type: int
 TEXT_IDLE_DIALOG_ID = 30112  # type: int
 TEXT_IDLE_DIALOG_COUNTDOWN_ID = 30113  # type: int
-TEXT_PLAYLIST_INFO_REQUIRED_ID = 30114  # type: int
-TEXT_PLAYLIST_PROVIDE_PATH_ID = 30115  # type: int
+TEXT_HTTP_REQUEST_ERROR_ID = 30114  # type: int
+TEXT_EMPTY_OR_INVALID_PLAYLIST_ID = 30115  # type: int
 TEXT_NO_INFO_AVAILABLE_ID = 30201  # type: int
 TEXT_ABBR_MINUTES_ID = 30202  # type: int
 TEXT_ABBR_SECONDS_ID = 30203  # type: int
-TEXT_LOADING_EPG_ID = 30204  # type: int
-TEXT_CHECK_XMLTV_URL_ID = 30205  # type: int
-TEXT_PARSE_XMLTV_ID = 30206  # type: int
-TEXT_CACHE_XMLTV_ID = 30207  # type: int
-TEXT_LOAD_XMLTV_FROM_CACHE_ID = 30208  # type: int
-TEXT_DOWNLOAD_XMLTV_ID = 30209  # type: int
-
+TEXT_WEEKDAY_FULL_ID_PREFIX = 3030  # type: int
+TEXT_WEEKDAY_ABBR_ID_PREFIX = 3031  # type: int
+TEXT_MONTH_FULL_ID_PREFIX = 304  # type: int
+TEXT_MONTH_ABBR_ID_PREFIX = 305  # type: int
 
 # noinspection PyUnresolvedReferences
 class WindowMixin(object):
@@ -156,11 +153,21 @@ def format_secs(secs, id="time"):
 
 def format_date(timestamp, id="dateshort", custom_format=None):
     # type: (float, str, str) -> str
+    ids = {
+        "%A": (TEXT_WEEKDAY_FULL_ID_PREFIX, "%w"),
+        "%a": (TEXT_WEEKDAY_ABBR_ID_PREFIX, "%w"),
+        "%B": (TEXT_MONTH_FULL_ID_PREFIX, "%m"),
+        "%b": (TEXT_MONTH_ABBR_ID_PREFIX, "%m")
+    }
     if timestamp:
         if custom_format is not None:
-            return datetime.datetime.fromtimestamp(timestamp).strftime(custom_format)
-        fmt = xbmc.getRegion(id)
-        return datetime.datetime.fromtimestamp(timestamp).strftime(fmt)
+            dt = datetime.datetime.fromtimestamp(timestamp)
+            for k in ids.iterkeys():
+                if k in custom_format:
+                    v = get_string(int("%s%s" % (ids[k][0], dt.strftime(ids[k][1]))))
+                    custom_format = custom_format.replace(k, v)
+            return dt.strftime(custom_format)
+        return datetime.datetime.fromtimestamp(timestamp).strftime(xbmc.getRegion(id))
     return ''
 
 

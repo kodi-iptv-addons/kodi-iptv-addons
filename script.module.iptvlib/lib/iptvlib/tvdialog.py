@@ -526,7 +526,7 @@ class TvDialog(xbmcgui.WindowXMLDialog, WindowMixin):
         if self.timer_slider_update:
             self.timer_slider_update.cancel()
             del self.timer_slider_update
-        if not xbmc.abortRequested and not self.is_closing:
+        if not self.is_closing:
             interval = 1 if self.getFocusId() == self.CTRL_SLIDER else 30
             self.timer_slider_update = threading.Timer(interval, self.update_playback_info)
             self.timer_slider_update.start()

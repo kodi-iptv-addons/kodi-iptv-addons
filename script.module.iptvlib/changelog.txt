@@ -1,2 +1,7 @@
-[B]v1.0.0[/B] (2018-11-01)
+[B]v1.0.1[/B] (2018-10-11)
+- Improved error handling
+- Fixed bug in date formatting
+- Added day color bar for EPG entries
+[B]v1.0.0[/B] (2018-10-10)
 - Initial release
+

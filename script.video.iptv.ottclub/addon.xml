@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addon id="script.video.iptv.ottclub-DEV"
        name="OTTCLUB-DEV"
-       version="1.0.0"
+       version="1.0.1"
        provider-name="Dmitry Vinogradov">
     <requires>
         <import addon="xbmc.python" version="2.24.0"/>
@@ -21,6 +21,11 @@
         <description lang="ru">OTTClub является универсальным приложением для просмотра онлайн телевидения (IPTV)</description>
         <license>GNU LESSER GENERAL PUBLIC LICENSE Version 3, June 2007</license>
         <source>https://github.com/dmitry-vinogradov/kodi-iptv-addons</source>
-        <news>[B]v1.0.0[/B] (2018-11-01)[CR]- Initial release</news>
+        <news>
+[B]v1.0.1[/B] (2018-10-11)[CR]
+- Improved error handling[CR]
+[B]v1.0.0[/B] (2018-10-10)[CR]
+- Initial release[CR]
+        </news>
     </extension>
 </addon>

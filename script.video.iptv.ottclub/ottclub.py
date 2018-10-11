@@ -1,3 +1,4 @@
+import traceback
 import urllib2
 
 from iptvlib.api import Api, ApiException
@@ -24,7 +25,11 @@ class Ottclub(Api):
         self.m3u_groups = OrderedDict()
         Model.API = self
 
-        m3u = urllib2.urlopen(self.playlist).read()
+        try:
+            m3u = urllib2.urlopen(self.playlist).read()
+        except urllib2.URLError, ex:
+            log(traceback.format_exc(), xbmc.LOGDEBUG)
+            raise ApiException(self.playlist, Api.E_HTTP_REQUEST_FAILED, str(ex.reason).encode('utf-8'))
 
         def on_item(item):
 
@@ -54,6 +59,9 @@ class Ottclub(Api):
                 group.channels[channel.cid] = channel
 
         M3u8Parser().parse(m3u, on_item)
+
+        if len(self.m3u_groups) == 0:
+            raise ApiException(self.playlist, Api.E_UNKNOW_ERROR)
 
     @property
     def base_api_url(self):

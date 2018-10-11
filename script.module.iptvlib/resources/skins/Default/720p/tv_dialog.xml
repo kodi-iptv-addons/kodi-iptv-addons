@@ -602,6 +602,14 @@
                                 <texture>listitem-bg.png</texture>
                                 <colordiffuse>FF000000</colordiffuse>
                             </control>
+                            <control type="image">
+                                <description>day color bar</description>
+                                <left>0</left>
+                                <top>0</top>
+                                <height>78</height>
+                                <width>2</width>
+                                <texture>$INFO[Listitem.Property(day_color)]</texture>
+                            </control>
                             <control type="label">
                                 <description>Program start time</description>
                                 <left>12</left>
@@ -653,6 +661,16 @@
                                 <height>78</height>
                                 <width>500</width>
                                 <texture>listitem-bg-fo.png</texture>
+                                <animation effect="fade" start="100" end="30" time="300"
+                                           condition="!Control.HasFocus(4300)">Conditional</animation>
+                            </control>
+                            <control type="image">
+                                <description>day color bar</description>
+                                <left>0</left>
+                                <top>0</top>
+                                <height>78</height>
+                                <width>2</width>
+                                <texture>$INFO[Listitem.Property(day_color)]</texture>
                                 <animation effect="fade" start="100" end="30" time="300"
                                            condition="!Control.HasFocus(4300)">Conditional</animation>
                             </control>

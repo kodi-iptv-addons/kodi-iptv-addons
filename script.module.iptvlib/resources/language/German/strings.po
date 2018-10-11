@@ -25,8 +25,8 @@ msgid "Authentication failed"
 msgstr "Anmeldeversuch fehlgeschlagen"
 
 msgctxt "#30104"
-msgid "You should check your subscription credentials"
-msgstr "Bitte überprüfen Sie Ihre Zugangsdaten"
+msgid "You should check your addon settings"
+msgstr "Bitte überprüfen Sie Ihre Addon-Einstellungen"
 
 msgctxt "#30105"
 msgid "Selected program is not playable"
@@ -65,14 +65,8 @@ msgid "in %s seconds"
 msgstr "in %s Sekunden beendet"
 
 msgctxt "#30114"
-msgid "M3U Play List information required"
-msgstr "M3U Play List Information erforderlich"
-
-msgctxt "#30115"
-msgid "Please provide valid M3U Play List path"
-msgstr "Bitte korrigieren Sie den Pfad zur M3U Playliste"
-
-
+msgid "HTTP request failed"
+msgstr "HTTP Anfrage ist fehlgeschlagen"
 
 # Application's strings
 msgctxt "#30201"
@@ -87,26 +81,160 @@ msgctxt "#30203"
 msgid "sec."
 msgstr "sek."
 
-msgctxt "#30204"
-msgid "Loading EPG"
-msgstr "EPG wird geladen"
+# Date formatting strings
 
-msgctxt "#30205"
-msgid "Check XMLTV URL"
-msgstr "Untersuche XMLTV URL"
+# Weekday as full name
+msgctxt "#30300"
+msgid "Sunday"
+msgstr "Sonntag"
 
-msgctxt "#30206"
-msgid "Parse XMLTV"
-msgstr "Parse XMLTV"
+msgctxt "#30301"
+msgid "Monday"
+msgstr "Montag"
 
-msgctxt "#30207"
-msgid "Cache XMLTV"
-msgstr "Cache XMLTV"
+msgctxt "#30302"
+msgid "Tuesday"
+msgstr "Dienstag"
 
-msgctxt "#30208"
-msgid "Load XMLTV from cache"
-msgstr "Lade XMLTV aus dem cache"
+msgctxt "#30303"
+msgid "Wednesday"
+msgstr "Mittwoch"
 
-msgctxt "#30209"
-msgid "Download XMLTV"
-msgstr "Lade XMLTV runter"
+msgctxt "#30304"
+msgid "Thursday"
+msgstr "Donnerstag"
+
+msgctxt "#30305"
+msgid "Friday"
+msgstr "Freitag"
+
+msgctxt "#30306"
+msgid "Saturday"
+msgstr "Samstag"
+
+# Weekday as abbreviated name
+msgctxt "#30310"
+msgid "Sun"
+msgstr "So"
+
+msgctxt "#30311"
+msgid "Mon"
+msgstr "Mo"
+
+msgctxt "#30312"
+msgid "Tue"
+msgstr "Di"
+
+msgctxt "#30313"
+msgid "Wed"
+msgstr "Mi"
+
+msgctxt "#30314"
+msgid "Thu"
+msgstr "Do"
+
+msgctxt "#30315"
+msgid "Fri"
+msgstr "Fr"
+
+msgctxt "#30316"
+msgid "Sat"
+msgstr "Sa"
+
+# Month as full name
+msgctxt "#30401"
+msgid "January"
+msgstr "Januar"
+
+msgctxt "#30402"
+msgid "February"
+msgstr "Februar"
+
+msgctxt "#30403"
+msgid "March"
+msgstr "März"
+
+msgctxt "#30404"
+msgid "April"
+msgstr "April"
+
+msgctxt "#30405"
+msgid "May"
+msgstr "Mai"
+
+msgctxt "#30406"
+msgid "June"
+msgstr "Juni"
+
+msgctxt "#30407"
+msgid "July"
+msgstr "Juli"
+
+msgctxt "#30408"
+msgid "August"
+msgstr "August"
+
+msgctxt "#30409"
+msgid "September"
+msgstr "September"
+
+msgctxt "#30410"
+msgid "October"
+msgstr "Oktober"
+
+msgctxt "#30411"
+msgid "November"
+msgstr "November"
+
+msgctxt "#30412"
+msgid "December"
+msgstr "Dezember"
+
+# Month as abbreviated name
+msgctxt "#30501"
+msgid "Jan"
+msgstr "Jan"
+
+msgctxt "#30502"
+msgid "Feb"
+msgstr "Feb"
+
+msgctxt "#30503"
+msgid "Mar"
+msgstr "Mär"
+
+msgctxt "#30504"
+msgid "Apr"
+msgstr "Apr"
+
+msgctxt "#30505"
+msgid "May"
+msgstr "Mai"
+
+msgctxt "#30506"
+msgid "Jun"
+msgstr "Jun"
+
+msgctxt "#30507"
+msgid "Jul"
+msgstr "Jul"
+
+msgctxt "#30508"
+msgid "Aug"
+msgstr "Aug"
+
+msgctxt "#30509"
+msgid "Sep"
+msgstr "Sept"
+
+msgctxt "#30510"
+msgid "Oct"
+msgstr "Okt"
+
+msgctxt "#30511"
+msgid "Nov"
+msgstr "Nov"
+
+msgctxt "#30512"
+msgid "Dec"
+msgstr "Dez"

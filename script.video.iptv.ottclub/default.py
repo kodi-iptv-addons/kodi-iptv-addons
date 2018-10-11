@@ -5,6 +5,7 @@ setattr(__builtin__, 'addon_id', os.path.basename(os.path.abspath(os.path.dirnam
 
 import xbmcgui
 from ottclub import Ottclub
+from iptvlib.api import ApiException
 from iptvlib import *
 from iptvlib.mainwindow import MainWindow
 
@@ -39,12 +40,37 @@ class Main(object):
         adult = addon.getSetting("adult") == 'true' or \
                            addon.getSetting("adult") == True
 
-        self.main_window.api = Ottclub(
-            playlist,
-            key,
-            adult,
-            working_path=xbmc.translatePath(addon.getAddonInfo("profile"))
-        )
+        try:
+            self.main_window.api = Ottclub(
+                playlist,
+                key,
+                adult,
+                working_path=xbmc.translatePath(addon.getAddonInfo("profile"))
+            )
+        except ApiException, ex:
+            if ex.code == Ottclub.E_HTTP_REQUEST_FAILED:
+                dialog = xbmcgui.Dialog()
+                dialog.ok(
+                    addon.getAddonInfo("name"),
+                    get_string(TEXT_HTTP_REQUEST_ERROR_ID),
+                    ex.message,
+                    ex.origin_error
+                )
+            elif ex.code == Ottclub.E_UNKNOW_ERROR:
+                dialog = xbmcgui.Dialog()
+                yesno = bool(
+                    dialog.yesno(
+                        addon.getAddonInfo("name"),
+                        addon.getLocalizedString(30005),
+                        ex.message,
+                        get_string(TEXT_CHECK_SETTINGS_ID)
+                    )
+                )
+                del dialog
+                if yesno is True:
+                    addon.openSettings()
+                    return self.check_settings()
+            return False
 
         return True
 
