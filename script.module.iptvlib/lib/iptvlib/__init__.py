@@ -2,16 +2,12 @@
 import __builtin__
 import calendar
 import datetime
-import httplib
 import math
 import os
 import platform
 import threading
 import time
-from Queue import Queue
 from functools import wraps
-from httplib import HTTPResponse
-from urlparse import urlparse
 
 import xbmc
 import xbmcaddon
@@ -54,6 +50,7 @@ TEXT_WEEKDAY_FULL_ID_PREFIX = 3030  # type: int
 TEXT_WEEKDAY_ABBR_ID_PREFIX = 3031  # type: int
 TEXT_MONTH_FULL_ID_PREFIX = 304  # type: int
 TEXT_MONTH_ABBR_ID_PREFIX = 305  # type: int
+
 
 # noinspection PyUnresolvedReferences
 class WindowMixin(object):
@@ -206,39 +203,6 @@ def run_async(func):
         return thread
 
     return async_func
-
-
-def do_download(q, results):
-    # type: (Queue, dict[str, dict]) -> None
-    while True:
-        url = q.get()
-        print "download %s" % url
-        purl = urlparse(url)
-        conn = httplib.HTTPConnection(purl.netloc)
-        conn.request("GET", url)
-        results[url] = conn.getresponse()
-        q.task_done()
-
-
-def download(urls):
-    # type: (list) -> dict[str, HTTPResponse]
-    num_threads = len(urls)
-    queue = Queue()
-    results = dict()
-
-    for i in range(num_threads):
-        thread = threading.Thread(target=do_download, args=(queue, results,))
-        thread.setDaemon(True)
-        thread.start()
-
-    for url in urls:
-        queue.put(url)
-    queue.join()
-
-    while queue.unfinished_tasks > 0:
-        continue
-
-    return results
 
 
 def log(msg, level=xbmc.LOGNOTICE):

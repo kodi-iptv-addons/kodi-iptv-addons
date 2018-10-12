@@ -1,3 +1,5 @@
+[B]v1.0.2[/B] (2018-10-12)
+- Minor bug fixes
 [B]v1.0.1[/B] (2018-10-11)
 - Improved error handling
 [B]v1.0.0[/B] (2018-10-10)

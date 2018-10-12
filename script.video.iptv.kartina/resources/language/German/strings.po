@@ -28,9 +28,5 @@ msgid "Api hostname"
 msgstr "API Hostname"
 
 msgctxt "#30006"
-msgid "Use service channel logos"
-msgstr "Benutze Logos für Kanäle von IPTV Provider"
-
-
-
-
+msgid "Show adult channels"
+msgstr "Zeige Kanäle für Erwachsene"

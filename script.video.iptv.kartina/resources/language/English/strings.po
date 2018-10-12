@@ -28,9 +28,5 @@ msgid "Api hostname"
 msgstr "Api hostname"
 
 msgctxt "#30006"
-msgid "Use service channel logos"
-msgstr "Use service channel logos"
-
-
-
-
+msgid "Show adult channels"
+msgstr "Show adult channels"

@@ -89,7 +89,7 @@ class Channel(Model):
         super(Channel, self).__init__(channel_data)
 
     def get_icon(self):
-        return self.icon if self.icon is not None else addon.getAddonInfo('icon')
+        return addon.getAddonInfo('icon') if not self.icon else self.icon
 
     def get_current_program(self):
         # type: () -> Program

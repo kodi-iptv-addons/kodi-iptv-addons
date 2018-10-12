@@ -2,10 +2,16 @@
 import abc
 import json
 import os
+import threading
+import traceback
 import urllib2
+from Queue import Queue
 from collections import OrderedDict
+from threading import Event
 from urllib import urlencode
+from urllib2 import Request
 
+import xbmc
 from iptvlib import build_user_agent, log
 from iptvlib.models import Group, Program, Channel
 
@@ -163,8 +169,8 @@ class Api:
         pass
 
     @abc.abstractmethod
-    def get_epg(self, channel):
-        # type: (Channel) -> dict[int, Program]
+    def get_epg(self, cid):
+        # type: (str) -> dict[int, Program]
         """
         Returns the EPG for given channel id
         :rtype: dict[int, Program]
@@ -227,23 +233,10 @@ class Api:
             fh.write(json.dumps(data))
             fh.close()
 
-    def make_request(self, uri, payload=None, method="GET", headers=None):
-        # type: (str, dict, str, dict) -> dict
-        """
-        Makes HTTP request to the IPTV API
-        :param uri: URL of the IPTV API
-        :param payload: Payload data
-        :param method: HTTP method
-        :param headers: Additional HTTP headers
-        :return:
-        """
+    def prepare_request(self, uri, payload=None, method="GET", headers=None):
+        # type: (str, dict, str, dict) -> Request
+        url = self.base_api_url % uri if uri.startswith('http') is False else uri
         headers = headers or {}
-        if self.auth_status != self.AUTH_STATUS_OK and not self.is_login_uri(uri):
-            self.login()
-            return self.make_request(uri, payload, method)
-
-        self._last_error = None
-        url = self.base_api_url % uri
         headers["User-Agent"] = self.user_agent
         headers["Connection"] = "Close"
 
@@ -257,26 +250,32 @@ class Api:
                 data = urlencode(payload)
             elif method == "GET":
                 url += "?%s" % urlencode(payload)
-        req = urllib2.Request(url=url, headers=headers, data=data)
+        return urllib2.Request(url=url, headers=headers, data=data)
 
+    def send_request(self, request):
+        # type: (Request) -> dict
         json_data = ""
         try:
-            json_data = urllib2.urlopen(req).read()
+            json_data = urllib2.urlopen(request).read()
             response = json.loads(json_data)
         except urllib2.URLError, ex:
+            log("Exception %s: %s" % (type(ex), ex.message))
+            log(traceback.format_exc(), xbmc.LOGDEBUG)
             response = {
                 "error": {
                     "message": str(ex),
                     "code": self.E_HTTP_REQUEST_FAILED,
                     "details": {
-                        "url": url,
-                        "data": data,
-                        "headers": headers
+                        "url": request.get_full_url(),
+                        "data": request.get_data(),
+                        "headers": request.headers
                     }
                 }
             }
             pass
         except ValueError, ex:
+            log("Exception %s: %s" % (type(ex), ex.message))
+            log(traceback.format_exc(), xbmc.LOGDEBUG)
             response = {
                 "error": {
                     "message": "Unable decode server response: %s" % str(ex),
@@ -288,6 +287,8 @@ class Api:
             }
             pass
         except Exception, ex:
+            log("Exception %s: %s" % (type(ex), ex.message))
+            log(traceback.format_exc(), xbmc.LOGDEBUG)
             response = {
                 "error": {
                     "message": "%s: %s" % (type(ex), str(ex)),
@@ -295,11 +296,29 @@ class Api:
                 }
             }
             pass
+        return response
+
+    def make_request(self, uri, payload=None, method="GET", headers=None):
+        # type: (str, dict, str, dict) -> dict
+        """
+        Makes HTTP request to the IPTV API
+        :param uri: URL of the IPTV API
+        :param payload: Payload data
+        :param method: HTTP method
+        :param headers: Additional HTTP headers
+        :return:
+        """
+        if self.auth_status != self.AUTH_STATUS_OK and not self.is_login_uri(uri):
+            self.login()
+            return self.make_request(uri, payload, method)
+
+        request = self.prepare_request(uri, payload, method, headers)
+        response = self.send_request(request)
+
+        self._last_error = None
 
         if "error" in response:
-
             self._last_error = response
-
             if self.is_login_uri(uri):
                 self.auth_status = self.AUTH_STATUS_NONE
                 try:
@@ -316,3 +335,34 @@ class Api:
                 raise ApiException(self._last_error["message"], self._last_error["code"])
 
         return response
+
+    def do_send_request(self, queue, results, stop_event, wait=None):
+        # type: (Queue, dict[str, dict], Event, float) -> None
+        while not stop_event.is_set():
+            request = queue.get()
+            results[request.get_full_url()] = self.send_request(request)
+            queue.task_done()
+            stop_event.wait(wait)
+
+    def send_parallel_requests(self, requests, wait=None, num_threads=None):
+        # type: (list[Request], float, int) -> dict[str, dict]
+        num_threads = len(requests) if num_threads is None else num_threads
+        queue = Queue(num_threads * 2)
+        results = dict()
+
+        stop_event = threading.Event()
+        for i in range(num_threads):
+            thread = threading.Thread(target=self.do_send_request, args=(queue, results, stop_event, wait,))
+            thread.setDaemon(True)
+            thread.start()
+
+        for req in requests:
+            queue.put(req)
+        queue.join()
+
+        while queue.unfinished_tasks > 0:
+            continue
+
+        stop_event.set()
+
+        return results

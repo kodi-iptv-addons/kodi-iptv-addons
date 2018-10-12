@@ -1,3 +1,5 @@
+import traceback
+
 import xbmcgui
 from iptvlib import *
 from iptvlib.api import Api, ApiException
@@ -43,7 +45,8 @@ class MainWindow(xbmcgui.WindowXML, WindowMixin):
                 self.tv_dialog.close()
             del self.api
         except Exception, ex:
-            print("Exception %s: %s" % (type(ex), ex.message))
+            log("Exception %s: %s" % (type(ex), ex.message))
+            log(traceback.format_exc(), xbmc.LOGDEBUG)
         super(MainWindow, self).close()
 
     def check_settings(self):

@@ -7,6 +7,7 @@ class M3u8Channel(object):
         self.group = unicode(group, "utf-8") if group and type(group) is not unicode else group
         self.url = url
 
+
 class M3u8Item(object):
     def __init__(self, **kwargs):
         self.__dict__.update(kwargs)
@@ -47,19 +48,24 @@ class M3u8Parser(object):
                 if len(args) > 0:
                     on_item(M3u8Item(**args))
                 options, name = line.replace(self.EXTINF + ':', '').split(',')  # type: (str, str)
+                tvg_rec = reg('\s+tvg-rec\s*=\s*"([^"]+)"', line) or 0
                 args = dict({
                     "id": self.EXTINF,
                     "name": name,
                     "tvg-id": reg('\s+tvg-id\s*=\s*"([^"]+)"', line),
                     "tvg-logo": reg('\s+tvg-logo\s*=\s*"([^"]+)"', line),
                     "group-title": reg('\s+group-title\s*=\s*"([^"]+)"', line),
-                    "tvg-rec": int(reg('\s+tvg-rec\s*=\s*"([^"]+)"', line)),
+                    "tvg-rec": int(tvg_rec),
                     "adult": reg('\s+adult\s*=\s*"([^"]+)"', line),
                 })
             if line.startswith(self.EXTGRP):
                 args["group-title"] = unicode(line.replace(self.EXTGRP + ':', '').strip(), "utf-8")
             if line.startswith('http'):
                 args["url"] = line
+                if args["tvg-id"] is None:
+                    for p in args['url'].split("/"):
+                        if p.isdigit():
+                            args["tvg-id"] = p
+                            break
                 on_item(M3u8Item(**args))
                 args = dict()
-

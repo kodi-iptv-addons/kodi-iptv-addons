@@ -50,7 +50,7 @@ class Ottclub(Api):
                     item["tvg-id"],
                     group.gid,
                     item["name"],
-                    self.icon_url + item["tvg-logo"],
+                    "%s%s" % (self.icon_url, item["tvg-logo"]),
                     bool(item["tvg-id"]),
                     bool(item["tvg-rec"]),
                     bool(item["adult"]),

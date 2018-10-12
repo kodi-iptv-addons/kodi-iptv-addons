@@ -144,7 +144,7 @@ class TvDialog(xbmcgui.WindowXMLDialog, WindowMixin):
     def get_last_played_channel(self):
         # type: () -> Channel
         last_channel_id = addon.getSetting("last_channel_id") or None
-        if last_channel_id is None or last_channel_id == "None":
+        if last_channel_id is None or last_channel_id == "None" or self.api.channels.has_key(last_channel_id) is False:
             last_channel_id = self.api.channels.keys()[0]
         return self.api.channels[last_channel_id]
 
@@ -270,7 +270,7 @@ class TvDialog(xbmcgui.WindowXMLDialog, WindowMixin):
             self.timer_refocus.cancel()
             self.timer_refocus = None
 
-        if not xbmc.abortRequested and not self.is_closing:
+        if not self.is_closing:
             self.timer_refocus = threading.Timer(5, self.refocus_window)
             self.timer_refocus.start()
 

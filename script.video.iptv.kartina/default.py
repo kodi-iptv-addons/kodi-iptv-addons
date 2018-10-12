@@ -36,12 +36,12 @@ class Main(object):
                 return False
 
         hostname = addon.getSetting("hostname")
-        use_origin_icons = addon.getSetting("use_origin_icons") == 'true' or \
-                           addon.getSetting("use_origin_icons") == True
+        adult = addon.getSetting("adult") == 'true' or \
+                addon.getSetting("adult") == True
 
         self.main_window.api = Kartina(
             hostname=hostname,
-            use_origin_icons=use_origin_icons,
+            adult=adult,
             username=username,
             password=password,
             working_path=xbmc.translatePath(addon.getAddonInfo("profile"))
@@ -52,4 +52,3 @@ class Main(object):
 
 if __name__ == "__main__":
     Main()
-

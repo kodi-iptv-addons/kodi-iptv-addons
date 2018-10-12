@@ -6,6 +6,6 @@
     </category>
     <category label="30004">
         <setting id="hostname" type="text" label="30005" default="iptv.kartina.tv"/>
-        <setting id="origin_logos" type="bool" label="30006" default="true"/>
+        <setting id="adult" type="bool" label="30006" default="false"/>
     </category>
 </settings>

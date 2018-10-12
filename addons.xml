@@ -13,7 +13,7 @@
       <platform>all</platform>
     </extension>
   </addon>
-  <addon id="script.module.iptvlib" name="IPTV Library" version="1.0.1" provider-name="Dmitry Vinogradov">
+  <addon id="script.module.iptvlib" name="IPTV Library" version="1.0.2" provider-name="Dmitry Vinogradov">
     <requires>
       <import addon="xbmc.python" version="2.24.0"/>
     </requires>
@@ -30,6 +30,9 @@
       <license>GNU LESSER GENERAL PUBLIC LICENSE Version 3, June 2007</license>
       <source>https://github.com/dmitry-vinogradov/kodi-iptv-addons</source>
       <news>
+[B]v1.0.2[/B] (2018-10-12)[CR]
+- Improved HTTP downloading[CR]
+- Big fixes[CR]
 [B]v1.0.1[/B] (2018-10-11)[CR]
 - Improved error handling[CR]
 - Fixed bug in date formatting[CR]
@@ -39,7 +42,35 @@
         </news>
     </extension>
   </addon>
-  <addon id="script.video.iptv.ottclub" name="OTTCLUB" version="1.0.1" provider-name="Dmitry Vinogradov">
+  <addon id="script.video.iptv.kartina" name="KARTINA" version="1.0.0" provider-name="Dmitry Vinogradov">
+    <requires>
+      <import addon="xbmc.python" version="2.24.0"/>
+      <import addon="script.module.iptvlib" version="1.0.0"/>
+    </requires>
+    <extension point="xbmc.python.script" library="default.py">
+      <provides>video</provides>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+      <assets>
+        <icon>resources/icon.png</icon>
+        <fanart/>
+        <screenshot/>
+      </assets>
+      <platform>all</platform>
+      <summary lang="en">IPTV Client for Kartina (kartina.tv)</summary>
+      <description lang="ru">Kartina.TV идеально подходит для русскоговорящих телезрителей, проживающих за рубежом.
+            Нет необходимости устанавливать спутниковую тарелку или подключать кабельное телевидение — достаточно иметь
+            дома выход в Интернет.
+        </description>
+      <license>GNU LESSER GENERAL PUBLIC LICENSE Version 3, June 2007</license>
+      <source>https://github.com/dmitry-vinogradov/kodi-iptv-addons</source>
+      <news>
+[B]v1.0.0[/B] (2018-10-12)[CR]
+- Initial release
+        </news>
+    </extension>
+  </addon>
+  <addon id="script.video.iptv.ottclub" name="OTTCLUB" version="1.0.2" provider-name="Dmitry Vinogradov">
     <requires>
       <import addon="xbmc.python" version="2.24.0"/>
       <import addon="script.module.iptvlib" version="1.0.0"/>
@@ -59,6 +90,8 @@
       <license>GNU LESSER GENERAL PUBLIC LICENSE Version 3, June 2007</license>
       <source>https://github.com/dmitry-vinogradov/kodi-iptv-addons</source>
       <news>
+[B]v1.0.2[/B] (2018-10-12)[CR]
+- Minor bug fixes[CR]
 [B]v1.0.1[/B] (2018-10-11)[CR]
 - Improved error handling[CR]
 [B]v1.0.0[/B] (2018-10-10)[CR]

@@ -28,9 +28,5 @@ msgid "Api hostname"
 msgstr "Адрес API сервера"
 
 msgctxt "#30006"
-msgid "Use service channel logos"
-msgstr "Использовать иконки каналов от провайдера"
-
-
-
-
+msgid "Show adult channels"
+msgstr "Показывать каналы для взрослых"

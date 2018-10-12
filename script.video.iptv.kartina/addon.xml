@@ -24,6 +24,9 @@
         </description>
         <license>GNU LESSER GENERAL PUBLIC LICENSE Version 3, June 2007</license>
         <source>https://github.com/dmitry-vinogradov/kodi-iptv-addons</source>
-        <news>[B]v1.0.0[/B] (2018-11-01)[CR]- Initial release</news>
+        <news>
+[B]v1.0.0[/B] (2018-10-12)[CR]
+- Initial release
+        </news>
     </extension>
 </addon>
