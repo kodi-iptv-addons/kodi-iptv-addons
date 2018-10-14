@@ -1,3 +1,23 @@
+# coding=utf-8
+#
+#      Copyright (C) 2018 Dmitry Vinogradov
+#      https://github.com/dmitry-vinogradov/kodi-iptv-addons
+#
+# This library is free software; you can redistribute it and/or
+# modify it under the terms of the GNU Library General Public
+# License as published by the Free Software Foundation; either
+# version 2 of the License, or (at your option) any later version.
+#
+# This library is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Library General Public License for more details.
+#
+# You should have received a copy of the GNU Library General Public
+# License along with this library; if not, write to the
+# Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
+# Boston, MA  02110-1301, USA.
+#
 import traceback
 from threading import Timer
 
@@ -108,7 +128,7 @@ class TvDialog(xbmcgui.WindowXMLDialog, WindowMixin):
         self.defer_refocus_window()
         self.preload_icon('start.png')
 
-        program = Program.factory(self.get_last_played_channel(), int(time_now()))
+        program = Program.factory(self.get_last_played_channel())
         self.play_program(program)
         self.load_lists()
         self.reset_idle_timer()
@@ -222,7 +242,7 @@ class TvDialog(xbmcgui.WindowXMLDialog, WindowMixin):
 
     def play_program(self, program, offset=0):
         # type: (Program, int) -> None
-        if program is None or program.is_playable() is False:
+        if program.is_playable() is False:
             dialog = xbmcgui.Dialog()
             dialog.ok(addon.getAddonInfo("name"), "", get_string(TEXT_NOT_PLAYABLE_ID))
             return
@@ -289,6 +309,7 @@ class TvDialog(xbmcgui.WindowXMLDialog, WindowMixin):
         except:
             pass
 
+    # noinspection PyPep8Naming
     def onAction(self, action):
         action_id = action.getId()
         focused_id = self.getFocusId()
@@ -308,7 +329,7 @@ class TvDialog(xbmcgui.WindowXMLDialog, WindowMixin):
                 self.prev_focused_id = self.CTRL_DUMMY
                 return True
 
-        elif focused_id == self.CTRL_SLIDER:  # current playback details
+        elif focused_id == self.CTRL_SLIDER:  # navigation within current playback details
 
             if action_id in [xbmcgui.ACTION_PREVIOUS_MENU, xbmcgui.ACTION_NAV_BACK]:
                 self.setFocusId(self.CTRL_DUMMY)
@@ -396,6 +417,7 @@ class TvDialog(xbmcgui.WindowXMLDialog, WindowMixin):
                         self.prev_focused_id = focused_id
                         self.defer_load_program_list(item.getProperty("cid"), int(time_now()))
                         return True
+
             elif action_id == xbmcgui.ACTION_SELECT_ITEM:
                 self.setFocusId(self.CTRL_DUMMY)
                 selected_channel = self.ctrl_channels.getSelectedItem()
@@ -446,6 +468,7 @@ class TvDialog(xbmcgui.WindowXMLDialog, WindowMixin):
                         self.ctrl_groups.selectItem(index)
                         self.prev_focused_id = focused_id
                         return True
+
             elif action_id == xbmcgui.ACTION_SELECT_ITEM:
                 self.setFocusId(self.CTRL_DUMMY)
                 selected_channel = self.ctrl_channels.getSelectedItem()
@@ -453,6 +476,7 @@ class TvDialog(xbmcgui.WindowXMLDialog, WindowMixin):
                 program = channel.get_current_program()
                 if program is not None:
                     self.play_program(program)
+
 
         elif focused_id == self.CTRL_PROGRAMS:  # navigation within programs
 
