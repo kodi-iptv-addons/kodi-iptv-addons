@@ -161,8 +161,8 @@ class Api:
         pass
 
     @abc.abstractmethod
-    def is_login_uri(self, uri):
-        # type: (str) -> bool
+    def is_login_uri(self, uri, payload=None):
+        # type: (str, dict) -> bool
         """
         Checks whether given URI is used for login
         :rtype: str
@@ -260,13 +260,16 @@ class Api:
         headers["Connection"] = "Close"
 
         cookie = self.get_cookie()
-        if cookie != "" and not self.is_login_uri(uri):
+        if cookie != "" and not self.is_login_uri(uri, payload):
             headers["Cookie"] = cookie
 
         data = None
         if payload:
             if method == "POST":
-                data = urlencode(payload)
+                if "Content-Type" in headers and headers["Content-Type"] == "application/json":
+                    data = json.dumps(payload)
+                else:
+                    data = urlencode(payload)
             elif method == "GET":
                 url += "?%s" % urlencode(payload)
         return urllib2.Request(url=url, headers=headers, data=data)
@@ -327,7 +330,7 @@ class Api:
         :param headers: Additional HTTP headers
         :return:
         """
-        if self.auth_status != self.AUTH_STATUS_OK and not self.is_login_uri(uri):
+        if self.auth_status != self.AUTH_STATUS_OK and not self.is_login_uri(uri, payload):
             self.login()
             return self.make_request(uri, payload, method)
 
@@ -336,9 +339,9 @@ class Api:
 
         self._last_error = None
 
-        if "error" in response:
+        if "error" in response and response["error"] is not None:
             self._last_error = response
-            if self.is_login_uri(uri):
+            if self.is_login_uri(uri, payload):
                 self.auth_status = self.AUTH_STATUS_NONE
                 try:
                     os.remove(self.cookie_file)

@@ -57,7 +57,7 @@ class Kartina(Api):
     def get_cookie(self):
         return self.read_cookie_file()
 
-    def is_login_uri(self, uri):
+    def is_login_uri(self, uri, payload=None):
         return "login" in uri
 
     def login(self):

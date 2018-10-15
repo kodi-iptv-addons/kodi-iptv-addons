@@ -1,0 +1,32 @@
+# XBMC Media Center language file
+# Addon Name: IPTV Client for Kartina (kartina.tv)
+# Addon id: script.video.iptv.ottclub.org
+# Addon version: 1.0.0
+# Addon Provider: Dmitry Vinogradov
+msgid ""
+msgstr ""
+
+# Settings
+msgctxt "#30001"
+msgid "Account"
+msgstr "Аккаунт"
+
+msgctxt "#30002"
+msgid "Login"
+msgstr "Абонемент"
+
+msgctxt "#30003"
+msgid "Password"
+msgstr "Пароль"
+
+msgctxt "#30004"
+msgid "Advanced"
+msgstr "Расширенные настройки"
+
+msgctxt "#30005"
+msgid "Api hostname"
+msgstr "Адрес API сервера"
+
+msgctxt "#30006"
+msgid "Show adult channels"
+msgstr "Показывать каналы для взрослых"

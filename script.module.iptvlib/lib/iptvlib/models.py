@@ -59,17 +59,19 @@ class Group(Model):
     gid = None  # type: str
     name = None  # type: str
     channels = None  # type: OrderedDict[str, Channel]
+    number = None  # type: int
 
-    def __init__(self, gid, name, channels):
-        # type: (str, str, OrderedDict[str, Channel]) -> Group
+    def __init__(self, gid, name, channels, number=None):
+        # type: (str, str, OrderedDict[str, Channel], int) -> Group
         self.gid = gid
         self.name = name
         self.channels = OrderedDict(channels)
+        self.number = number
 
         super(Group, self).__init__({"gid": gid, "group_name": name, "icon": ""})
 
     def get_icon(self):
-        return "%s.png" % self.data["gid"]
+        return "%s.png" % (self.number if self.number is not None else self.data["gid"])
 
     def __repr__(self):
         return "%s (%s)" % (self.name, self.gid)

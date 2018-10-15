@@ -3,7 +3,8 @@ SELF_PATH=`pwd`
 addons = $(SELF_PATH)/repository.iptv \
 	$(SELF_PATH)/script.module.iptvlib \
 	$(SELF_PATH)/script.video.iptv.kartina \
-	$(SELF_PATH)/script.video.iptv.ottclub
+	$(SELF_PATH)/script.video.iptv.ottclub \
+	$(SELF_PATH)/script.video.iptv.ottplayer
 
 release: zip repo
 
