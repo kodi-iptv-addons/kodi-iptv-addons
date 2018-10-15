@@ -1,3 +1,5 @@
+[B]v1.0.3[/B] (2018-10-15)
+- Big fixes
 [B]v1.0.2[/B] (2018-10-12)
 - Improved HTTP downloading
 - Big fixes
