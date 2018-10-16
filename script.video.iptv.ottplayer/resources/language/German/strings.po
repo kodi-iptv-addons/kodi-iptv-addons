@@ -30,3 +30,11 @@ msgstr "API Hostname"
 msgctxt "#30006"
 msgid "Show adult channels"
 msgstr "Zeige Kanäle für Erwachsene"
+
+msgctxt "#30007"
+msgid "No playlists is bound to device 'KODI'"
+msgstr "An das gerät 'KODI' sind keine Playlisten gebunden"
+
+msgctxt "#30008"
+msgid "You can bind a playlist to device 'KODI' on http://ottplayer.es"
+msgstr "Zuweisen Sie mind. eine Playlist an 'KODI' auf http://ottplayer.es"
