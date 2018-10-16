@@ -1,7 +1,6 @@
 # XBMC Media Center language file
 # Addon Name: IPTV Library
 # Addon id: script.module.iptvlib
-# Addon version: 1.0.0
 # Addon Provider: Dmitry Vinogradov
 msgid ""
 msgstr ""

@@ -1,7 +1,6 @@
 # XBMC Media Center language file
 # Addon Name: IPTV player for M3U8 playlists (visit ottplayer.org for more details)
 # Addon id: script.video.iptv.ottclub
-# Addon version: 1.0.0
 # Addon Provider: Dmitry Vinogradov
 msgid ""
 msgstr ""

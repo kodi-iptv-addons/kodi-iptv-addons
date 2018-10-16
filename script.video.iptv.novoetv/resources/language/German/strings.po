@@ -1,6 +1,6 @@
 # XBMC Media Center language file
-# Addon Name: IPTV Client for Kartina (kartina.tv)
-# Addon id: script.video.iptv.kartina
+# Addon Name: IPTV Client for NovoeTv (new-rus.tv)
+# Addon id: script.video.iptv.novoetv
 # Addon Provider: Dmitry Vinogradov
 msgid ""
 msgstr ""
@@ -8,24 +8,24 @@ msgstr ""
 # Settings
 msgctxt "#30001"
 msgid "Account"
-msgstr "Account"
+msgstr "Zugangsdaten"
 
 msgctxt "#30002"
 msgid "Login"
-msgstr "Login"
+msgstr "Benutzer ID"
 
 msgctxt "#30003"
 msgid "Password"
-msgstr "Password"
+msgstr "Kennwort"
 
 msgctxt "#30004"
 msgid "Advanced"
-msgstr "Advanced"
+msgstr "Erweitert"
 
 msgctxt "#30005"
 msgid "Api hostname"
-msgstr "Api hostname"
+msgstr "API Hostname"
 
 msgctxt "#30006"
 msgid "Show adult channels"
-msgstr "Show adult channels"
+msgstr "Zeige Kanäle für Erwachsene"

@@ -1,6 +1,6 @@
 # XBMC Media Center language file
-# Addon Name: IPTV Client for Kartina (kartina.tv)
-# Addon id: script.video.iptv.kartina
+# Addon Name: IPTV Client for NovoeTv (new-rus.tv)
+# Addon id: script.video.iptv.novoetv
 # Addon Provider: Dmitry Vinogradov
 msgid ""
 msgstr ""

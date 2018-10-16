@@ -1,7 +1,6 @@
 # XBMC Media Center language file
 # Addon Name: IPTV Client for Kartina (kartina.tv)
-# Addon id: script.video.iptv.ottclub.org
-# Addon version: 1.0.0
+# Addon id: script.video.iptv.kartina
 # Addon Provider: Dmitry Vinogradov
 msgid ""
 msgstr ""
