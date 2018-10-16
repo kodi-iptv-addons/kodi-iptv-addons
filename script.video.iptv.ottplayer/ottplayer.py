@@ -58,7 +58,7 @@ class Ottplayer(Api):
 
     @property
     def diff_live_archive(self):
-        return HALFHOUR
+        return TENSECS
 
     @property
     def archive_ttl(self):

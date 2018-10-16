@@ -369,21 +369,25 @@ class TvDialog(xbmcgui.WindowXMLDialog, WindowMixin):
 
                 if self.player.is_live():
                     if action_id == xbmcgui.ACTION_MOVE_LEFT and self.api.diff_live_archive > TENSECS:
+                        self.prev_focused_id = focused_id
                         confirm = xbmcgui.Dialog()
                         yesno = bool(
                             confirm.yesno(
                                 addon.getAddonInfo("name"),
                                 get_string(TEXT_ARCHIVE_NOT_AVAILABLE_YET_ID),
-                                get_string(TEXT_WANNA_JUMP_TO_ARCHIVE_ID)
+                                get_string(TEXT_JUMP_TO_ARCHIVE_ID)
                             )
                         )
                         del confirm
                         if yesno is False:
+                            self.skip_secs = 0
                             self.update_playback_info()
-                            self.prev_focused_id = focused_id
                             return True
 
-                        self.skip_secs = self.main_window.api.diff_live_archive * -1
+                        self.skip_secs = self.api.diff_live_archive * -1
+                        self.update_playback_info()
+                        self.defer_skip_playback()
+                        return True
 
                     elif action_id == xbmcgui.ACTION_MOVE_RIGHT and self.skip_secs >= 0:
                         self.update_playback_info()
