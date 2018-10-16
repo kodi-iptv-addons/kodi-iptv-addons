@@ -24,6 +24,7 @@ import datetime
 import math
 import os
 import platform
+import sys
 import threading
 import time
 from functools import wraps
@@ -37,6 +38,10 @@ if hasattr(__builtin__, 'addon_id') is False:
 addon = xbmcaddon.Addon(id=getattr(__builtin__, 'addon_id'))
 
 utc_local_offset = math.ceil(calendar.timegm(time.localtime()) - time.time())
+
+reload(sys)
+# noinspection PyUnresolvedReferences
+sys.setdefaultencoding('utf-8')
 
 TENSECS = 10  # type: int
 MIN = 60  # type: int

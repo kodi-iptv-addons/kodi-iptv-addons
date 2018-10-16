@@ -1,12 +1,14 @@
-[B]v1.0.3[/B] (2018-10-15)
+v1.0.4 (2018-10-16)
 - Big fixes
-[B]v1.0.2[/B] (2018-10-12)
+v1.0.3 (2018-10-15)
+- Big fixes
+v1.0.2 (2018-10-12)
 - Improved HTTP downloading
 - Big fixes
-[B]v1.0.1[/B] (2018-10-11)
+v1.0.1 (2018-10-11)
 - Improved error handling
 - Fixed bug in date formatting
 - Added day color bar for EPG entries
-[B]v1.0.0[/B] (2018-10-10)
+v1.0.0 (2018-10-10)
 - Initial release
 

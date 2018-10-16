@@ -332,7 +332,7 @@ class Api:
         """
         if self.auth_status != self.AUTH_STATUS_OK and not self.is_login_uri(uri, payload):
             self.login()
-            return self.make_request(uri, payload, method)
+            return self.make_request(uri, payload, method, headers)
 
         request = self.prepare_request(uri, payload, method, headers)
         response = self.send_request(request)

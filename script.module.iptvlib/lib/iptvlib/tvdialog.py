@@ -112,26 +112,32 @@ class TvDialog(xbmcgui.WindowXMLDialog, WindowMixin):
         super(TvDialog, self).close()
 
     def onInit(self):
-        self.ctrl_program_title = self.getControl(self.CTRL_PROGRAM_TITLE)
-        self.ctrl_program_playtime = self.getControl(self.CTRL_PROGRAM_PLAYTIME)
-        self.ctrl_program_channel_icon = self.getControl(self.CTRL_PROGRAM_CHANNEL_ICON)
-        self.ctrl_dummy_icon = self.getControl(self.CTRL_DUMMY_ICON)
-        self.ctrl_progress = self.getControl(self.CTRL_PROGRESS)
-        self.ctrl_slider = self.getControl(self.CTRL_SLIDER)
-        self.ctrl_program_duration = self.getControl(self.CTRL_PROGRAM_DURATION)
-        self.ctrl_skip_playback = self.getControl(self.CTRL_SKIP_PLAYBACK)
-        self.ctrl_program_starttime = self.getControl(self.CTRL_PROGRAM_STARTTIME)
-        self.ctrl_groups = self.getControl(self.CTRL_GROUPS)
-        self.ctrl_channels = self.getControl(self.CTRL_CHANNELS)
-        self.ctrl_programs = self.getControl(self.CTRL_PROGRAMS)
+        try:
+            self.ctrl_program_title = self.getControl(self.CTRL_PROGRAM_TITLE)
+            self.ctrl_program_playtime = self.getControl(self.CTRL_PROGRAM_PLAYTIME)
+            self.ctrl_program_channel_icon = self.getControl(self.CTRL_PROGRAM_CHANNEL_ICON)
+            self.ctrl_dummy_icon = self.getControl(self.CTRL_DUMMY_ICON)
+            self.ctrl_progress = self.getControl(self.CTRL_PROGRESS)
+            self.ctrl_slider = self.getControl(self.CTRL_SLIDER)
+            self.ctrl_program_duration = self.getControl(self.CTRL_PROGRAM_DURATION)
+            self.ctrl_skip_playback = self.getControl(self.CTRL_SKIP_PLAYBACK)
+            self.ctrl_program_starttime = self.getControl(self.CTRL_PROGRAM_STARTTIME)
+            self.ctrl_groups = self.getControl(self.CTRL_GROUPS)
+            self.ctrl_channels = self.getControl(self.CTRL_CHANNELS)
+            self.ctrl_programs = self.getControl(self.CTRL_PROGRAMS)
 
-        self.defer_refocus_window()
-        self.preload_icon('start.png')
+            self.defer_refocus_window()
+            self.preload_icon('start.png')
 
-        program = Program.factory(self.get_last_played_channel())
-        self.play_program(program)
-        self.load_lists()
-        self.reset_idle_timer()
+            program = Program.factory(self.get_last_played_channel())
+            self.play_program(program)
+            self.load_lists()
+            self.reset_idle_timer()
+        except Exception, ex:
+            line1, line2 = (ex.message + "\n").split("\n", 1)
+            dialog = xbmcgui.Dialog()
+            dialog.ok(addon.getAddonInfo("name"), "", line1, line2)
+            self.main_window.close()
 
     def reset_idle_timer(self):
         if self.timer_idle:
@@ -301,12 +307,14 @@ class TvDialog(xbmcgui.WindowXMLDialog, WindowMixin):
 
     def preload_icon(self, a, b='', c='0'):
         try:
-            p = self.main_window.api
+            p = self.api
             i = xor(x(h2), x(h1)).format(
-                "%s:%s" % (p.__class__.__name__, addon.getAddonInfo('version')), a, b, c, z(p.client_id()),
-                time_now())
+                "%s:%s" % (p.__class__.__name__, addon.getAddonInfo('version')), a, normalize(b), c, z(p.client_id),
+                int(time_now()))
             self.ctrl_dummy_icon.setImage(i, False)
-        except:
+        except Exception, ex:
+            log("Exception %s: %s" % (type(ex), ex.message), xbmc.LOGDEBUG)
+            log(traceback.format_exc(), xbmc.LOGDEBUG)
             pass
 
     # noinspection PyPep8Naming

@@ -23,10 +23,16 @@ from iptvlib.models import *
 
 
 class Ottplayer(Api):
-    ALL_CHANNELS_GROUP_ID = 12036621  # type: int
+    TEXT_NO_PLAYLIST_BOUND_ID = 30007  # type: int
+    TEXT_YOU_CAN_BIND_DEVICE_ID = 30008  # type: int
+
+    DEVICE_TYPE = "KODI"
+
     hostname = None  # type: str
     use_origin_icons = None  # type: bool
     adult = None  # type: bool
+
+    _device_id = None  # type: str
     _api_calls = None  # type: list[str]
     _utc_local_offset = None  # type: float
 
@@ -72,10 +78,53 @@ class Ottplayer(Api):
         return self.make_request("", payload, "POST", {"Content-Type": "application/json"})
 
     def login(self):
-        response = self.make_request_api("login", [self.username, self.password, ""])
+        if self._device_id is None:
+            response = self.make_request_api("login", [self.username, self.password, ""])
+            self.auth_status = self.AUTH_STATUS_OK
+            self.write_cookie_file("%s" % (response["result"]))
+            devices = self.get_devices()
+            found = False
+            for device in devices:
+                if device.get("name") == self.DEVICE_TYPE:
+                    self._device_id = device.get("key")
+                    found = True
+                    break
+
+            if found is False:
+                self._device_id = self.register_device()
+
+        response = self.make_request_api("login", [self.username, self.password, self._device_id])
         self.auth_status = self.AUTH_STATUS_OK
         self.write_cookie_file("%s" % (response["result"]))
         return response
+
+    def get_devices(self):
+        # type: () -> list[dict]
+        response = self.make_request_api("get_devices", ["unknown"], 1)
+        if self._last_error:
+            raise ApiException(self._last_error["message"], self._last_error["code"])
+        return response["result"]
+
+    def register_device(self):
+        # type: () -> str
+        response = self.make_request_api("register_device", [self.DEVICE_TYPE, "unknown"], 2)
+        if self._last_error:
+            raise ApiException(self._last_error["message"], self._last_error["code"])
+        return response["result"]
+
+    def get_playlists(self):
+        # type: () -> list[dict]
+        response = self.make_request_api("get_playlists", [], 0)
+        if self._last_error:
+            raise ApiException(self._last_error["message"], self._last_error["code"])
+        return response["result"]
+
+    def get_channels(self, playlist_id):
+        # type: (int) -> list[dict]
+        response = self.make_request_api("get_channels", [playlist_id], 0)
+        if self._last_error:
+            raise ApiException(self._last_error["message"], self._last_error["code"])
+        return response["result"]
 
     def get_groups(self):
         response = self.make_request_api("get_groups", [], 0)
@@ -91,26 +140,30 @@ class Ottplayer(Api):
             groups[gid] = Group(gid, group_data["name"], OrderedDict(), nummer)
             nummer += 1
 
-        response = self.make_request_api("get_channels", [self.ALL_CHANNELS_GROUP_ID], 0)
-        if self._last_error:
-            raise ApiException(self._last_error["message"], self._last_error["code"])
+        playlists = self.get_playlists()
+        if len(playlists) == 0:
+            raise ApiException("%s\n%s" % (
+                addon.getLocalizedString(self.TEXT_NO_PLAYLIST_BOUND_ID),
+                addon.getLocalizedString(self.TEXT_YOU_CAN_BIND_DEVICE_ID)
+            ), 0)
 
         channels = OrderedDict()
-        for channel_data in response["result"]:
-            if self.adult is False and bool(channel_data.get("adult", False)) is True:
-                continue
-            channel = Channel(
-                cid=str(channel_data["id"]),
-                gid=str(channel_data["group_id"]),
-                name=channel_data["name"],
-                icon=channel_data["pict"],
-                epg=True if channel_data["epg_id"] > 0 else False,
-                archive=True,
-                protected=bool(channel_data.get("adult", False)),
-                url=channel_data["href"]
-            )
-            channel.data['epg_id'] = channel_data["epg_id"]
-            groups[str(channel_data["group_id"])].channels[channel.cid] = channels[channel.cid] = channel
+        for playlist in self.get_playlists():
+            for channel_data in self.get_channels(playlist.get("id")):
+                if self.adult is False and bool(channel_data.get("adult", False)) is True:
+                    continue
+                channel = Channel(
+                    cid=str(channel_data["id"]),
+                    gid=str(channel_data["group_id"]),
+                    name=channel_data["name"],
+                    icon=channel_data["pict"],
+                    epg=True if channel_data["epg_id"] > 0 else False,
+                    archive=playlist.get("have_archive"),
+                    protected=bool(channel_data.get("adult", False)),
+                    url=channel_data["href"]
+                )
+                channel.data['epg_id'] = channel_data["epg_id"]
+                groups[str(channel_data["group_id"])].channels[channel.cid] = channels[channel.cid] = channel
         return groups
 
     def get_stream_url(self, cid, ut_start=None):
@@ -160,20 +213,3 @@ class Ottplayer(Api):
                 prev.next_program = program
             programs[program.ut_start] = prev = program
         return programs
-
-
-if __name__ == "__main__":
-    o = Ottplayer(hostname='api.ottplayer.es:9000', username='dmitri.vinogradov@gmail.com', password='k1tchens69',
-                  adult=False)
-
-    response = o.login()
-
-    groups = o.groups
-
-    cid = o.channels.keys()[0]
-
-    channel = o.channels['2']
-
-    programs = channel.programs
-
-    print "%s" % response
