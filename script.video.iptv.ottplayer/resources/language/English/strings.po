@@ -7,12 +7,12 @@ msgstr ""
 
 # Settings
 msgctxt "#30001"
-msgid "Account"
-msgstr "Account"
+msgid "Ottplayer Account"
+msgstr "Ottplayer Account"
 
 msgctxt "#30002"
 msgid "Login"
-msgstr "Login"
+msgstr "Email"
 
 msgctxt "#30003"
 msgid "Password"

@@ -7,12 +7,12 @@ msgstr ""
 
 # Settings
 msgctxt "#30001"
-msgid "Account"
-msgstr "Аккаунт"
+msgid "Ottplayer Account"
+msgstr "Ottplayer Аккаунт"
 
 msgctxt "#30002"
 msgid "Login"
-msgstr "Абонемент"
+msgstr "Email адрес"
 
 msgctxt "#30003"
 msgid "Password"
