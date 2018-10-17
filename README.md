@@ -24,16 +24,14 @@
 
 ### Available Addons / Предлагаемые дополнения
 
-|![Ottclub.cc](https://raw.githubusercontent.com/kodi-iptv-addons/kodi-iptv-addons/master/script.video.iptv.ottclub/resources/icon.png)|
+|[![Ottclub.cc](https://raw.githubusercontent.com/kodi-iptv-addons/kodi-iptv-addons/master/script.video.iptv.ottclub/resources/icon.png)](https://goo.gl/VHVSB5)|
 |---|
 
-|![OttPlayer.es](https://raw.githubusercontent.com/kodi-iptv-addons/kodi-iptv-addons/master/script.video.iptv.ottplayer/resources/icon.png)|
+|[![OttPlayer.es](https://raw.githubusercontent.com/kodi-iptv-addons/kodi-iptv-addons/master/script.video.iptv.ottplayer/resources/icon.png)](https://ottplayer.es)|
 |---|
 
-|![Kartina.TV](https://raw.githubusercontent.com/kodi-iptv-addons/kodi-iptv-addons/master/script.video.iptv.kartina/resources/icon.png)|
+|[![Kartina.TV](https://raw.githubusercontent.com/kodi-iptv-addons/kodi-iptv-addons/master/script.video.iptv.kartina/resources/icon.png)](https://www.kartina.tv)|
 |---|
 
-![New-rus.tv](https://raw.githubusercontent.com/kodi-iptv-addons/kodi-iptv-addons/master/script.video.iptv.novoetv/resources/icon.png)|
+|[![New-rus.tv](https://raw.githubusercontent.com/kodi-iptv-addons/kodi-iptv-addons/master/script.video.iptv.novoetv/resources/icon.png)](https://new-rus.tv)|
 |---|
-
-
