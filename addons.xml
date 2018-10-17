@@ -13,7 +13,7 @@
       <platform>all</platform>
     </extension>
   </addon>
-  <addon id="script.module.iptvlib" name="IPTV Library" version="1.0.5" provider-name="Dmitry Vinogradov">
+  <addon id="script.module.iptvlib" name="IPTV Library" version="1.0.6" provider-name="Dmitry Vinogradov">
     <requires>
       <import addon="xbmc.python" version="2.24.0"/>
     </requires>
@@ -30,6 +30,8 @@
       <license>GNU LESSER GENERAL PUBLIC LICENSE Version 3, June 2007</license>
       <source>https://github.com/dmitry-vinogradov/kodi-iptv-addons</source>
       <news>
+[B]v1.0.6[/B] (2018-10-17)[CR]
+- Big fixes[CR]
 [B]v1.0.5[/B] (2018-10-16)[CR]
 - Preload icons[CR]
 [B]v1.0.4[/B] (2018-10-16)[CR]
@@ -104,7 +106,7 @@
         </news>
     </extension>
   </addon>
-  <addon id="script.video.iptv.ottclub" name="OTTCLUB" version="1.0.3" provider-name="Dmitry Vinogradov">
+  <addon id="script.video.iptv.ottclub" name="OTTCLUB" version="1.0.4" provider-name="Dmitry Vinogradov">
     <requires>
       <import addon="xbmc.python" version="2.24.0"/>
       <import addon="script.module.iptvlib" version="1.0.0"/>
@@ -124,6 +126,8 @@
       <license>GNU LESSER GENERAL PUBLIC LICENSE Version 3, June 2007</license>
       <source>https://github.com/dmitry-vinogradov/kodi-iptv-addons</source>
       <news>
+[B]v1.0.4[/B] (2018-10-17)[CR]
+- Bug fixes[CR]
 [B]v1.0.3[/B] (2018-10-15)[CR]
 - Bug fixes[CR]
 [B]v1.0.2[/B] (2018-10-12)[CR]

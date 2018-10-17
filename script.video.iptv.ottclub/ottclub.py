@@ -40,7 +40,7 @@ class Ottclub(Api):
         # type: (str, str, bool, dict) -> None
         super(Ottclub, self).__init__(**kwargs)
         self.playlist = playlist if playlist.startswith('http') else 'http://%s/ottplayer/' % playlist
-        self.key = key
+        self.key = self.username = key
         self.adult = adult
         self.auth_status = self.AUTH_STATUS_OK
         self.m3u_groups = OrderedDict()
