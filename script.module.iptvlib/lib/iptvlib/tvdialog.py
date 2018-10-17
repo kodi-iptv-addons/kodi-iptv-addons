@@ -283,6 +283,7 @@ class TvDialog(xbmcgui.WindowXMLDialog, WindowMixin):
 
     def on_playback_callback(self, event, **kwargs):
         # type: (str, dict) -> None
+        log(event, xbmc.LOGDEBUG)
         if event == "onPlayBackEnded":
             if self.player.program:
                 if self.player.program.is_live_now():
@@ -296,8 +297,7 @@ class TvDialog(xbmcgui.WindowXMLDialog, WindowMixin):
             self.preload_icon('play', normalize(self.get_last_played_channel().name), 6)
             dialog = xbmcgui.Dialog()
             dialog.ok(addon.getAddonInfo("name"), " ", " ", get_string(TEXT_NOT_PLAYABLE_ID))
-            program = self.get_last_played_channel().get_current_program()
-            self.play_program(program)
+            self.setFocusId(self.CTRL_CHANNELS  )
         elif event == "onPlayBackStarted":
             self.update_playback_info()
 
