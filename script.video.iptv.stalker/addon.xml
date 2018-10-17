@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<addon id="script.video.iptv.stalker-DEV"
+       name="STALKER-DEV"
+       version="1.0.0"
+       provider-name="Dmitry Vinogradov">
+    <requires>
+        <import addon="xbmc.python" version="2.24.0"/>
+        <import addon="script.module.iptvlib" version="1.0.0"/>
+    </requires>
+    <extension point="xbmc.python.script" library="default.py">
+        <provides>video</provides>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <assets>
+            <icon>resources/icon.png</icon>
+            <fanart></fanart>
+            <screenshot></screenshot>
+        </assets>
+        <platform>all</platform>
+        <summary lang="en">IPTV Client for Stalker portal</summary>
+        <description lang="en">IPTV Client for Stalker portal</description>
+        <license>GNU LESSER GENERAL PUBLIC LICENSE Version 3, June 2007</license>
+        <source>https://github.com/dmitry-vinogradov/kodi-iptv-addons</source>
+        <news>
+[B]v1.0.0[/B] (2018-10-18)[CR]
+- Initial release
+        </news>
+    </extension>
+</addon>

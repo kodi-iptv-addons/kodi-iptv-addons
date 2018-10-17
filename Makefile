@@ -5,7 +5,8 @@ addons = $(SELF_PATH)/repository.iptv \
 	$(SELF_PATH)/script.video.iptv.kartina \
 	$(SELF_PATH)/script.video.iptv.novoetv \
 	$(SELF_PATH)/script.video.iptv.ottclub \
-	$(SELF_PATH)/script.video.iptv.ottplayer
+	$(SELF_PATH)/script.video.iptv.ottplayer\
+	$(SELF_PATH)/script.video.iptv.stalker
 
 release: zip repo
 

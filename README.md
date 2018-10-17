@@ -35,3 +35,6 @@
 
 |[![New-rus.tv](https://raw.githubusercontent.com/kodi-iptv-addons/kodi-iptv-addons/master/script.video.iptv.novoetv/resources/icon.png)](https://new-rus.tv)|
 |---|
+
+|[![Stalker](https://raw.githubusercontent.com/kodi-iptv-addons/kodi-iptv-addons/master/script.video.iptv.stalker/resources/icon.png)](#)|
+|---|
