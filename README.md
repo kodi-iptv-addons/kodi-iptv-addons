@@ -30,11 +30,9 @@
 |[![Kartina.TV](https://raw.githubusercontent.com/kodi-iptv-addons/kodi-iptv-addons/master/script.video.iptv.kartina/resources/icon.png)](https://www.kartina.tv)|[![New-rus.tv](https://raw.githubusercontent.com/kodi-iptv-addons/kodi-iptv-addons/master/script.video.iptv.novoetv/resources/icon.png)](https://new-rus.tv)|
 |---|---|
 
-|[![Stalker](https://raw.githubusercontent.com/kodi-iptv-addons/kodi-iptv-addons/master/script.video.iptv.stalker/resources/icon.png)](#)||
+|[![Stalker](https://raw.githubusercontent.com/kodi-iptv-addons/kodi-iptv-addons/master/script.video.iptv.stalker/resources/icon.png)](#)|[![ITV Live](https://raw.githubusercontent.com/kodi-iptv-addons/kodi-iptv-addons/master/script.video.iptv.itv/resources/icon.png)](https://itv.live/)|
 |---|---|
 
-|[![ITV Live](https://raw.githubusercontent.com/kodi-iptv-addons/kodi-iptv-addons/master/script.video.iptv.itv/resources/icon.png)](#)||
-|---|---|
 
 
 
