@@ -33,6 +33,9 @@
 |[![Stalker](https://raw.githubusercontent.com/kodi-iptv-addons/kodi-iptv-addons/master/script.video.iptv.stalker/resources/icon.png)](#)||
 |---|---|
 
+|[![ITV Live](https://raw.githubusercontent.com/kodi-iptv-addons/kodi-iptv-addons/master/script.video.iptv.itv/resources/icon.png)](#)||
+|---|---|
+
 
 
 

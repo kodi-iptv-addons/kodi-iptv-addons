@@ -271,7 +271,7 @@ class Api:
                 else:
                     data = urlencode(payload)
             elif method == "GET":
-                url += "?%s" % urlencode(payload)
+                url += "%s%s" % ("&" if "?" in url else "?", urlencode(payload))
         return urllib2.Request(url=url, headers=headers, data=data)
 
     def send_request(self, request):

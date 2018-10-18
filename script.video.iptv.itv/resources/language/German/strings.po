@@ -1,0 +1,23 @@
+# XBMC Media Center language file
+# Addon Name: IPTV player for ITV (itv.live)
+# Addon id: script.video.iptv.itv
+# Addon Provider: Dmitry Vinogradov
+msgid ""
+msgstr ""
+
+# Settings
+msgctxt "#30001"
+msgid "Account"
+msgstr "Zugangsdaten"
+
+msgctxt "#30002"
+msgid "Hostname"
+msgstr "Hostname"
+
+msgctxt "#30003"
+msgid "Key"
+msgstr "Key"
+
+msgctxt "#30004"
+msgid "Show adult channels"
+msgstr "Zeige Kanäle für Erwachsene"

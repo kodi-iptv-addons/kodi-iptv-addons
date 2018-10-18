@@ -25,6 +25,7 @@ from iptvlib import *
 
 
 class Model(object):
+    data = None  # type: dict
     API = None
 
     def __init__(self, data):
