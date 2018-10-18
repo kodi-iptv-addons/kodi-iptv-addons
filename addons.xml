@@ -30,21 +30,21 @@
       <license>GNU LESSER GENERAL PUBLIC LICENSE Version 3, June 2007</license>
       <source>https://github.com/dmitry-vinogradov/kodi-iptv-addons</source>
       <news>
-[B]v1.0.7[/B] (2018-10-17)[CR]
-- Big fixes[CR]
-[B]v1.0.2[/B] (2018-10-12)[CR]
-- Improved HTTP downloading[CR]
-- Big fixes[CR]
-[B]v1.0.1[/B] (2018-10-11)[CR]
-- Improved error handling[CR]
-- Fixed bug in date formatting[CR]
-- Added day color bar for EPG entries[CR]
-[B]v1.0.0[/B] (2018-10-10)[CR]
-- Initial release[CR]
+v1.0.7 (2018-10-17)
+- Big fixes
+v1.0.2 (2018-10-12)
+- Improved HTTP downloading
+- Big fixes
+v1.0.1 (2018-10-11)
+- Improved error handling
+- Fixed bug in date formatting
+- Added day color bar for EPG entries
+v1.0.0 (2018-10-10)
+- Initial release
         </news>
     </extension>
   </addon>
-  <addon id="script.video.iptv.kartina" name="KARTINA" version="1.0.0" provider-name="Dmitry Vinogradov">
+  <addon id="script.video.iptv.kartina" name="KARTINA" version="1.0.1" provider-name="Dmitry Vinogradov">
     <requires>
       <import addon="xbmc.python" version="2.24.0"/>
       <import addon="script.module.iptvlib" version="1.0.0"/>
@@ -67,12 +67,14 @@
       <license>GNU LESSER GENERAL PUBLIC LICENSE Version 3, June 2007</license>
       <source>https://github.com/dmitry-vinogradov/kodi-iptv-addons</source>
       <news>
-[B]v1.0.0[/B] (2018-10-12)[CR]
+v1.0.1 (2018-10-18)
+- Hide password field in settings
+v1.0.0 (2018-10-12)
 - Initial release
         </news>
     </extension>
   </addon>
-  <addon id="script.video.iptv.novoetv" name="NOVOETV" version="1.0.0" provider-name="Dmitry Vinogradov">
+  <addon id="script.video.iptv.novoetv" name="NOVOETV" version="1.0.1" provider-name="Dmitry Vinogradov">
     <requires>
       <import addon="xbmc.python" version="2.24.0"/>
       <import addon="script.module.iptvlib" version="1.0.0"/>
@@ -95,12 +97,14 @@
       <license>GNU LESSER GENERAL PUBLIC LICENSE Version 3, June 2007</license>
       <source>https://github.com/dmitry-vinogradov/kodi-iptv-addons</source>
       <news>
-[B]v1.0.0[/B] (2018-10-16)[CR]
+v1.0.1 (2018-10-18)
+- Hide password field in settings
+v1.0.0 (2018-10-16)
 - Initial release
         </news>
     </extension>
   </addon>
-  <addon id="script.video.iptv.ottclub" name="OTTCLUB" version="1.0.4" provider-name="Dmitry Vinogradov">
+  <addon id="script.video.iptv.ottclub" name="OTTCLUB" version="1.0.5" provider-name="Dmitry Vinogradov">
     <requires>
       <import addon="xbmc.python" version="2.24.0"/>
       <import addon="script.module.iptvlib" version="1.0.0"/>
@@ -120,20 +124,24 @@
       <license>GNU LESSER GENERAL PUBLIC LICENSE Version 3, June 2007</license>
       <source>https://github.com/dmitry-vinogradov/kodi-iptv-addons</source>
       <news>
-[B]v1.0.4[/B] (2018-10-17)[CR]
-- Bug fixes[CR]
-[B]v1.0.3[/B] (2018-10-15)[CR]
-- Bug fixes[CR]
-[B]v1.0.2[/B] (2018-10-12)[CR]
-- Minor bug fixes[CR]
-[B]v1.0.1[/B] (2018-10-11)[CR]
-- Improved error handling[CR]
-[B]v1.0.0[/B] (2018-10-10)[CR]
-- Initial release[CR]
+v1.0.5 (2018-10-18)
+- Hide password field in settings
+- Bug fixes
+v1.0.4 (2018-10-17)
+- Bug fixes
+v1.0.3 (2018-10-15)
+- Bug fixes
+v1.0.2 (2018-10-12)
+- Minor bug fixes
+v1.0.1 (2018-10-11)
+- Improved error handling
+v1.0.0 (2018-10-10)
+- Initial release
+
         </news>
     </extension>
   </addon>
-  <addon id="script.video.iptv.ottplayer" name="OTTPLAYER" version="1.0.1" provider-name="Dmitry Vinogradov">
+  <addon id="script.video.iptv.ottplayer" name="OTTPLAYER" version="1.0.2" provider-name="Dmitry Vinogradov">
     <requires>
       <import addon="xbmc.python" version="2.24.0"/>
       <import addon="script.module.iptvlib" version="1.0.0"/>
@@ -153,14 +161,16 @@
       <license>GNU LESSER GENERAL PUBLIC LICENSE Version 3, June 2007</license>
       <source>https://github.com/dmitry-vinogradov/kodi-iptv-addons</source>
       <news>
-[B]v1.0.1[/B] (2018-10-16)[CR]
-- Bug fixes[CR]
-[B]v1.0.0[/B] (2018-10-15)[CR]
-- Initial release[CR]
+v1.0.2 (2018-10-18)
+- Hide password field in settings
+v1.0.1 (2018-10-16)
+- Bug fixes
+v1.0.0 (2018-10-15)
+- Initial release
         </news>
     </extension>
   </addon>
-  <addon id="script.video.iptv.stalker" name="STALKER" version="1.0.0" provider-name="Dmitry Vinogradov">
+  <addon id="script.video.iptv.stalker" name="STALKER" version="1.0.1" provider-name="Dmitry Vinogradov">
     <requires>
       <import addon="xbmc.python" version="2.24.0"/>
       <import addon="script.module.iptvlib" version="1.0.0"/>
@@ -180,7 +190,9 @@
       <license>GNU LESSER GENERAL PUBLIC LICENSE Version 3, June 2007</license>
       <source>https://github.com/dmitry-vinogradov/kodi-iptv-addons</source>
       <news>
-[B]v1.0.0[/B] (2018-10-18)[CR]
+v1.0.1 (2018-10-18)
+- Hide password field in settings
+v1.0.0 (2018-10-18)
 - Initial release
         </news>
     </extension>

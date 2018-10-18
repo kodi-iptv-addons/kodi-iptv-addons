@@ -120,7 +120,7 @@ class Ottclub(Api):
         channels = self.channels
         url = channels[cid].url
         if ut_start is not None:
-            url = "%s?utc=%s&lutc=%s" % (url, ut_start, int(time_now()))
+            url = "%s%sutc=%s&lutc=%s" % (url, "&" if "?" in url else "?", ut_start, int(time_now()))
         return url
 
     def get_epg(self, cid):
@@ -130,6 +130,7 @@ class Ottclub(Api):
         if self._last_error:
             raise ApiException(self._last_error["message"], self._last_error["code"])
         prev = None
+        response = {int(k):v for k,v in response.items()}
         for k in sorted(response.iterkeys()):
             v = response[k]
             program = Program(
@@ -139,7 +140,7 @@ class Ottclub(Api):
                 v["time_to"],
                 v["name"],
                 v["descr"],
-                bool(int(v["rec"]))
+                bool(v["rec"]) if v.has_key("rec") else self.channels[cid].archive
             )
             if prev is not None:
                 program.prev_program = prev

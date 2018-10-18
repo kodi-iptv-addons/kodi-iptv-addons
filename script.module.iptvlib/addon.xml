@@ -19,17 +19,17 @@
         <license>GNU LESSER GENERAL PUBLIC LICENSE Version 3, June 2007</license>
         <source>https://github.com/dmitry-vinogradov/kodi-iptv-addons</source>
         <news>
-[B]v1.0.7[/B] (2018-10-17)[CR]
-- Big fixes[CR]
-[B]v1.0.2[/B] (2018-10-12)[CR]
-- Improved HTTP downloading[CR]
-- Big fixes[CR]
-[B]v1.0.1[/B] (2018-10-11)[CR]
-- Improved error handling[CR]
-- Fixed bug in date formatting[CR]
-- Added day color bar for EPG entries[CR]
-[B]v1.0.0[/B] (2018-10-10)[CR]
-- Initial release[CR]
+v1.0.7 (2018-10-17)
+- Big fixes
+v1.0.2 (2018-10-12)
+- Improved HTTP downloading
+- Big fixes
+v1.0.1 (2018-10-11)
+- Improved error handling
+- Fixed bug in date formatting
+- Added day color bar for EPG entries
+v1.0.0 (2018-10-10)
+- Initial release
         </news>
     </extension>
 </addon>

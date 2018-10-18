@@ -1,2 +1,4 @@
+v1.0.1 (2018-10-18)
+- Hide password field in settings
 v1.0.0 (2018-10-12)
 - Initial release
