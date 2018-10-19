@@ -27,7 +27,7 @@ import urllib2
 from Queue import Queue
 from collections import OrderedDict
 from threading import Event
-from urllib import urlencode
+from urllib import urlencode, addinfourl
 from urllib2 import Request
 
 import xbmc
@@ -44,6 +44,18 @@ class ApiException(Exception):
     def __repr__(self):
         return "ApiException: (%s) %s" % (self.code, self.message)
 
+
+class HttpRequest(urllib2.Request):
+    ident = None  # type: str
+    method = None # type: str
+
+    def __init__(self, ident=None, method=None, **kwargs):
+        self.ident = ident
+        self.method = method
+        urllib2.Request.__init__(self, **kwargs)
+
+    def get_method(self):
+        return self.method or urllib2.Request.get_method(self)
 
 class Api:
     __metaclass__ = abc.ABCMeta
@@ -252,9 +264,10 @@ class Api:
             fh.write(json.dumps(data))
             fh.close()
 
-    def prepare_request(self, uri, payload=None, method="GET", headers=None):
-        # type: (str, dict, str, dict) -> Request
+    def prepare_request(self, uri, payload=None, method="GET", headers=None, ident=None):
+        # type: (str, dict, str, dict, str) -> HttpRequest
         url = self.base_api_url % uri if uri.startswith('http') is False else uri
+        ident = ident or url
         headers = headers or {}
         headers["User-Agent"] = self.user_agent
         headers["Connection"] = "Close"
@@ -272,14 +285,18 @@ class Api:
                     data = urlencode(payload)
             elif method == "GET":
                 url += "%s%s" % ("&" if "?" in url else "?", urlencode(payload))
-        return urllib2.Request(url=url, headers=headers, data=data)
+        return HttpRequest(ident=ident, method=method, url=url, headers=headers, data=data)
 
     def send_request(self, request):
-        # type: (Request) -> dict
+        # type: (Request) -> dict|str
         json_data = ""
         try:
-            json_data = urllib2.urlopen(request).read()
-            response = json.loads(json_data)
+            response = urllib2.urlopen(request)  # type: addinfourl
+            content_type = response.headers.getheader("content-type")  # type: str
+            content = response.read()
+            if not content_type.startswith("application/json"):
+                return content
+            response = json.loads(content)
         except urllib2.URLError, ex:
             log("Exception %s: %s" % (type(ex), ex.message))
             log(traceback.format_exc(), xbmc.LOGDEBUG)
@@ -353,13 +370,13 @@ class Api:
     def do_send_request(self, queue, results, stop_event, wait=None):
         # type: (Queue, dict[str, dict], Event, float) -> None
         while not stop_event.is_set():
-            request = queue.get()
-            results[request.get_full_url()] = self.send_request(request)
+            request = queue.get()  # type: HttpRequest
+            results[request.ident] = self.send_request(request)
             queue.task_done()
             stop_event.wait(wait)
 
     def send_parallel_requests(self, requests, wait=None, num_threads=None):
-        # type: (list[Request], float, int) -> dict[str, dict]
+        # type: (list[HttpRequest], float, int) -> dict[str, dict]
         num_threads = len(requests) if num_threads is None else num_threads
         queue = Queue(num_threads * 2)
         results = dict()

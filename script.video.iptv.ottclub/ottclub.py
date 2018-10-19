@@ -18,6 +18,7 @@
 # Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
 # Boston, MA  02110-1301, USA.
 #
+import json
 import traceback
 import urllib2
 
@@ -126,12 +127,8 @@ class Ottclub(Api):
     def get_epg(self, cid):
         # type: (str) -> OrderedDict[int, Program]
         programs = OrderedDict()
-        response = self.make_request("channel/%s" % cid)
-        if self._last_error:
-            raise ApiException(
-                self._last_error.get("message", get_string(TEXT_SERVICE_ERROR_OCCURRED_ID)),
-                self._last_error.get("code", Api.E_UNKNOW_ERROR)
-            )
+        json_data = self.make_request("channel/%s" % cid)
+        response = json.loads(json_data)
         prev = None
         response = {int(k):v for k,v in response.items()}
         for k in sorted(response.iterkeys()):

@@ -18,7 +18,7 @@
 # Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
 # Boston, MA  02110-1301, USA.
 #
-from iptvlib.api import Api, ApiException
+from iptvlib.api import Api, ApiException, HttpRequest
 from iptvlib.models import *
 
 
@@ -70,16 +70,23 @@ class Ottplayer(Api):
     def is_login_uri(self, uri, payload=None):
         return payload is not None and "login" in payload.get("method", "")
 
-    def make_request_api(self, method, params, sid_index=-1):
+    def prepare_api_request(self, method, params, sid_index=-1, ident=None):
+        # type: (str, list, int, str) -> HttpRequest
         self._api_calls += 1
         if sid_index >= 0:
             params.insert(sid_index, self.read_cookie_file())
+        ident = ident or "%s:%s" % (method, self._api_calls)
         payload = {"id": self._api_calls, "method": method, "params": params, }
-        return self.make_request("", payload, "POST", {"Content-Type": "application/json"})
+        return self.prepare_request("", payload, "POST", {"Content-Type": "application/json"}, ident)
+
+    def make_api_request(self, method, params, sid_index=-1):
+        # type: (str, list, int) -> dict
+        request = self.prepare_api_request(method, params, sid_index)
+        return self.send_request(request)
 
     def login(self):
         if self._device_id is None:
-            response = self.make_request_api("login", [self.username, self.password, ""])
+            response = self.make_api_request("login", [self.username, self.password, ""])
             self.auth_status = self.AUTH_STATUS_OK
             self.write_cookie_file("%s" % (response["result"]))
             devices = self.get_devices()
@@ -93,14 +100,14 @@ class Ottplayer(Api):
             if found is False:
                 self._device_id = self.register_device()
 
-        response = self.make_request_api("login", [self.username, self.password, self._device_id])
+        response = self.make_api_request("login", [self.username, self.password, self._device_id])
         self.auth_status = self.AUTH_STATUS_OK
         self.write_cookie_file("%s" % (response["result"]))
         return response
 
     def get_devices(self):
         # type: () -> list[dict]
-        response = self.make_request_api("get_devices", ["unknown"], 1)
+        response = self.make_api_request("get_devices", ["unknown"], 1)
         if self._last_error:
             raise ApiException(
                 self._last_error.get("message", get_string(TEXT_SERVICE_ERROR_OCCURRED_ID)),
@@ -110,17 +117,7 @@ class Ottplayer(Api):
 
     def register_device(self):
         # type: () -> str
-        response = self.make_request_api("register_device", [self.DEVICE_TYPE, "unknown"], 2)
-        if self._last_error:
-            raise ApiException(
-                self._last_error.get("message", get_string(TEXT_SERVICE_ERROR_OCCURRED_ID)),
-                self._last_error.get("code", Api.E_UNKNOW_ERROR)
-            )
-        return response["result"]
-
-    def get_playlists(self):
-        # type: () -> list[dict]
-        response = self.make_request_api("get_playlists", [], 0)
+        response = self.make_api_request("register_device", [self.DEVICE_TYPE, "unknown"], 2)
         if self._last_error:
             raise ApiException(
                 self._last_error.get("message", get_string(TEXT_SERVICE_ERROR_OCCURRED_ID)),
@@ -130,7 +127,7 @@ class Ottplayer(Api):
 
     def get_channels(self, playlist_id):
         # type: (int) -> list[dict]
-        response = self.make_request_api("get_channels", [playlist_id], 0)
+        response = self.make_api_request("get_channels", [playlist_id], 0)
         if self._last_error:
             raise ApiException(
                 self._last_error.get("message", get_string(TEXT_SERVICE_ERROR_OCCURRED_ID)),
@@ -139,41 +136,65 @@ class Ottplayer(Api):
         return response["result"]
 
     def get_groups(self):
-        response = self.make_request_api("get_groups", [], 0)
-        if self._last_error:
+        get_groups_request = self.prepare_api_request("get_groups", [], 0)
+        get_playlists_request = self.prepare_api_request("get_playlists", [], 0)
+        requests = [get_groups_request, get_playlists_request]
+        results = self.send_parallel_requests(requests)
+
+        get_groups_response = results[get_groups_request.ident]
+        if "error" in get_groups_response and get_groups_response["error"]:
+            raise ApiException(
+                get_groups_response.get("message", get_string(TEXT_SERVICE_ERROR_OCCURRED_ID)),
+                get_groups_response.get("code", Api.E_UNKNOW_ERROR)
+            )
+
+        groups = OrderedDict()
+        number = 1
+        for group_data in get_groups_response["result"]:
+            if all(k in group_data for k in ("id", "name", "title")) is False:
+                continue
+            gid = str(group_data["id"])
+            groups[gid] = Group(gid, group_data["name"], OrderedDict(), number)
+            number += 1
+
+        get_playlists_response = results[get_playlists_request.ident]
+        if "error" in get_playlists_response and get_playlists_response["error"]:
             raise ApiException(
                 self._last_error.get("message", get_string(TEXT_SERVICE_ERROR_OCCURRED_ID)),
                 self._last_error.get("code", Api.E_UNKNOW_ERROR)
             )
-
-        groups = OrderedDict()
-        nummer = 1
-        for group_data in response["result"]:
-            if all(k in group_data for k in ("id", "name", "title")) is False:
-                continue
-            gid = str(group_data["id"])
-            groups[gid] = Group(gid, group_data["name"], OrderedDict(), nummer)
-            nummer += 1
-
-        playlists = self.get_playlists()
+        
+        playlists = get_playlists_response.get("result")  # type: list[dict]
         if len(playlists) == 0:
             raise ApiException("%s\n%s" % (
                 addon.getLocalizedString(self.TEXT_NO_PLAYLIST_BOUND_ID),
                 addon.getLocalizedString(self.TEXT_YOU_CAN_BIND_DEVICE_ID)
-            ), 0)
+            ), Api.E_UNKNOW_ERROR)
 
         channels = OrderedDict()
-        for playlist in self.get_playlists():
-            for channel_data in self.get_channels(playlist.get("id")):
+        requests = []
+        for playlist in playlists:
+            requests.append(self.prepare_api_request("get_channels", [playlist.get("id")], 0, playlist.get("id")))
+
+        results = self.send_parallel_requests(requests)
+        for playlist_id, result in results.iteritems():
+            if "error" in result and result["error"]:
+                raise ApiException(
+                    self._last_error.get("message", get_string(TEXT_SERVICE_ERROR_OCCURRED_ID)),
+                    self._last_error.get("code", Api.E_UNKNOW_ERROR)
+                )
+            for channel_data in result["result"]:
                 if self.adult is False and bool(channel_data.get("adult", False)) is True:
                     continue
+                playlist = next((playlist for playlist in playlists if playlist.get("id") == playlist_id), {})
+                group = next((group for group in groups if groups.get("cid") == str(channel_data["group_id"])), {})
                 channel = Channel(
                     cid=str(channel_data["id"]),
                     gid=str(channel_data["group_id"]),
                     name=channel_data["name"],
                     icon=channel_data["pict"],
                     epg=True if channel_data["epg_id"] > 0 else False,
-                    archive=playlist.get("have_archive"),
+                    archive=playlist.get("have_archive", False),
                     protected=bool(channel_data.get("adult", False)),
                     url=channel_data["href"]
                 )
@@ -182,7 +203,6 @@ class Ottplayer(Api):
         return groups
 
     def get_stream_url(self, cid, ut_start=None):
-        log("#### get_stream_url(cid: %s, ut_start: %s)" % (cid, ut_start))
         channels = self.channels
         url = channels[cid].url
         if ut_start is not None:
@@ -192,7 +212,7 @@ class Ottplayer(Api):
     def get_epg(self, cid):
         # type: (str) -> OrderedDict[int, Program]
         channel = self.channels[cid]
-        response = self.make_request_api("get_epg2", [channel.epg_id, 2, int(self.archive_ttl / DAY)])
+        response = self.make_api_request("get_epg2", [channel.epg_id, 2, int(self.archive_ttl / DAY)])
         if self._last_error:
             raise ApiException(
                 self._last_error.get("message", get_string(TEXT_SERVICE_ERROR_OCCURRED_ID)),

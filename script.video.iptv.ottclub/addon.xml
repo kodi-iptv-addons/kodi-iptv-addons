@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addon id="script.video.iptv.ottclub-DEV"
        name="OTTCLUB-DEV"
-       version="1.0.6"
+       version="1.0.7"
        provider-name="Dmitry Vinogradov">
     <requires>
         <import addon="xbmc.python" version="2.24.0"/>
@@ -22,7 +22,7 @@
         <license>GNU LESSER GENERAL PUBLIC LICENSE Version 3, June 2007</license>
         <source>https://github.com/dmitry-vinogradov/kodi-iptv-addons</source>
         <news>
-v1.0.6 (2018-10-19)
+v1.0.7 (2018-10-20)
 - Bug fixes
 v1.0.5 (2018-10-18)
 - Hide password field in settings
