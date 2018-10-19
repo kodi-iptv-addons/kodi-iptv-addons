@@ -170,7 +170,7 @@ class Stalker(Api):
             if response.get("status") == "OK":
                 return response.get("results")
 
-        raise ApiException("Selected program is not playable", Api.E_UNKNOW_ERROR)
+        raise ApiException(get_string(TEXT_NOT_PLAYABLE_ID), Api.E_UNKNOW_ERROR)
 
     def get_epg(self, cid):
         settings = self.read_settings_file()
@@ -201,17 +201,3 @@ class Stalker(Api):
                 prev.next_program = program
             programs[program.ut_start] = prev = program
         return programs
-
-#
-# if __name__ == "__main__":
-#     api = Stalker(username="xo149231", password="72635845", hostname="stb.shara-tv.org", timeshift=0, adult=False)
-#
-#     groups = api.groups
-#
-#     channel = api.channels[next(iter(api.channels.iterkeys()))]
-#
-#     programs = channel.programs
-#
-#     api.get_stream_url(channel.cid, int(time_now()) - DAY)
-#
-#     print "%s" % len(groups)
