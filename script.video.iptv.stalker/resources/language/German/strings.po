@@ -23,8 +23,8 @@ msgid "Advanced"
 msgstr "Erweitert"
 
 msgctxt "#30005"
-msgid "Api hostname"
-msgstr "API Hostname"
+msgid "Portal hostname"
+msgstr "Portal Hostname"
 
 msgctxt "#30006"
 msgid "Show adult channels"

@@ -23,8 +23,8 @@ msgid "Advanced"
 msgstr "Расширенные настройки"
 
 msgctxt "#30005"
-msgid "Api hostname"
-msgstr "Адрес API сервера"
+msgid "Portal hostname"
+msgstr "Адрес портала Stalker"
 
 msgctxt "#30006"
 msgid "Show adult channels"
