@@ -347,14 +347,6 @@ class Api:
                     os.remove(self.cookie_file)
                 except OSError:
                     pass
-                self._attempt += 1
-                if self._attempt < self.AUTH_MAX_ATTEMPTS:
-                    return self.make_request(uri, payload, method)
-                else:
-                    self._attempt = 0
-                raise ApiException(self._last_error["message"], self._last_error["code"])
-            else:
-                raise ApiException(self._last_error["message"], self._last_error["code"])
 
         return response
 

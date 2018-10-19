@@ -73,7 +73,10 @@ class Itv(Api):
     def get_groups(self):
         response = self.make_request("", {"action": "playerInfo", "ukey": self.key})
         if self._last_error:
-            raise ApiException(self._last_error["message"], self._last_error["code"])
+            raise ApiException(
+                self._last_error.get("message", get_string(TEXT_SERVICE_ERROR_OCCURRED_ID)),
+                self._last_error.get("code", Api.E_UNKNOW_ERROR)
+            )
 
         number = 1
         groups = OrderedDict()
@@ -128,7 +131,10 @@ class Itv(Api):
 
         response = self.make_request("epg.php?obj=%s" % obj)  # type: dict[str, list[dict]]
         if self._last_error:
-            raise ApiException(self._last_error["message"], self._last_error["code"])
+            raise ApiException(
+                self._last_error.get("message", get_string(TEXT_SERVICE_ERROR_OCCURRED_ID)),
+                self._last_error.get("code", Api.E_UNKNOW_ERROR)
+            )
 
         programs = OrderedDict()
         prev = None

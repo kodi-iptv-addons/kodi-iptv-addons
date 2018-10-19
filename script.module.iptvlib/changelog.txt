@@ -1,4 +1,4 @@
-v1.0.7 (2018-10-17)
+v1.0.8 (2018-10-19)
 - Big fixes
 v1.0.2 (2018-10-12)
 - Improved HTTP downloading

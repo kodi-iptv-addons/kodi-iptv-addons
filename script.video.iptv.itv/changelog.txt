@@ -1,2 +1,4 @@
+v1.0.1 (2018-10-19)
+- Bug fixes
 v1.0.0 (2018-10-19)
 - Initial release

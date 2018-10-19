@@ -128,7 +128,10 @@ class Ottclub(Api):
         programs = OrderedDict()
         response = self.make_request("channel/%s" % cid)
         if self._last_error:
-            raise ApiException(self._last_error["message"], self._last_error["code"])
+            raise ApiException(
+                self._last_error.get("message", get_string(TEXT_SERVICE_ERROR_OCCURRED_ID)),
+                self._last_error.get("code", Api.E_UNKNOW_ERROR)
+            )
         prev = None
         response = {int(k):v for k,v in response.items()}
         for k in sorted(response.iterkeys()):

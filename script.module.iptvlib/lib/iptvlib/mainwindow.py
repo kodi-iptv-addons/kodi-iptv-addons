@@ -79,7 +79,8 @@ class MainWindow(xbmcgui.WindowXML, WindowMixin):
             dialog = xbmcgui.Dialog()
             if dialog.yesno(
                     addon.getAddonInfo("name"),
-                    "%s: %s" % (get_string(TEXT_AUTHENTICATION_FAILED_ID), ex.message),
+                    get_string(TEXT_AUTHENTICATION_FAILED_ID),
+                    ex.message,
                     get_string(TEXT_CHECK_SETTINGS_ID)):
                 addon.openSettings()
                 return self.check_settings()

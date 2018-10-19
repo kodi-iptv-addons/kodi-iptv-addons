@@ -90,7 +90,10 @@ class Novoetv(Api):
     def get_groups(self):
         response = self.make_request("channel_list.php", payload=self.auth_payload(), method="GET")
         if self._last_error:
-            raise ApiException(self._last_error["message"], self._last_error["code"])
+            raise ApiException(
+                self._last_error.get("message", get_string(TEXT_SERVICE_ERROR_OCCURRED_ID)),
+                self._last_error.get("code", Api.E_UNKNOW_ERROR)
+            )
 
         groups = OrderedDict()
         for group_data in response["groups"]:
@@ -122,7 +125,10 @@ class Novoetv(Api):
             payload["gmt"] = int(ut_start)
         response = self.make_request("get_url.php", self.auth_payload(payload))
         if self._last_error:
-            raise ApiException(self._last_error["message"], self._last_error["code"])
+            raise ApiException(
+                self._last_error.get("message", get_string(TEXT_SERVICE_ERROR_OCCURRED_ID)),
+                self._last_error.get("code", Api.E_UNKNOW_ERROR)
+            )
         url = response["url"]
         return url.replace("http/ts", "http").split()[0]
 

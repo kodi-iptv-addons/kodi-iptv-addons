@@ -102,34 +102,49 @@ class Ottplayer(Api):
         # type: () -> list[dict]
         response = self.make_request_api("get_devices", ["unknown"], 1)
         if self._last_error:
-            raise ApiException(self._last_error["message"], self._last_error["code"])
+            raise ApiException(
+                self._last_error.get("message", get_string(TEXT_SERVICE_ERROR_OCCURRED_ID)),
+                self._last_error.get("code", Api.E_UNKNOW_ERROR)
+            )
         return response["result"]
 
     def register_device(self):
         # type: () -> str
         response = self.make_request_api("register_device", [self.DEVICE_TYPE, "unknown"], 2)
         if self._last_error:
-            raise ApiException(self._last_error["message"], self._last_error["code"])
+            raise ApiException(
+                self._last_error.get("message", get_string(TEXT_SERVICE_ERROR_OCCURRED_ID)),
+                self._last_error.get("code", Api.E_UNKNOW_ERROR)
+            )
         return response["result"]
 
     def get_playlists(self):
         # type: () -> list[dict]
         response = self.make_request_api("get_playlists", [], 0)
         if self._last_error:
-            raise ApiException(self._last_error["message"], self._last_error["code"])
+            raise ApiException(
+                self._last_error.get("message", get_string(TEXT_SERVICE_ERROR_OCCURRED_ID)),
+                self._last_error.get("code", Api.E_UNKNOW_ERROR)
+            )
         return response["result"]
 
     def get_channels(self, playlist_id):
         # type: (int) -> list[dict]
         response = self.make_request_api("get_channels", [playlist_id], 0)
         if self._last_error:
-            raise ApiException(self._last_error["message"], self._last_error["code"])
+            raise ApiException(
+                self._last_error.get("message", get_string(TEXT_SERVICE_ERROR_OCCURRED_ID)),
+                self._last_error.get("code", Api.E_UNKNOW_ERROR)
+            )
         return response["result"]
 
     def get_groups(self):
         response = self.make_request_api("get_groups", [], 0)
         if self._last_error:
-            raise ApiException(self._last_error["message"], self._last_error["code"])
+            raise ApiException(
+                self._last_error.get("message", get_string(TEXT_SERVICE_ERROR_OCCURRED_ID)),
+                self._last_error.get("code", Api.E_UNKNOW_ERROR)
+            )
 
         groups = OrderedDict()
         nummer = 1
@@ -179,7 +194,10 @@ class Ottplayer(Api):
         channel = self.channels[cid]
         response = self.make_request_api("get_epg2", [channel.epg_id, 2, int(self.archive_ttl / DAY)])
         if self._last_error:
-            raise ApiException(self._last_error["message"], self._last_error["code"])
+            raise ApiException(
+                self._last_error.get("message", get_string(TEXT_SERVICE_ERROR_OCCURRED_ID)),
+                self._last_error.get("code", Api.E_UNKNOW_ERROR)
+            )
 
         epg = dict()
         for v in response["result"]:
