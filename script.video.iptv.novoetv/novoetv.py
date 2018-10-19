@@ -177,17 +177,3 @@ class Novoetv(Api):
                 prev.next_program = program
             programs[program.ut_start] = prev = program
         return programs
-#
-# if __name__ == "__main__":
-#
-#     n = Novoetv(hostname='api.new-rus.tv', username='190087', password='85075', adult=False)
-#
-#     groups = n.groups
-#
-#     cid = n.channels.keys()[0]
-#
-#     channel = n.channels[cid]
-#
-#     programs = channel.programs
-#
-#     print "%s" % len(programs)
