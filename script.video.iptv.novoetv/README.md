@@ -1,4 +1,4 @@
-#NOVOE TV Addon for KODI
+# NOVOE TV Addon for KODI
 
 [![Ottclub.cc](https://raw.githubusercontent.com/kodi-iptv-addons/kodi-iptv-addons/master/script.video.iptv.novoetv/resources/icon.png)](https://new-rus.tv)
 

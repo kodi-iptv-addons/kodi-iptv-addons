@@ -1,4 +1,4 @@
-#OTTPLAYER Addon for KODI
+# OTTPLAYER Addon for KODI
 
 [![Ottclub.cc](https://raw.githubusercontent.com/kodi-iptv-addons/kodi-iptv-addons/master/script.video.iptv.ottplayer/resources/icon.png)](https://ottplayer.es)
 

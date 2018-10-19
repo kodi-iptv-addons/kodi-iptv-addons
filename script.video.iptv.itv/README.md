@@ -1,4 +1,4 @@
-#ITV Addon for KODI
+# ITV Addon for KODI
 
 [![Ottclub.cc](https://raw.githubusercontent.com/kodi-iptv-addons/kodi-iptv-addons/master/script.video.iptv.itv/resources/icon.png)](https://itv.live)
 

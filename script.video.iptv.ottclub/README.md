@@ -1,4 +1,4 @@
-#OTTCLUB Addon for KODI
+# OTTCLUB Addon for KODI
 
 [![Ottclub.cc](https://raw.githubusercontent.com/kodi-iptv-addons/kodi-iptv-addons/master/script.video.iptv.ottclub/resources/icon.png)](https://goo.gl/VHVSB5)
 

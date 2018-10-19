@@ -1,4 +1,4 @@
-#STALKER Addon for KODI
+# STALKER Addon for KODI
 
 [![Ottclub.cc](https://raw.githubusercontent.com/kodi-iptv-addons/kodi-iptv-addons/master/script.video.iptv.stalker/resources/icon.png)](#)
 

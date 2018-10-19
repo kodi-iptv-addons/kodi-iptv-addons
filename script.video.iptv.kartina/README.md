@@ -1,4 +1,4 @@
-#KARTINA TV Addon for KODI
+# KARTINA TV Addon for KODI
 
 [![Ottclub.cc](https://raw.githubusercontent.com/kodi-iptv-addons/kodi-iptv-addons/master/script.video.iptv.kartina/resources/icon.png)](https://kartina.tv)
 
