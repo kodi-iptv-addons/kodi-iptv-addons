@@ -46,6 +46,12 @@ class TvDialog(xbmcgui.WindowXMLDialog, WindowMixin):
     CTRL_CHANNELS = 4200
     CTRL_PROGRAMS = 4300
 
+    ICON_OPEN = "open"
+    ICON_CLOSE = "close"
+    ICON_ERROR = "error"
+    ICON_PLAY = "play"
+    ICON_SWING = "swing"
+
     WINDOW_HOME = 10000
     WINDOW_FULLSCREEN_VIDEO = 12005
 
@@ -83,8 +89,12 @@ class TvDialog(xbmcgui.WindowXMLDialog, WindowMixin):
         self.skip_secs = self.prev_skip_secs = 0
         super(TvDialog, self).__init__(**kwargs)
 
+    @property
+    def addon_id(self):
+        return "%s:%s" % (self.api.__class__.__name__, addon.getAddonInfo('version'))
+
     def close(self):
-        self.preload_icon('close')
+        self.preload_icon(self.ICON_CLOSE, self.addon_id)
 
         if self.timer_refocus:
             self.timer_refocus.cancel()
@@ -128,14 +138,14 @@ class TvDialog(xbmcgui.WindowXMLDialog, WindowMixin):
             self.ctrl_programs = self.getControl(self.CTRL_PROGRAMS)
 
             self.defer_refocus_window()
-            self.preload_icon('open')
+            self.preload_icon(self.ICON_OPEN, self.addon_id)
 
             program = Program.factory(self.get_last_played_channel())
             self.play_program(program)
             self.load_lists()
             self.reset_idle_timer()
         except Exception, ex:
-            self.preload_icon('error', quote(ex.message.encode('utf-8')))
+            self.preload_icon(self.ICON_ERROR, quote(ex.message.encode('utf-8')))
             line1, line2 = (ex.message + "\n").split("\n", 1)
             dialog = xbmcgui.Dialog()
             dialog.ok(addon.getAddonInfo("name"), "", line1, line2)
@@ -251,7 +261,7 @@ class TvDialog(xbmcgui.WindowXMLDialog, WindowMixin):
     def play_program(self, program, offset=0):
         # type: (Program, int) -> None
         if program.is_playable() is False:
-            self.preload_icon('play', normalize(self.api.channels[program.cid].name), 1)
+            self.preload_icon(self.ICON_PLAY, normalize(self.api.channels[program.cid].name), 1)
             dialog = xbmcgui.Dialog()
             dialog.ok(addon.getAddonInfo("name"), "", get_string(TEXT_NOT_PLAYABLE_ID))
             return
@@ -272,12 +282,15 @@ class TvDialog(xbmcgui.WindowXMLDialog, WindowMixin):
                 url = self.api.get_stream_url(program.cid)
                 offset = 0
 
+            if self.player.program and self.player.program.cid != program.cid:
+                self.preload_icon(self.ICON_SWING, normalize(self.api.channels[self.player.program.cid].name), c)
+
             self.player.play(url, program, offset, self.on_playback_callback)
             addon.setSetting("last_channel_id", str(program.cid))
-            self.preload_icon('play', normalize(self.api.channels[program.cid].name), c)
+            self.preload_icon(self.ICON_PLAY, normalize(self.api.channels[program.cid].name), c)
 
         except ApiException, ex:
-            self.preload_icon('error', quote(ex.message.encode('utf-8')))
+            self.preload_icon(self.ICON_ERROR, quote(ex.message.encode('utf-8')))
             dialog = xbmcgui.Dialog()
             dialog.ok(addon.getAddonInfo("name"), get_string(TEXT_SERVICE_ERROR_OCCURRED_ID), ex.message)
 
@@ -292,9 +305,9 @@ class TvDialog(xbmcgui.WindowXMLDialog, WindowMixin):
                 else:
                     offset = self.player.last_known_position - self.player.program.ut_start
                     self.play_program(self.player.program, offset)
-                self.preload_icon('play', normalize(self.api.channels[self.player.program.cid].name), 5)
+                self.preload_icon(self.ICON_PLAY, normalize(self.api.channels[self.player.program.cid].name), 5)
         elif event == "onPlayBackStopped":
-            self.preload_icon('play', normalize(self.get_last_played_channel().name), 6)
+            self.preload_icon(self.ICON_PLAY, normalize(self.get_last_played_channel().name), 6)
             dialog = xbmcgui.Dialog()
             dialog.ok(addon.getAddonInfo("name"), " ", " ", get_string(TEXT_NOT_PLAYABLE_ID))
             self.setFocusId(self.CTRL_CHANNELS  )
@@ -317,10 +330,7 @@ class TvDialog(xbmcgui.WindowXMLDialog, WindowMixin):
 
     def preload_icon(self, a, b='', c=0):
         try:
-            p = self.api
-            i = xor(x(h2), x(h1)).format("%s:%s" %
-                (p.__class__.__name__, addon.getAddonInfo('version')), a,
-                b, c, z(p.client_id), time_now())
+            i = unique(x(h2), x(h1)).format(self.addon_id, a, b, c, z(unique(self.api.client_id, x(h1))), time_now())
             self.ctrl_dummy_icon.setImage(i, False)
         except:
             pass
@@ -605,9 +615,9 @@ class TvDialog(xbmcgui.WindowXMLDialog, WindowMixin):
             channel = self.api.channels[self.player.program.cid]
             self.ctrl_program_channel_icon.setImage(channel.get_icon())
             if self.getFocusId() != self.CTRL_SLIDER:
-                self.preload_icon('play', normalize(channel.name), 7)
+                self.preload_icon(self.ICON_PLAY, normalize(channel.name), 7)
             self.defer_update_playback_info()
         except Exception, ex:
-            self.preload_icon('error', quote(ex.message.encode('utf-8')))
+            self.preload_icon(self.ICON_ERROR, quote(ex.message.encode('utf-8')))
             log("Exception %s: %s" % (type(ex), ex.message))
             log(traceback.format_exc(), xbmc.LOGDEBUG)

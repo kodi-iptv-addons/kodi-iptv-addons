@@ -69,6 +69,11 @@ class Novoetv(Api):
             "settings": "all"
         }
         response = self.make_request("login.php", payload=payload, method="GET")
+        if "error" in response:
+            raise ApiException(
+                response["error"].get("message", get_string(TEXT_AUTHENTICATION_FAILED_ID)),
+                response["error"].get("code", Api.E_AUTH_ERROR)
+            )
 
         self.auth_status = self.AUTH_STATUS_OK
         self.write_cookie_file("%s=%s" % (response["sid_name"], response["sid"]))

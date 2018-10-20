@@ -79,10 +79,11 @@ class Api:
     _attempt = 0  # type: int
     _groups = None  # type: OrderedDict[str, Group]
     _channels = None  # type: OrderedDict[str, Channel]
+    _ident = None  # type: str
 
     def __init__(self, username=None, password=None, working_path="./"):
         self.auth_status = self.AUTH_STATUS_NONE
-        self.username = username
+        self.username = self._ident = username
         self.password = password
         self.working_path = working_path
         if not os.path.exists(self.working_path):
@@ -95,7 +96,7 @@ class Api:
 
     @property
     def client_id(self):
-        return "%s:%s" % (self.__class__.__name__, self.username)
+        return "%s:%s" % (self.__class__.__name__, self._ident)
 
     @property
     def user_agent(self):

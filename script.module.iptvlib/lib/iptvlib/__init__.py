@@ -137,7 +137,7 @@ def build_user_agent():
     )
 
 
-def xor(s, t):
+def unique(s, t):
     # type: (str, str) -> str
     t = (t * ((len(s) / len(t)) + 1))[:len(s)]
     if isinstance(s, str):
