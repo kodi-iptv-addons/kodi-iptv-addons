@@ -267,7 +267,6 @@ class Api:
     def prepare_request(self, uri, payload=None, method="GET", headers=None, ident=None):
         # type: (str, dict, str, dict, str) -> HttpRequest
         url = self.base_api_url % uri if uri.startswith('http') is False else uri
-        ident = ident or url
         headers = headers or {}
         headers["User-Agent"] = self.user_agent
         headers["Connection"] = "Close"
@@ -285,6 +284,7 @@ class Api:
                     data = urlencode(payload)
             elif method == "GET":
                 url += "%s%s" % ("&" if "?" in url else "?", urlencode(payload))
+        ident = ident or url
         return HttpRequest(ident=ident, method=method, url=url, headers=headers, data=data)
 
     def send_request(self, request):

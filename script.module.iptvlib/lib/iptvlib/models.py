@@ -134,11 +134,20 @@ class Channel(Model):
             try:
                 programs = self.API.get_epg(self.cid)
                 first_program = programs[next(iter(programs.iterkeys()))]
+                last_program = programs[next(reversed(list(programs.iterkeys())))]
                 if first_program.ut_start <= int(time_now()) < first_program.ut_end:
+                    # prepend epg with dummy entries if the very first program is current one
                     start_time = int(time.mktime(
                         datetime.datetime.combine(datetime.date.today(),
                                                   datetime.datetime.min.time()).timetuple()) - (WEEK * 2))
                     ph_programs = Program.get_dummy_programs(self, start_time, first_program.ut_start)
+                    ph_programs.update(programs)
+                    for key in sorted(ph_programs.iterkeys()):
+                        self._programs[key] = ph_programs[key]
+                elif last_program.ut_start < int(time_now()) <= last_program.ut_end \
+                        or int(time_now()) > last_program.ut_end:
+                    # append epg with dummy entries if the very last program is in past
+                    ph_programs = Program.get_dummy_programs(self, last_program.ut_end, last_program.ut_end + TREEDAYS)
                     ph_programs.update(programs)
                     for key in sorted(ph_programs.iterkeys()):
                         self._programs[key] = ph_programs[key]
