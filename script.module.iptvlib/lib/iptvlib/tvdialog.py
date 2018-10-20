@@ -310,7 +310,7 @@ class TvDialog(xbmcgui.WindowXMLDialog, WindowMixin):
             self.preload_icon(self.ICON_PLAY, normalize(self.get_last_played_channel().name), 6)
             dialog = xbmcgui.Dialog()
             dialog.ok(addon.getAddonInfo("name"), " ", " ", get_string(TEXT_NOT_PLAYABLE_ID))
-            self.setFocusId(self.CTRL_CHANNELS  )
+            self.setFocusId(self.CTRL_CHANNELS)
         elif event == "onPlayBackStarted":
             self.update_playback_info()
 
@@ -506,7 +506,6 @@ class TvDialog(xbmcgui.WindowXMLDialog, WindowMixin):
                 program = channel.get_current_program()
                 if program is not None:
                     self.play_program(program)
-
 
         elif focused_id == self.CTRL_PROGRAMS:  # navigation within programs
 
