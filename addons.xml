@@ -44,7 +44,7 @@ v1.0.0 (2018-10-10)
         </news>
     </extension>
   </addon>
-  <addon id="script.video.iptv.itv" name="ITV" version="1.0.1" provider-name="Dmitry Vinogradov">
+  <addon id="script.video.iptv.itv" name="ITV" version="1.0.2" provider-name="Dmitry Vinogradov">
     <requires>
       <import addon="xbmc.python" version="2.24.0"/>
       <import addon="script.module.iptvlib" version="1.0.0"/>
@@ -64,6 +64,8 @@ v1.0.0 (2018-10-10)
       <license>GNU LESSER GENERAL PUBLIC LICENSE Version 3, June 2007</license>
       <source>https://github.com/dmitry-vinogradov/kodi-iptv-addons</source>
       <news>
+v1.0.2 (2018-10-20)
+- Set default value for hostname in settings to api.itv.live
 v1.0.1 (2018-10-19)
 - Bug fixes
 v1.0.0 (2018-10-19)
