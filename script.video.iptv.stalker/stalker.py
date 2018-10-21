@@ -77,7 +77,7 @@ class Stalker(Api):
         token_type = response.get("token_type", "Bearer")
         return token_type[0].upper() + token_type[1:]
 
-    def is_login_uri(self, uri, payload=None):
+    def is_login_request(self, uri, payload=None, method=None, headers=None):
         return "auth/token.php" in uri
 
     def login(self):

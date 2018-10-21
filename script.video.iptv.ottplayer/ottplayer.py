@@ -67,7 +67,7 @@ class Ottplayer(Api):
     def get_cookie(self):
         return ""
 
-    def is_login_uri(self, uri, payload=None):
+    def is_login_request(self, uri, payload=None, method=None, headers=None):
         return payload is not None and "login" in payload.get("method", "")
 
     def prepare_api_request(self, method, params, sid_index=-1, ident=None):
@@ -84,9 +84,21 @@ class Ottplayer(Api):
         request = self.prepare_api_request(method, params, sid_index)
         return self.send_request(request)
 
+    def do_login(self, device_id=""):
+        response = self.make_api_request("login", [self.username, self.password, device_id])
+        if "error" in response and response["error"]:
+            if isinstance(response["error"], dict):
+                raise ApiException(
+                    response["error"].get("message", get_string(TEXT_AUTHENTICATION_FAILED_ID)),
+                    response["error"].get("code", Api.E_AUTH_ERROR)
+                )
+            raise ApiException(response["error"], Api.E_AUTH_ERROR)
+        return response
+
+
     def login(self):
         if self._device_id is None:
-            response = self.make_api_request("login", [self.username, self.password, ""])
+            response = self.do_login()
             self.auth_status = self.AUTH_STATUS_OK
             self.write_cookie_file("%s" % (response["result"]))
             devices = self.get_devices()
@@ -100,7 +112,7 @@ class Ottplayer(Api):
             if found is False:
                 self._device_id = self.register_device()
 
-        response = self.make_api_request("login", [self.username, self.password, self._device_id])
+        response = self.do_login(self._device_id)
         self.auth_status = self.AUTH_STATUS_OK
         self.write_cookie_file("%s" % (response["result"]))
         return response
@@ -136,6 +148,8 @@ class Ottplayer(Api):
         return response["result"]
 
     def get_groups(self):
+        if self.auth_status != self.AUTH_STATUS_OK:
+            self.login()
         get_groups_request = self.prepare_api_request("get_groups", [], 0)
         get_playlists_request = self.prepare_api_request("get_playlists", [], 0)
         requests = [get_groups_request, get_playlists_request]

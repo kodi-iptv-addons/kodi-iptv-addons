@@ -174,8 +174,8 @@ class Api:
         pass
 
     @abc.abstractmethod
-    def is_login_uri(self, uri, payload=None):
-        # type: (str, dict) -> bool
+    def is_login_request(self, uri, payload=None, method=None, headers=None):
+        # type: (str, dict, str, dict) -> bool
         """
         Checks whether given URI is used for login
         :rtype: str
@@ -273,7 +273,7 @@ class Api:
         headers["Connection"] = "Close"
 
         cookie = self.get_cookie()
-        if cookie != "" and not self.is_login_uri(uri, payload):
+        if cookie != "" and not self.is_login_request(uri, payload):
             headers["Cookie"] = cookie
 
         data = None
@@ -309,7 +309,7 @@ class Api:
                         "url": request.get_full_url(),
                         "data": request.get_data(),
                         "headers": request.headers
-                    }
+                    },
                 }
             }
             pass
@@ -348,7 +348,7 @@ class Api:
         :param headers: Additional HTTP headers
         :return:
         """
-        if self.auth_status != self.AUTH_STATUS_OK and not self.is_login_uri(uri, payload):
+        if self.auth_status != self.AUTH_STATUS_OK and not self.is_login_request(uri, payload, method, headers):
             self.login()
             return self.make_request(uri, payload, method, headers)
 
@@ -359,7 +359,7 @@ class Api:
 
         if "error" in response and response["error"] is not None:
             self._last_error = response
-            if self.is_login_uri(uri, payload):
+            if self.is_login_request(uri, payload):
                 self.auth_status = self.AUTH_STATUS_NONE
                 try:
                     os.remove(self.cookie_file)

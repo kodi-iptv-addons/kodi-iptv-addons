@@ -1,3 +1,5 @@
+v1.0.3 (2018-10-20)
+- Handle authentication failures properly
 v1.0.2 (2018-10-20)
 - Set default value for hostname in settings to api.itv.live
 v1.0.1 (2018-10-19)

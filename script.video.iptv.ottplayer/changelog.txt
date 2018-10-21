@@ -1,3 +1,5 @@
+v1.0.5 (2018-10-20)
+- Handle authentication failures properly
 v1.0.4 (2018-10-20)
 - Bug fixes
 v1.0.2 (2018-10-18)

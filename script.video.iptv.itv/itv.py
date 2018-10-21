@@ -31,6 +31,7 @@ class Itv(Api):
     key = None  # type: str
     adult = None  # type: bool
     hostname = None  # type: str
+    _player_info = None  # type: list
 
     def __init__(self, hostname, key, adult, **kwargs):
         # type: (str, str, bool, dict) -> None
@@ -38,7 +39,7 @@ class Itv(Api):
         self.hostname = hostname
         self.key = self.username = key
         self.adult = adult
-        self.auth_status = self.AUTH_STATUS_OK
+        self.auth_status = self.AUTH_STATUS_NONE
         Model.API = self
 
     @property
@@ -64,24 +65,29 @@ class Itv(Api):
     def get_cookie(self):
         return ""
 
-    def is_login_uri(self, uri, payload=None):
-        return False
+    def is_login_request(self, uri, payload=None, method=None, headers=None):
+        return uri == "" and payload.get("action") == "playerInfo"
 
     def login(self):
-        pass
-
-    def get_groups(self):
+        self._player_info = []
         response = self.make_request("", {"action": "playerInfo", "ukey": self.key})
-        if self._last_error:
+        if isinstance(response, list) and len(response) and response[0].get("response") == "No Token":
             raise ApiException(
-                self._last_error.get("message", get_string(TEXT_SERVICE_ERROR_OCCURRED_ID)),
-                self._last_error.get("code", Api.E_UNKNOW_ERROR)
+                addon.getLocalizedString(30005),
+                Api.E_AUTH_ERROR
             )
 
+        self._player_info = response
+        self.auth_status = self.AUTH_STATUS_OK
+        return response
+
+    def get_groups(self):
+        if self._player_info is None:
+            self.login()
         number = 1
         groups = OrderedDict()
         channels = OrderedDict()
-        for channel_data in response:
+        for channel_data in self._player_info:
             if groups.has_key(channel_data["cat_id"]) is False:
                 gid = str(channel_data["cat_id"])
                 groups[gid] = Group(

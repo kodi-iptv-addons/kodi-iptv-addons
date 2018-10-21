@@ -11,8 +11,8 @@ msgid "Account"
 msgstr "Zugangsdaten"
 
 msgctxt "#30002"
-msgid "Hostname"
-msgstr "Hostname"
+msgid "Api Hostname"
+msgstr "Api Hostname"
 
 msgctxt "#30003"
 msgid "Key"
@@ -21,3 +21,7 @@ msgstr "Key"
 msgctxt "#30004"
 msgid "Show adult channels"
 msgstr "Zeige Kanäle für Erwachsene"
+
+msgctxt "#30005"
+msgid "Wrong key"
+msgstr "Falscher Key"

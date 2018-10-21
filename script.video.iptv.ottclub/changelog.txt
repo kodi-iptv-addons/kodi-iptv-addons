@@ -1,4 +1,4 @@
-v1.0.7 (2018-10-20)
+v1.0.8 (2018-10-20)
 - Bug fixes
 v1.0.5 (2018-10-18)
 - Hide password field in settings

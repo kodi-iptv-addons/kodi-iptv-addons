@@ -59,7 +59,7 @@ class Novoetv(Api):
     def get_cookie(self):
         return ""
 
-    def is_login_uri(self, uri, payload=None):
+    def is_login_request(self, uri, payload=None, method=None, headers=None):
         return "login" in uri
 
     def login(self):
