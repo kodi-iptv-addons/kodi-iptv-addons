@@ -27,7 +27,7 @@ from iptvlib.tvdialog import TvDialog
 
 
 class MainWindow(xbmcgui.WindowXML, WindowMixin):
-    SCRIPT_PATH = os.path.abspath(os.path.dirname(__file__) + "/../../")
+    SCRIPT_PATH = os.path.abspath(os.path.dirname(__file__) + u'/../../')
     check_settings_handler = None  # type: callable()
     api = None  # type: Api
     tv_dialog = None  # type: TvDialog
