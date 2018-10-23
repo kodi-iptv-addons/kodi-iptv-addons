@@ -1,6 +1,6 @@
 # ITV Addon for KODI
 
-[![Ottclub.cc](https://raw.githubusercontent.com/kodi-iptv-addons/kodi-iptv-addons/master/script.video.iptv.torrenttv/resources/icon.png)](http://torrent-tv.ru)
+[![Torrent-tv.ru](https://raw.githubusercontent.com/kodi-iptv-addons/kodi-iptv-addons/master/script.video.iptv.torrenttv/resources/icon.png)](http://torrent-tv.ru)
 
 
 
