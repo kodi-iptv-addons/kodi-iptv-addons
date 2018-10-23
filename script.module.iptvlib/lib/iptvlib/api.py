@@ -357,7 +357,7 @@ class Api:
 
         self._last_error = None
 
-        if "error" in response and response["error"] is not None:
+        if "error" in response and response["error"]:
             self._last_error = response
             if self.is_login_request(uri, payload):
                 self.auth_status = self.AUTH_STATUS_NONE

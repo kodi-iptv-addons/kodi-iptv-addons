@@ -1,0 +1,23 @@
+# XBMC Media Center language file
+# Addon Name: IPTV player for Torrent TV (TS-Proxy) (torrent-tv.ru)
+# Addon id: script.video.iptv.torrenttv
+# Addon Provider: Dmitry Vinogradov
+msgid ""
+msgstr ""
+
+# Settings
+msgctxt "#30001"
+msgid "Torrent-Tv Account"
+msgstr "Torrent-Tv Аккаунт"
+
+msgctxt "#30002"
+msgid "Login"
+msgstr "Email адрес"
+
+msgctxt "#30003"
+msgid "Password"
+msgstr "Пароль"
+
+msgctxt "#30004"
+msgid "Show adult channels"
+msgstr "Показывать каналы для взрослых"

@@ -1,34 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<addon id="script.module.iptvlib"
-       name="IPTV Library"
-       version="1.0.14"
+<addon id="script.video.iptv.torrenttv-DEV"
+       name="TORRENTTV-DEV"
+       version="1.0.0"
        provider-name="Dmitry Vinogradov">
     <requires>
         <import addon="xbmc.python" version="2.24.0"/>
+        <import addon="script.module.iptvlib" version="1.0.0"/>
     </requires>
-    <extension point="xbmc.python.module" library="lib"/>
+    <extension point="xbmc.python.script" library="default.py">
+        <provides>video</provides>
+    </extension>
     <extension point="xbmc.addon.metadata">
         <assets>
-            <icon>resources/skins/Default/media/icon.png</icon>
+            <icon>resources/icon.png</icon>
             <fanart></fanart>
             <screenshot></screenshot>
         </assets>
-        <summary lang="en">Common library for IPTV Addons</summary>
-        <description lang="en">Common library for IPTV Addons</description>
         <platform>all</platform>
+        <summary lang="en">IPTV player for Torrent TV (TS-Proxy) (torrent-tv.ru)</summary>
+        <description lang="en">IPTV player for Torrent TV (TS-Proxy) (torrent-tv.ru)</description>
         <license>GNU LESSER GENERAL PUBLIC LICENSE Version 3, June 2007</license>
         <source>https://github.com/dmitry-vinogradov/kodi-iptv-addons</source>
         <news>
-v1.0.14 (2018-10-23)
-- Big fixes
-v1.0.2 (2018-10-12)
-- Improved HTTP downloading
-- Big fixes
-v1.0.1 (2018-10-11)
-- Improved error handling
-- Fixed bug in date formatting
-- Added day color bar for EPG entries
-v1.0.0 (2018-10-10)
+v1.0.0 (2018-10-23)
 - Initial release
         </news>
     </extension>

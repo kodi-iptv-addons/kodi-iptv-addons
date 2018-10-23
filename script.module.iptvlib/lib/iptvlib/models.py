@@ -69,7 +69,7 @@ class Group(Model):
         self.channels = OrderedDict(channels)
         self.number = number
 
-        super(Group, self).__init__({"gid": gid, "group_name": name, "icon": ""})
+        super(Group, self).__init__({"gid": gid, "group_name": name, "icon": "", "number": number})
 
     def get_icon(self):
         return "%s.png" % (self.number if self.number is not None else self.data["gid"])
@@ -132,32 +132,30 @@ class Channel(Model):
     def programs(self):
         if len(self._programs) == 0:
             try:
-                programs = self.API.get_epg(self.cid)
+                programs = self.API.get_epg(self.cid)  # type: OrderedDict
                 first_program = programs[next(iter(programs.iterkeys()))]  # type: Program
                 last_program = programs[next(reversed(list(programs.iterkeys())))]  # type: Program
-                if first_program.ut_start <= int(time_now()) < first_program.ut_end:
-                    # prepend epg with dummy entries if the very first program is current one
-                    start_time = int(time.mktime(
-                        datetime.datetime.combine(datetime.date.today(),
-                                                  datetime.datetime.min.time()).timetuple()) - (WEEK * 2))
-                    ph_programs = Program.get_dummy_programs(self, start_time, first_program.ut_start)
-                    last_ph_program = ph_programs[next(reversed(list(ph_programs.iterkeys())))]
-                    ph_programs.update(programs)
-                    first_program.prev_program = last_ph_program
-                    last_ph_program.next_program = first_program
-                    for key in sorted(ph_programs.iterkeys()):
-                        self._programs[key] = ph_programs[key]
-                elif last_program.ut_start < int(time_now()) <= last_program.ut_end \
-                        or int(time_now()) > last_program.ut_end:
-                    # append epg with dummy entries if the very last program is in past
-                    ph_programs = Program.get_dummy_programs(self, last_program.ut_end, last_program.ut_end + TREEDAYS)
-                    ph_programs.update(programs)
-                    last_program.next_program = programs[last_program.ut_end]
-                    last_program.next_program.prev_program = last_program
-                    for key in sorted(ph_programs.iterkeys()):
-                        self._programs[key] = ph_programs[key]
-                else:
-                    self._programs = programs
+
+                # prepend epg with dummy entries
+                start_time = first_program.ut_start - DAY
+                prepend_programs = Program.get_dummy_programs(self, start_time, first_program.ut_start)
+                last_prepend_program = prepend_programs[next(reversed(list(prepend_programs.iterkeys())))]
+                programs.update(prepend_programs)
+                first_program.prev_program = last_prepend_program
+                last_prepend_program.next_program = first_program
+
+                # append epg with dummy entries
+                if last_program.ut_end == 0:
+                    last_program.ut_end = last_program.ut_start + HOUR
+                append_programs = Program.get_dummy_programs(self, last_program.ut_end, last_program.ut_end + DAY)
+                first_append_program = append_programs[next(iter(append_programs.iterkeys()))]  # type: Program
+                programs.update(append_programs)
+                last_program.next_program = first_append_program
+                first_append_program.prev_program = last_program
+
+                for key in sorted(programs.iterkeys()):
+                    self._programs[key] = programs[key]
+
             except:
                 start_time = int(time.mktime(
                     datetime.datetime.combine(datetime.date.today(),
