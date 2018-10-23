@@ -95,7 +95,6 @@ class Ottplayer(Api):
             raise ApiException(response["error"], Api.E_AUTH_ERROR)
         return response
 
-
     def login(self):
         if self._device_id is None:
             response = self.do_login()
@@ -201,9 +200,9 @@ class Ottplayer(Api):
                 if self.adult is False and bool(channel_data.get("adult", False)) is True:
                     continue
                 playlist = next((playlist for playlist in playlists if playlist.get("id") == playlist_id), {})
-                group = next((group for group in groups if groups.get("cid") == str(channel_data["group_id"])), {})
+                cid = "%s-%s" % (channel_data["group_id"], channel_data["id"],)
                 channel = Channel(
-                    cid=str(channel_data["id"]),
+                    cid=cid,
                     gid=str(channel_data["group_id"]),
                     name=channel_data["name"],
                     icon=channel_data["pict"],

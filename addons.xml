@@ -177,7 +177,7 @@ v1.0.0 (2018-10-10)
         </news>
     </extension>
   </addon>
-  <addon id="script.video.iptv.ottplayer" name="OTTPLAYER" version="1.0.5" provider-name="Dmitry Vinogradov">
+  <addon id="script.video.iptv.ottplayer" name="OTTPLAYER" version="1.0.6" provider-name="Dmitry Vinogradov">
     <requires>
       <import addon="xbmc.python" version="2.24.0"/>
       <import addon="script.module.iptvlib" version="1.0.0"/>
@@ -197,6 +197,8 @@ v1.0.0 (2018-10-10)
       <license>GNU LESSER GENERAL PUBLIC LICENSE Version 3, June 2007</license>
       <source>https://github.com/dmitry-vinogradov/kodi-iptv-addons</source>
       <news>
+v1.0.6 (2018-10-23)
+- Fixed bug in playlists merge
 v1.0.5 (2018-10-20)
 - Handle authentication failures properly
 v1.0.4 (2018-10-20)
