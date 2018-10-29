@@ -20,7 +20,7 @@
         <summary lang="en">IPTV player for M3U8 playlists (visit ottplayer.org for more details)</summary>
         <description lang="ru">OTTClub является универсальным приложением для просмотра онлайн телевидения (IPTV)</description>
         <license>GNU LESSER GENERAL PUBLIC LICENSE Version 3, June 2007</license>
-        <source>https://github.com/dmitry-vinogradov/kodi-iptv-addons</source>
+        <source>https://github.com/kodi-iptv-addons</source>
         <news>
 v1.0.8 (2018-10-20)
 - Bug fixes

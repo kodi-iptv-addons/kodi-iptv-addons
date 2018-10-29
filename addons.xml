@@ -2,9 +2,9 @@
 <addons>
   <addon id="repository.iptv" name="IPTV Add-ons repository" version="1.0.0" provider-name="Dmitry Vinogradov">
     <extension point="xbmc.addon.repository" name="IPTV Add-ons repository">
-      <info compressed="false">https://github.com/dmitry-vinogradov/kodi-iptv-addons/raw/master/addons.xml</info>
-      <checksum>https://github.com/dmitry-vinogradov/kodi-iptv-addons/raw/master/addons.xml.md5</checksum>
-      <datadir zip="true">https://github.com/dmitry-vinogradov/kodi-iptv-addons/raw/master/</datadir>
+      <info compressed="false">https://github.com/kodi-iptv-addons/raw/master/addons.xml</info>
+      <checksum>https://github.com/kodi-iptv-addons/raw/master/addons.xml.md5</checksum>
+      <datadir zip="true">https://github.com/kodi-iptv-addons/raw/master/</datadir>
     </extension>
     <extension point="xbmc.addon.metadata">
       <summary>IPTV Add-ons repository</summary>
@@ -28,7 +28,7 @@
       <description lang="en">Common library for IPTV Addons</description>
       <platform>all</platform>
       <license>GNU LESSER GENERAL PUBLIC LICENSE Version 3, June 2007</license>
-      <source>https://github.com/dmitry-vinogradov/kodi-iptv-addons</source>
+      <source>https://github.com/kodi-iptv-addons</source>
       <news>
 v1.0.14 (2018-10-23)
 - Big fixes
@@ -62,7 +62,7 @@ v1.0.0 (2018-10-10)
       <summary lang="en">IPTV player for ITV (itv.live)</summary>
       <description lang="en">IPTV player for ITV (itv.live)</description>
       <license>GNU LESSER GENERAL PUBLIC LICENSE Version 3, June 2007</license>
-      <source>https://github.com/dmitry-vinogradov/kodi-iptv-addons</source>
+      <source>https://github.com/kodi-iptv-addons</source>
       <news>
 v1.0.3 (2018-10-20)
 - Handle authentication failures properly
@@ -96,7 +96,7 @@ v1.0.0 (2018-10-19)
             дома выход в Интернет.
         </description>
       <license>GNU LESSER GENERAL PUBLIC LICENSE Version 3, June 2007</license>
-      <source>https://github.com/dmitry-vinogradov/kodi-iptv-addons</source>
+      <source>https://github.com/kodi-iptv-addons</source>
       <news>
 v1.0.4 (2018-10-20)
 - Bug fixes
@@ -128,7 +128,7 @@ v1.0.0 (2018-10-12)
             каналов улучшенного качества HQ и HD. Архив передач на 2 недели.
         </description>
       <license>GNU LESSER GENERAL PUBLIC LICENSE Version 3, June 2007</license>
-      <source>https://github.com/dmitry-vinogradov/kodi-iptv-addons</source>
+      <source>https://github.com/kodi-iptv-addons</source>
       <news>
 v1.0.4 (2018-10-20)
 - Bug fixes
@@ -157,7 +157,7 @@ v1.0.0 (2018-10-16)
       <summary lang="en">IPTV player for M3U8 playlists (visit ottplayer.org for more details)</summary>
       <description lang="ru">OTTClub является универсальным приложением для просмотра онлайн телевидения (IPTV)</description>
       <license>GNU LESSER GENERAL PUBLIC LICENSE Version 3, June 2007</license>
-      <source>https://github.com/dmitry-vinogradov/kodi-iptv-addons</source>
+      <source>https://github.com/kodi-iptv-addons</source>
       <news>
 v1.0.8 (2018-10-20)
 - Bug fixes
@@ -195,7 +195,7 @@ v1.0.0 (2018-10-10)
       <summary lang="en">IPTV client for playlists managed by Ottplayer (https://ottplayer.es)</summary>
       <description lang="ru">IPTV client for playlists managed by Ottplayer - a service that allows you to collect all your IP-TV in one playlist, adjust the channel order, receive electronic program guide.</description>
       <license>GNU LESSER GENERAL PUBLIC LICENSE Version 3, June 2007</license>
-      <source>https://github.com/dmitry-vinogradov/kodi-iptv-addons</source>
+      <source>https://github.com/kodi-iptv-addons</source>
       <news>
 v1.0.6 (2018-10-23)
 - Fixed bug in playlists merge
@@ -230,7 +230,7 @@ v1.0.0 (2018-10-15)
       <summary lang="en">IPTV Client for Stalker portal</summary>
       <description lang="en">IPTV Client for Stalker portal</description>
       <license>GNU LESSER GENERAL PUBLIC LICENSE Version 3, June 2007</license>
-      <source>https://github.com/dmitry-vinogradov/kodi-iptv-addons</source>
+      <source>https://github.com/kodi-iptv-addons</source>
       <news>
 v1.0.3 (2018-10-20)
 - Bug fixes
@@ -259,7 +259,7 @@ v1.0.0 (2018-10-18)
       <summary lang="en">IPTV player for Torrent TV (TS-Proxy) (torrent-tv.ru)</summary>
       <description lang="en">IPTV player for Torrent TV (TS-Proxy) (torrent-tv.ru)</description>
       <license>GNU LESSER GENERAL PUBLIC LICENSE Version 3, June 2007</license>
-      <source>https://github.com/dmitry-vinogradov/kodi-iptv-addons</source>
+      <source>https://github.com/kodi-iptv-addons</source>
       <news>
 v1.0.0 (2018-10-23)
 - Initial release

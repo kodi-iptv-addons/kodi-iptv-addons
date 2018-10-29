@@ -20,7 +20,7 @@
         <summary lang="en">IPTV client for playlists managed by Ottplayer (https://ottplayer.es)</summary>
         <description lang="ru">IPTV client for playlists managed by Ottplayer - a service that allows you to collect all your IP-TV in one playlist, adjust the channel order, receive electronic program guide.</description>
         <license>GNU LESSER GENERAL PUBLIC LICENSE Version 3, June 2007</license>
-        <source>https://github.com/dmitry-vinogradov/kodi-iptv-addons</source>
+        <source>https://github.com/kodi-iptv-addons</source>
         <news>
 v1.0.6 (2018-10-23)
 - Fixed bug in playlists merge

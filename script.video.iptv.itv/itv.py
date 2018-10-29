@@ -1,7 +1,7 @@
 # coding=utf-8
 #
 #      Copyright (C) 2018 Dmitry Vinogradov
-#      https://github.com/dmitry-vinogradov/kodi-iptv-addons
+#      https://github.com/kodi-iptv-addons
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Library General Public
@@ -27,6 +27,7 @@ from iptvlib.models import *
 
 class Itv(Api):
     PROTECTED_GROUP = u"Взрослый"
+    TEXT_ERROR_WRONG_KEY_ID = 30005  # type: int
 
     key = None  # type: str
     adult = None  # type: bool
@@ -73,8 +74,13 @@ class Itv(Api):
         response = self.make_request("", {"action": "playerInfo", "ukey": self.key})
         if isinstance(response, list) and len(response) and response[0].get("response") == "No Token":
             raise ApiException(
-                addon.getLocalizedString(30005),
+                addon.getLocalizedString(self.TEXT_ERROR_WRONG_KEY_ID),
                 Api.E_AUTH_ERROR
+            )
+        elif "error" in response and isinstance(response, dict):
+            raise ApiException(
+                response["error"].get("message", get_string(TEXT_SERVICE_ERROR_OCCURRED_ID)),
+                response["error"].get("code", Api.E_UNKNOW_ERROR)
             )
 
         self._player_info = response

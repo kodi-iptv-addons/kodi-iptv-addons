@@ -20,7 +20,7 @@
         <summary lang="en">IPTV player for Torrent TV (TS-Proxy) (torrent-tv.ru)</summary>
         <description lang="en">IPTV player for Torrent TV (TS-Proxy) (torrent-tv.ru)</description>
         <license>GNU LESSER GENERAL PUBLIC LICENSE Version 3, June 2007</license>
-        <source>https://github.com/dmitry-vinogradov/kodi-iptv-addons</source>
+        <source>https://github.com/kodi-iptv-addons</source>
         <news>
 v1.0.0 (2018-10-23)
 - Initial release

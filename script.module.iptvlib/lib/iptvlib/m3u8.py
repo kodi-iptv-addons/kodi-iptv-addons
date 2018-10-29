@@ -1,7 +1,7 @@
 # coding=utf-8
 #
 #      Copyright (C) 2018 Dmitry Vinogradov
-#      https://github.com/dmitry-vinogradov/kodi-iptv-addons
+#      https://github.com/kodi-iptv-addons
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Library General Public

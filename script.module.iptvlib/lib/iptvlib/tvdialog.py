@@ -1,7 +1,7 @@
 # coding=utf-8
 #
 #      Copyright (C) 2018 Dmitry Vinogradov
-#      https://github.com/dmitry-vinogradov/kodi-iptv-addons
+#      https://github.com/kodi-iptv-addons
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Library General Public
@@ -348,7 +348,7 @@ class TvDialog(xbmcgui.WindowXMLDialog, WindowMixin):
                 if yesno is True:
                     self.main_window.close()
 
-            if action_id == xbmcgui.ACTION_SELECT_ITEM:
+            if action_id in [xbmcgui.ACTION_SELECT_ITEM, xbmcgui.ACTION_MOUSE_LEFT_CLICK]:
                 self.setFocusId(self.CTRL_SLIDER)
                 self.update_playback_info()
                 self.prev_focused_id = self.CTRL_DUMMY
@@ -447,7 +447,7 @@ class TvDialog(xbmcgui.WindowXMLDialog, WindowMixin):
                         self.defer_load_program_list(item.getProperty("cid"), int(time_now()))
                         return True
 
-            elif action_id == xbmcgui.ACTION_SELECT_ITEM:
+            elif action_id in [xbmcgui.ACTION_SELECT_ITEM, xbmcgui.ACTION_MOUSE_LEFT_CLICK]:
                 self.setFocusId(self.CTRL_DUMMY)
                 selected_channel = self.ctrl_channels.getSelectedItem()
                 channel = self.api.channels[selected_channel.getProperty("cid")]
@@ -498,7 +498,7 @@ class TvDialog(xbmcgui.WindowXMLDialog, WindowMixin):
                         self.prev_focused_id = focused_id
                         return True
 
-            elif action_id == xbmcgui.ACTION_SELECT_ITEM:
+            elif action_id in [xbmcgui.ACTION_SELECT_ITEM, xbmcgui.ACTION_MOUSE_LEFT_CLICK]:
                 self.setFocusId(self.CTRL_DUMMY)
                 selected_channel = self.ctrl_channels.getSelectedItem()
                 channel = self.api.channels[selected_channel.getProperty("cid")]
@@ -511,7 +511,7 @@ class TvDialog(xbmcgui.WindowXMLDialog, WindowMixin):
             if action_id in [xbmcgui.ACTION_PREVIOUS_MENU, xbmcgui.ACTION_NAV_BACK]:
                 self.setFocusId(self.CTRL_DUMMY)
 
-            elif action_id == xbmcgui.ACTION_SELECT_ITEM:
+            elif action_id in [xbmcgui.ACTION_SELECT_ITEM, xbmcgui.ACTION_MOUSE_LEFT_CLICK]:
                 self.setFocusId(self.CTRL_DUMMY)
                 selected_program = self.ctrl_programs.getSelectedItem()
                 channel = self.api.channels[selected_program.getProperty("cid")]

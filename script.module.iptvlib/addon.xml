@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addon id="script.module.iptvlib"
        name="IPTV Library"
-       version="1.0.14"
+       version="1.0.15"
        provider-name="Dmitry Vinogradov">
     <requires>
         <import addon="xbmc.python" version="2.24.0"/>
@@ -17,13 +17,13 @@
         <description lang="en">Common library for IPTV Addons</description>
         <platform>all</platform>
         <license>GNU LESSER GENERAL PUBLIC LICENSE Version 3, June 2007</license>
-        <source>https://github.com/dmitry-vinogradov/kodi-iptv-addons</source>
+        <source>https://github.com/kodi-iptv-addons</source>
         <news>
-v1.0.14 (2018-10-23)
-- Big fixes
+v1.0.15 (2018-10-29)
+- Bug fixes
 v1.0.2 (2018-10-12)
 - Improved HTTP downloading
-- Big fixes
+- Bug fixes
 v1.0.1 (2018-10-11)
 - Improved error handling
 - Fixed bug in date formatting

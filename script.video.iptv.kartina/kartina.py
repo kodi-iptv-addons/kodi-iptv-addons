@@ -1,7 +1,7 @@
 # coding=utf-8
 #
 #      Copyright (C) 2018 Dmitry Vinogradov
-#      https://github.com/dmitry-vinogradov/kodi-iptv-addons
+#      https://github.com/kodi-iptv-addons
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Library General Public
@@ -23,6 +23,8 @@ from iptvlib.models import *
 
 
 class Kartina(Api):
+    API_REQUESTS_NUM_THREADS = 4
+
     hostname = None  # type: str
     use_origin_icons = None  # type: bool
     adult = None  # type: bool
@@ -52,7 +54,7 @@ class Kartina(Api):
 
     @property
     def archive_ttl(self):
-        return TREEDAYS
+        return TWOWEEKS
 
     def get_cookie(self):
         return self.read_cookie_file()
@@ -128,14 +130,14 @@ class Kartina(Api):
     def get_real_epg(self, cid):
         requests = []
         days = (self.archive_ttl / DAY) + 2
-        while days % 4: days += 1
+        while days % self.API_REQUESTS_NUM_THREADS: days += 1
         start = int(time_now() - self.archive_ttl)
         for i in range(days):
             day = format_date(start + (i * DAY), custom_format="%d%m%y")
             request = self.prepare_request("epg", payload={"cid": cid, "day": day})
             requests.append(request)
 
-        results = self.send_parallel_requests(requests, 0.40, 4)
+        results = self.send_parallel_requests(requests, 0.40, self.API_REQUESTS_NUM_THREADS)
 
         epg = dict()
         prev_ts = None
@@ -197,7 +199,7 @@ class Kartina(Api):
 
         requests = []
         days = (self.archive_ttl / DAY) + 2
-        while days % 4: days += 1
+        while days % self.API_REQUESTS_NUM_THREADS: days += 1
         start = int(time_now() - self.archive_ttl)
         for i in range(days):
             day = format_date(start + (i * DAY), custom_format="%d%m%y")
@@ -207,7 +209,7 @@ class Kartina(Api):
             )
             requests.append(request)
 
-        results = self.send_parallel_requests(requests, 0.20, 4)
+        results = self.send_parallel_requests(requests, 0.20, self.API_REQUESTS_NUM_THREADS)
 
         epg = dict()
         prev_ts = None
