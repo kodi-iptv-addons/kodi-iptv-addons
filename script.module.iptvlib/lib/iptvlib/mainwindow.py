@@ -23,21 +23,50 @@ import traceback
 import xbmcgui
 from iptvlib import *
 from iptvlib.api import Api, ApiException
+from iptvlib.fonts import FontManager, FontManagerException
 from iptvlib.tvdialog import TvDialog
 
 
 class MainWindow(xbmcgui.WindowXML, WindowMixin):
     SCRIPT_PATH = os.path.abspath(os.path.dirname(__file__) + u'/../../')
+
     check_settings_handler = None  # type: callable()
     api = None  # type: Api
     tv_dialog = None  # type: TvDialog
+    tv_dialog_xml_file = "tv_dialog_font.xml"
+    fm = None  # type: FontManager
 
     _initialized = False  # type: bool
 
     def __init__(self, *args, **kwargs):
+        self.fm = FontManager(MainWindow.SCRIPT_PATH)
+        self.check_skin()
+
         if kwargs.has_key("check_settings_handler"):
             self.check_settings_handler = kwargs.pop("check_settings_handler", None)
         super(MainWindow, self).__init__(**kwargs)
+
+    def check_skin(self):
+        try:
+            self.fm.check_fonts()
+        except FontManagerException, ex:
+            if ex.message == FontManagerException.INSTALL_NEEDED:
+                xbmcgui.Dialog().ok(
+                    addon.getAddonInfo("name"), " ",
+                    get_string(TEXT_INSTALL_EXTRA_RESOURCES_ID)
+                )
+                self.fm.install_skin()
+                self.close()
+                sys.exit()
+            elif ex.message == FontManagerException.RESTART_NEEDED:
+                xbmcgui.Dialog().ok(
+                    addon.getAddonInfo("name"), " ",
+                    get_string(TEXT_PLEASE_RESTART_KODI_ID)
+                )
+                self.close()
+                sys.exit()
+            elif ex.message == FontManagerException.INSTALL_NOT_NEEDED:
+                self.tv_dialog_xml_file = "tv_dialog.xml"
 
     @classmethod
     def create(cls, check_settings_handler):
@@ -54,7 +83,7 @@ class MainWindow(xbmcgui.WindowXML, WindowMixin):
 
         self._initialized = True
 
-        self.tv_dialog = TvDialog("tv_dialog.xml", MainWindow.SCRIPT_PATH, 'Default', '720p', main_window=self)
+        self.tv_dialog = TvDialog(self.tv_dialog_xml_file, MainWindow.SCRIPT_PATH, 'Default', '720p', main_window=self)
         self.tv_dialog.doModal()
         del self.tv_dialog
 

@@ -67,6 +67,14 @@ msgctxt "#30114"
 msgid "HTTP request failed"
 msgstr "HTTP Anfrage ist fehlgeschlagen"
 
+msgctxt "#30115"
+msgid "Please restart KODI to complete add-on installation"
+msgstr "Bitte starten Sie KODI neu um die Installation zu beenden"
+
+msgctxt "#30116"
+msgid "This add-on needs to install some extra resources."
+msgstr "Dieses Addon muss einige zusätzliche Ressourcen installieren. Diese Installation erfordert einen manuellen KODI-Neustart."
+
 # Application's strings
 msgctxt "#30201"
 msgid "No information available"

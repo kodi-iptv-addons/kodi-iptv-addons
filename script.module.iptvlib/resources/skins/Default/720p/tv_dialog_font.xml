@@ -43,7 +43,7 @@
             <width>0</width>
             <aligny>center</aligny>
             <align>center</align>
-            <font>font_MainMenu</font>
+            <font>script.module.iptvlib-font_MainMenu</font>
             <textcolor>black</textcolor>
             <texturefocus>white.png</texturefocus>
             <texturenofocus>white.png</texturenofocus>
@@ -95,7 +95,7 @@
                 <height>50</height>
                 <width>350</width>
                 <align>center</align>
-                <font>font_MainMenu</font>
+                <font>script.module.iptvlib-font_MainMenu</font>
                 <textcolor>white</textcolor>
                 <shadowcolor>grey</shadowcolor>
             </control>
@@ -116,7 +116,7 @@
                 <height>15</height>
                 <width>400</width>
                 <label>$INFO[System.Date(DDD)], $INFO[System.Date(d)] $INFO[System.Date(mmm)]., $INFO[System.Time]</label>
-                <font>font14</font>
+                <font>script.module.iptvlib-font14</font>
                 <aligny>center</aligny>
                 <align>center</align>
             </control>
@@ -134,7 +134,7 @@
                 <height>15</height>
                 <width>980</width>
                 <label>[UPPERCASE]$INFO[Control.GetLabel(4000)][/UPPERCASE]</label>
-                <font>font30_title</font>
+                <font>script.module.iptvlib-font30_title</font>
                 <aligny>center</aligny>
                 <align>center</align>
             </control>
@@ -145,7 +145,7 @@
                 <height>15</height>
                 <width>110</width>
                 <label>1:34:11</label>
-                <font>font14</font>
+                <font>script.module.iptvlib-font14</font>
                 <aligny>center</aligny>
                 <align>center</align>
             </control>
@@ -176,7 +176,7 @@
                 <height>15</height>
                 <width>110</width>
                 <label>1:50:00</label>
-                <font>font14</font>
+                <font>script.module.iptvlib-font14</font>
                 <aligny>center</aligny>
                 <align>center</align>
             </control>
@@ -270,7 +270,7 @@
                             <top>1</top>
                             <width>252</width>
                             <height>80</height>
-                            <font>font14</font>
+                            <font>script.module.iptvlib-font14</font>
                             <aligny>center</aligny>
                             <textcolor>white</textcolor>
                             <align>left</align>
@@ -317,7 +317,7 @@
                             <top>1</top>
                             <width>252</width>
                             <height>80</height>
-                            <font>font14</font>
+                            <font>script.module.iptvlib-font14</font>
                             <aligny>center</aligny>
                             <textcolor>black</textcolor>
                             <align>left</align>
@@ -432,7 +432,7 @@
                                 <top>1</top>
                                 <height>80</height>
                                 <width>330</width>
-                                <font>font14</font>
+                                <font>script.module.iptvlib-font14</font>
                                 <aligny>center</aligny>
                                 <textcolor>white</textcolor>
                                 <align>left</align>
@@ -515,7 +515,7 @@
                                 <top>1</top>
                                 <height>80</height>
                                 <width>330</width>
-                                <font>font14</font>
+                                <font>script.module.iptvlib-font14</font>
                                 <aligny>center</aligny>
                                 <textcolor>black</textcolor>
                                 <align>left</align>
@@ -535,7 +535,7 @@
                                 <top>1</top>
                                 <height>80</height>
                                 <width>330</width>
-                                <font>font14</font>
+                                <font>script.module.iptvlib-font14</font>
                                 <aligny>center</aligny>
                                 <textcolor>white</textcolor>
                                 <align>left</align>
@@ -637,7 +637,7 @@
                                 <top>2</top>
                                 <height>80</height>
                                 <width>70</width>
-                                <font>font14</font>
+                                <font>script.module.iptvlib-font14</font>
                                 <aligny>top</aligny>
                                 <textcolor>white</textcolor>
                                 <align>left</align>
@@ -657,7 +657,7 @@
                                 <top>2</top>
                                 <height>76</height>
                                 <width>400</width>
-                                <font>font14</font>
+                                <font>script.module.iptvlib-font14</font>
                                 <aligny>top</aligny>
                                 <textcolor>white</textcolor>
                                 <align>left</align>
@@ -701,7 +701,7 @@
                                 <top>2</top>
                                 <height>80</height>
                                 <width>70</width>
-                                <font>font14</font>
+                                <font>script.module.iptvlib-font14</font>
                                 <aligny>top</aligny>
                                 <textcolor>black</textcolor>
                                 <align>left</align>
@@ -723,7 +723,7 @@
                                 <top>2</top>
                                 <height>80</height>
                                 <width>70</width>
-                                <font>font14</font>
+                                <font>script.module.iptvlib-font14</font>
                                 <aligny>top</aligny>
                                 <textcolor>white</textcolor>
                                 <align>left</align>
@@ -737,7 +737,7 @@
                                 <top>2</top>
                                 <height>76</height>
                                 <width>400</width>
-                                <font>font14</font>
+                                <font>script.module.iptvlib-font14</font>
                                 <aligny>top</aligny>
                                 <textcolor>black</textcolor>
                                 <align>left</align>
@@ -752,7 +752,7 @@
                                 <top>2</top>
                                 <height>76</height>
                                 <width>400</width>
-                                <font>font14</font>
+                                <font>script.module.iptvlib-font14</font>
                                 <aligny>top</aligny>
                                 <textcolor>white</textcolor>
                                 <align>left</align>
@@ -801,7 +801,7 @@
                             <top>55</top>
                             <height>30</height>
                             <width>500</width>
-                            <font>font12</font>
+                            <font>script.module.iptvlib-font12</font>
                             <label>         [UPPERCASE]$INFO[Container(4300).ListItem.Property(t_start)] - $INFO[Container(4300).ListItem.Property(t_end)], $INFO[Container(4300).ListItem.Property(d_start)][/UPPERCASE]</label>
                         </control>
                         <control type="textbox">
@@ -810,7 +810,7 @@
                             <top>100</top>
                             <height>500</height>
                             <width>500</width>
-                            <font>font14</font>
+                            <font>script.module.iptvlib-font14</font>
                             <wrapmultiline>true</wrapmultiline>
                             <label>[B]$INFO[Container(4300).ListItem.Property(title)][/B] [I][COLOR grey]$INFO[Container(4300).ListItem.Property(category)][/COLOR][/I][CR][CR]$INFO[Container(4300).ListItem.Property(descr)]</label>
                         </control>

@@ -65,7 +65,15 @@ msgstr "через %s секунд"
 
 msgctxt "#30114"
 msgid "HTTP request failed"
-msgstr "Ошибка при выполнении ХТТП запроса"
+msgstr "Ошибка при выполнении HTTP запроса"
+
+msgctxt "#30115"
+msgid "Please restart KODI to complete add-on installation"
+msgstr "Пожалуйста перезагрузите KODI для завершения установки дополнения"
+
+msgctxt "#30116"
+msgid "This add-on needs to install some extra resources."
+msgstr "Это дополнение требует установки дополнительных ресурсов. После этого потребуется перезагрузка KODI."
 
 # Application's strings
 msgctxt "#30201"
