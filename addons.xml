@@ -13,7 +13,7 @@
       <platform>all</platform>
     </extension>
   </addon>
-  <addon id="script.module.iptvlib" name="IPTV Library" version="1.0.14" provider-name="Dmitry Vinogradov">
+  <addon id="script.module.iptvlib" name="IPTV Library" version="1.0.15" provider-name="Dmitry Vinogradov">
     <requires>
       <import addon="xbmc.python" version="2.24.0"/>
     </requires>
@@ -30,11 +30,13 @@
       <license>GNU LESSER GENERAL PUBLIC LICENSE Version 3, June 2007</license>
       <source>https://github.com/kodi-iptv-addons</source>
       <news>
-v1.0.14 (2018-10-23)
-- Big fixes
+v1.0.15 (2018-11-02)
+- Improved error handling
+- Added fonts used in skin
+- Bug fixes
 v1.0.2 (2018-10-12)
 - Improved HTTP downloading
-- Big fixes
+- Bug fixes
 v1.0.1 (2018-10-11)
 - Improved error handling
 - Fixed bug in date formatting
@@ -44,7 +46,7 @@ v1.0.0 (2018-10-10)
         </news>
     </extension>
   </addon>
-  <addon id="script.video.iptv.itv" name="ITV" version="1.0.3" provider-name="Dmitry Vinogradov">
+  <addon id="script.video.iptv.itv" name="ITV" version="1.0.4" provider-name="Dmitry Vinogradov">
     <requires>
       <import addon="xbmc.python" version="2.24.0"/>
       <import addon="script.module.iptvlib" version="1.0.0"/>
@@ -64,6 +66,8 @@ v1.0.0 (2018-10-10)
       <license>GNU LESSER GENERAL PUBLIC LICENSE Version 3, June 2007</license>
       <source>https://github.com/kodi-iptv-addons</source>
       <news>
+v1.0.4 (2018-11-02)
+- Improved error handling
 v1.0.3 (2018-10-20)
 - Handle authentication failures properly
 v1.0.2 (2018-10-20)
@@ -75,7 +79,7 @@ v1.0.0 (2018-10-19)
         </news>
     </extension>
   </addon>
-  <addon id="script.video.iptv.kartina" name="KARTINA" version="1.0.4" provider-name="Dmitry Vinogradov">
+  <addon id="script.video.iptv.kartina" name="KARTINA" version="1.0.5" provider-name="Dmitry Vinogradov">
     <requires>
       <import addon="xbmc.python" version="2.24.0"/>
       <import addon="script.module.iptvlib" version="1.0.0"/>
@@ -98,6 +102,9 @@ v1.0.0 (2018-10-19)
       <license>GNU LESSER GENERAL PUBLIC LICENSE Version 3, June 2007</license>
       <source>https://github.com/kodi-iptv-addons</source>
       <news>
+v1.0.5 (2018-11-02)
+- Improved error handling
+- Fetch EPG for 2 weeks
 v1.0.4 (2018-10-20)
 - Bug fixes
 v1.0.1 (2018-10-18)
@@ -107,7 +114,7 @@ v1.0.0 (2018-10-12)
         </news>
     </extension>
   </addon>
-  <addon id="script.video.iptv.novoetv" name="NOVOETV" version="1.0.4" provider-name="Dmitry Vinogradov">
+  <addon id="script.video.iptv.novoetv" name="NOVOETV" version="1.0.5" provider-name="Dmitry Vinogradov">
     <requires>
       <import addon="xbmc.python" version="2.24.0"/>
       <import addon="script.module.iptvlib" version="1.0.0"/>
@@ -130,6 +137,9 @@ v1.0.0 (2018-10-12)
       <license>GNU LESSER GENERAL PUBLIC LICENSE Version 3, June 2007</license>
       <source>https://github.com/kodi-iptv-addons</source>
       <news>
+v1.0.5 (2018-11-02)
+- Improved error handling
+- Fetch EPG for 2 weeks
 v1.0.4 (2018-10-20)
 - Bug fixes
 v1.0.1 (2018-10-18)
@@ -139,7 +149,7 @@ v1.0.0 (2018-10-16)
         </news>
     </extension>
   </addon>
-  <addon id="script.video.iptv.ottclub" name="OTTCLUB" version="1.0.8" provider-name="Dmitry Vinogradov">
+  <addon id="script.video.iptv.ottclub" name="OTTCLUB" version="1.0.9" provider-name="Dmitry Vinogradov">
     <requires>
       <import addon="xbmc.python" version="2.24.0"/>
       <import addon="script.module.iptvlib" version="1.0.0"/>
@@ -159,6 +169,8 @@ v1.0.0 (2018-10-16)
       <license>GNU LESSER GENERAL PUBLIC LICENSE Version 3, June 2007</license>
       <source>https://github.com/kodi-iptv-addons</source>
       <news>
+v1.0.9 (2018-11-02)
+- Improved error handling
 v1.0.8 (2018-10-20)
 - Bug fixes
 v1.0.5 (2018-10-18)
@@ -177,7 +189,7 @@ v1.0.0 (2018-10-10)
         </news>
     </extension>
   </addon>
-  <addon id="script.video.iptv.ottplayer" name="OTTPLAYER" version="1.0.6" provider-name="Dmitry Vinogradov">
+  <addon id="script.video.iptv.ottplayer" name="OTTPLAYER" version="1.0.7" provider-name="Dmitry Vinogradov">
     <requires>
       <import addon="xbmc.python" version="2.24.0"/>
       <import addon="script.module.iptvlib" version="1.0.0"/>
@@ -197,6 +209,8 @@ v1.0.0 (2018-10-10)
       <license>GNU LESSER GENERAL PUBLIC LICENSE Version 3, June 2007</license>
       <source>https://github.com/kodi-iptv-addons</source>
       <news>
+v1.0.7 (2018-11-02)
+- Improved error handling
 v1.0.6 (2018-10-23)
 - Fixed bug in playlists merge
 v1.0.5 (2018-10-20)
@@ -212,7 +226,7 @@ v1.0.0 (2018-10-15)
         </news>
     </extension>
   </addon>
-  <addon id="script.video.iptv.stalker" name="STALKER" version="1.0.3" provider-name="Dmitry Vinogradov">
+  <addon id="script.video.iptv.stalker" name="STALKER" version="1.0.4" provider-name="Dmitry Vinogradov">
     <requires>
       <import addon="xbmc.python" version="2.24.0"/>
       <import addon="script.module.iptvlib" version="1.0.0"/>
@@ -232,6 +246,8 @@ v1.0.0 (2018-10-15)
       <license>GNU LESSER GENERAL PUBLIC LICENSE Version 3, June 2007</license>
       <source>https://github.com/kodi-iptv-addons</source>
       <news>
+v1.0.4 (2018-11-02)
+- Improved error handling
 v1.0.3 (2018-10-20)
 - Bug fixes
 v1.0.1 (2018-10-18)
@@ -241,7 +257,7 @@ v1.0.0 (2018-10-18)
         </news>
     </extension>
   </addon>
-  <addon id="script.video.iptv.torrenttv" name="TORRENTTV" version="1.0.0" provider-name="Dmitry Vinogradov">
+  <addon id="script.video.iptv.torrenttv" name="TORRENTTV" version="1.0.1" provider-name="Dmitry Vinogradov">
     <requires>
       <import addon="xbmc.python" version="2.24.0"/>
       <import addon="script.module.iptvlib" version="1.0.0"/>
@@ -261,6 +277,9 @@ v1.0.0 (2018-10-18)
       <license>GNU LESSER GENERAL PUBLIC LICENSE Version 3, June 2007</license>
       <source>https://github.com/kodi-iptv-addons</source>
       <news>
+v1.0.1 (2018-11-02)
+- Improved error handling
+- Bug fixes
 v1.0.0 (2018-10-23)
 - Initial release
         </news>

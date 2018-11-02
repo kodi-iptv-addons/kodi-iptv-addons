@@ -112,10 +112,7 @@ class Stalker(Api):
         response = self.make_request(uri, headers=self.default_headers())
         is_error, error = Api.is_error_response(response)
         if is_error:
-            raise ApiException(
-                error.get("message", get_string(TEXT_SERVICE_ERROR_OCCURRED_ID)),
-                error.get("code", Api.E_UNKNOW_ERROR)
-            )
+            raise ApiException(error.get("message"), error.get("code"))
         if "error" in response:
             raise ApiException(
                 response.get("error_description", get_string(TEXT_SERVICE_ERROR_OCCURRED_ID)),
@@ -160,10 +157,7 @@ class Stalker(Api):
         response = self.make_request(uri, headers=self.default_headers())
         is_error, error = Api.is_error_response(response)
         if is_error:
-            raise ApiException(
-                error.get("message", get_string(TEXT_SERVICE_ERROR_OCCURRED_ID)),
-                error.get("code", Api.E_UNKNOW_ERROR)
-            )
+            raise ApiException(error.get("message"), error.get("code"))
         if "error" in response:
             raise ApiException(
                 response.get("error_description", get_string(TEXT_SERVICE_ERROR_OCCURRED_ID)),
@@ -210,10 +204,7 @@ class Stalker(Api):
         response = self.make_request(uri, headers=self.default_headers())
         is_error, error = Api.is_error_response(response)
         if is_error:
-            raise ApiException(
-                error.get("message", get_string(TEXT_SERVICE_ERROR_OCCURRED_ID)),
-                error.get("code", Api.E_UNKNOW_ERROR)
-            )
+            raise ApiException(error.get("message"), error.get("code"))
 
         programs = OrderedDict()
         prev = None  # type: Program

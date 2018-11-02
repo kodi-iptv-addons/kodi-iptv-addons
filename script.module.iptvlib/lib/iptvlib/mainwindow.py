@@ -111,7 +111,7 @@ class MainWindow(xbmcgui.WindowXML, WindowMixin):
             if ex.code == Api.E_API_ERROR:
                 if dialog.yesno(
                         addon.getAddonInfo("name"),
-                        get_string(TEXT_AUTHENTICATION_FAILED_ID),
+                        get_string(TEXT_AUTHENTICATION_FAILED_ID) + ":",
                         ex.message,
                         get_string(TEXT_CHECK_SETTINGS_ID)):
                     addon.openSettings()
@@ -122,19 +122,19 @@ class MainWindow(xbmcgui.WindowXML, WindowMixin):
                     error = get_string(TEXT_PLEASE_CHECK_INTERNET_CONNECTION_ID)
                 dialog.ok(
                     addon.getAddonInfo("name"),
-                    get_string(TEXT_HTTP_REQUEST_ERROR_ID),
+                    get_string(TEXT_HTTP_REQUEST_ERROR_ID) + ":",
                     error
                 )
             elif ex.code == Api.E_JSON_DECODE:
                 dialog.ok(
                     addon.getAddonInfo("name"),
-                    get_string(TEXT_UNEXPECTED_RESPONSE_FROM_SERVICE_PROVIDER_ID),
+                    get_string(TEXT_UNEXPECTED_RESPONSE_FROM_SERVICE_PROVIDER_ID) + ":",
                     ex.message
                 )
             else:
                 dialog.ok(
                     addon.getAddonInfo("name"),
-                    get_string(TEXT_UNEXPECTED_ERROR_OCCURRED_ID),
+                    get_string(TEXT_UNEXPECTED_ERROR_OCCURRED_ID) + ":",
                     ex.message
                 )
             return False

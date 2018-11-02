@@ -25,6 +25,7 @@ zip:
 		rm -f "$$addon_name/$$addon_name-$$version.zip" ; \
     	zip -r "$$addon_name/$$addon_name-$$version.zip" "$$addon_name" -x "*.zip" ; \
     	git add "$$addon_name/$$addon_name-$$version.zip" ; \
+    	git tag $$addon_name-$$version ; \
     	mv $$dir/../addon.xml.bak $$dir/addon.xml ; \
 	done
 

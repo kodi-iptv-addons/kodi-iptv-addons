@@ -1,4 +1,4 @@
-v1.0.15 (2018-11-01)
+v1.0.15 (2018-11-02)
 - Improved error handling
 - Added fonts used in skin
 - Bug fixes

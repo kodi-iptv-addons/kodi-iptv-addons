@@ -62,6 +62,12 @@ class Kartina(Api):
     def is_login_request(self, uri, payload=None, method=None, headers=None):
         return "login" in uri
 
+    @staticmethod
+    def raise_api_exception_on_error(response):
+        if not "error" in response:
+            return
+        raise ApiException(response["error"]["message"], Api.E_API_ERROR)
+
     def login(self):
         payload = {
             "login": self.username,
@@ -72,15 +78,8 @@ class Kartina(Api):
         response = self.make_request("login", payload=payload, method="POST")
         is_error, error = Api.is_error_response(response)
         if is_error:
-            raise ApiException(
-                error.get("message", get_string(TEXT_AUTHENTICATION_FAILED_ID)),
-                error.get("code", Api.E_AUTH_ERROR)
-            )
-        if "error" in response:
-            raise ApiException(
-                response["error"].get("message", get_string(TEXT_SERVICE_ERROR_OCCURRED_ID)),
-                Api.E_API_ERROR
-            )
+            raise ApiException(error.get("message"), error.get("code"))
+        Kartina.raise_api_exception_on_error(response)
 
         self.auth_status = self.AUTH_STATUS_OK
         self.write_cookie_file("%s=%s" % (response["sid_name"], response["sid"]))
@@ -92,10 +91,8 @@ class Kartina(Api):
         response = self.make_request("channel_list", method="POST")
         is_error, error = Api.is_error_response(response)
         if is_error:
-            raise ApiException(
-                error.get("message", get_string(TEXT_SERVICE_ERROR_OCCURRED_ID)),
-                error.get("code", Api.E_UNKNOW_ERROR)
-            )
+            raise ApiException(error.get("message"), error.get("code"))
+        Kartina.raise_api_exception_on_error(response)
 
         groups = OrderedDict()
         for group_data in response["groups"]:
@@ -128,10 +125,8 @@ class Kartina(Api):
         response = self.make_request("get_url", payload)
         is_error, error = Api.is_error_response(response)
         if is_error:
-            raise ApiException(
-                error.get("message", get_string(TEXT_SERVICE_ERROR_OCCURRED_ID)),
-                error.get("code", Api.E_UNKNOW_ERROR)
-            )
+            raise ApiException(error.get("message"), error.get("code"))
+        Kartina.raise_api_exception_on_error(response)
         url = response["url"]
         return url.replace("http/ts", "http").split()[0]
 

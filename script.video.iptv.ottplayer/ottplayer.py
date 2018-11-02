@@ -74,18 +74,7 @@ class Ottplayer(Api):
     def raise_api_exception_on_error(error):
         if not error:
             return
-        map = {
-            "unknown": 30009,
-            "Login failed": 30010,
-            "___": 30011,
-            "noconnect": 30007,
-            "noreg": 30009,
-            "nochannel": 30010,
-            "notsproxy": 30011,
-            "noepg": 30012,
-        }
-        string_id = map.get(error, 30009)
-        raise ApiException(addon.getLocalizedString(string_id), Api.E_API_ERROR)
+        raise ApiException(error, Api.E_API_ERROR)
 
     def prepare_api_request(self, method, params, sid_index=-1, ident=None):
         # type: (str, list, int, str) -> HttpRequest
