@@ -1,3 +1,5 @@
+v1.0.7 (2018-11-01)
+- Improved error handling
 v1.0.6 (2018-10-23)
 - Fixed bug in playlists merge
 v1.0.5 (2018-10-20)

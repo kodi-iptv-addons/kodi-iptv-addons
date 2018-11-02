@@ -70,10 +70,16 @@ class Kartina(Api):
             "settings": "all"
         }
         response = self.make_request("login", payload=payload, method="POST")
+        is_error, error = Api.is_error_response(response)
+        if is_error:
+            raise ApiException(
+                error.get("message", get_string(TEXT_AUTHENTICATION_FAILED_ID)),
+                error.get("code", Api.E_AUTH_ERROR)
+            )
         if "error" in response:
             raise ApiException(
-                response["error"].get("message", get_string(TEXT_AUTHENTICATION_FAILED_ID)),
-                response["error"].get("code", Api.E_AUTH_ERROR)
+                response["error"].get("message", get_string(TEXT_SERVICE_ERROR_OCCURRED_ID)),
+                Api.E_API_ERROR
             )
 
         self.auth_status = self.AUTH_STATUS_OK
@@ -84,10 +90,11 @@ class Kartina(Api):
 
     def get_groups(self):
         response = self.make_request("channel_list", method="POST")
-        if self._last_error:
+        is_error, error = Api.is_error_response(response)
+        if is_error:
             raise ApiException(
-                self._last_error.get("message", get_string(TEXT_SERVICE_ERROR_OCCURRED_ID)),
-                self._last_error.get("code", Api.E_UNKNOW_ERROR)
+                error.get("message", get_string(TEXT_SERVICE_ERROR_OCCURRED_ID)),
+                error.get("code", Api.E_UNKNOW_ERROR)
             )
 
         groups = OrderedDict()
@@ -119,10 +126,11 @@ class Kartina(Api):
         if ut_start:
             payload["gmt"] = int(ut_start)
         response = self.make_request("get_url", payload)
-        if self._last_error:
+        is_error, error = Api.is_error_response(response)
+        if is_error:
             raise ApiException(
-                self._last_error.get("message", get_string(TEXT_SERVICE_ERROR_OCCURRED_ID)),
-                self._last_error.get("code", Api.E_UNKNOW_ERROR)
+                error.get("message", get_string(TEXT_SERVICE_ERROR_OCCURRED_ID)),
+                error.get("code", Api.E_UNKNOW_ERROR)
             )
         url = response["url"]
         return url.replace("http/ts", "http").split()[0]
@@ -143,7 +151,8 @@ class Kartina(Api):
         prev_ts = None
         for key in sorted(results.iterkeys()):
             response = results[key]
-            if "error" not in response:
+            is_error, error = Api.is_error_response(response)
+            if not is_error:
                 for entry in response["epg"]:
                     title, descr = (entry["progname"] + "\n").split("\n", 1)
                     ts = int(entry["ut_start"])
@@ -158,7 +167,7 @@ class Kartina(Api):
                         epg[prev_ts]["time_to"] = ts
                     prev_ts = ts
             else:
-                log("error: %s" % response, xbmc.LOGDEBUG)
+                log("error: %s" % error, xbmc.LOGDEBUG)
 
         programs = OrderedDict()
         prev = None  # type: Program
@@ -185,7 +194,8 @@ class Kartina(Api):
                 url = "https://iptv.kartina.tv/api/json/open_epg?get=channels"
                 request = self.prepare_request(url)
                 response = self.send_parallel_requests([request])[url]
-                if "error" not in response:
+                is_error, error = Api.is_error_response(response)
+                if not is_error:
                     self._open_epg_cids = []
                     for entry in response["channels"]:
                         self._open_epg_cids.append(entry["id"])
@@ -215,7 +225,8 @@ class Kartina(Api):
         prev_ts = None
         for key in sorted(results.iterkeys()):
             response = results[key]
-            if "error" not in response:
+            is_error, error = Api.is_error_response(response)
+            if not is_error:
                 for entry in response["report"][0]["list"]:
                     title, descr = (entry["progname"] + "\n").split("\n", 1)
                     ts = int(entry["ts"])
@@ -230,7 +241,7 @@ class Kartina(Api):
                         epg[prev_ts]["time_to"] = ts
                     prev_ts = ts
             else:
-                log("error: %s" % response, xbmc.LOGDEBUG)
+                log("error: %s" % error, xbmc.LOGDEBUG)
 
         programs = OrderedDict()
         prev = None  # type: Program

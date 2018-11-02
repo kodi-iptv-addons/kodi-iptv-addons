@@ -70,6 +70,23 @@ class Ottplayer(Api):
     def is_login_request(self, uri, payload=None, method=None, headers=None):
         return payload is not None and "login" in payload.get("method", "")
 
+    @staticmethod
+    def raise_api_exception_on_error(error):
+        if not error:
+            return
+        map = {
+            "unknown": 30009,
+            "Login failed": 30010,
+            "___": 30011,
+            "noconnect": 30007,
+            "noreg": 30009,
+            "nochannel": 30010,
+            "notsproxy": 30011,
+            "noepg": 30012,
+        }
+        string_id = map.get(error, 30009)
+        raise ApiException(addon.getLocalizedString(string_id), Api.E_API_ERROR)
+
     def prepare_api_request(self, method, params, sid_index=-1, ident=None):
         # type: (str, list, int, str) -> HttpRequest
         self._api_calls += 1
@@ -86,13 +103,10 @@ class Ottplayer(Api):
 
     def do_login(self, device_id=""):
         response = self.make_api_request("login", [self.username, self.password, device_id])
-        if "error" in response and response["error"]:
-            if isinstance(response["error"], dict):
-                raise ApiException(
-                    response["error"].get("message", get_string(TEXT_AUTHENTICATION_FAILED_ID)),
-                    response["error"].get("code", Api.E_UNKNOW_ERROR)
-                )
-            raise ApiException(response["error"], Api.E_UNKNOW_ERROR)
+        is_error, error = Api.is_error_response(response)
+        if is_error:
+            raise ApiException(error.get("message"), error.get("code"))
+        Ottplayer.raise_api_exception_on_error(response["error"])
         return response
 
     def login(self):
@@ -119,37 +133,23 @@ class Ottplayer(Api):
     def get_devices(self):
         # type: () -> list[dict]
         response = self.make_api_request("get_devices", ["unknown"], 1)
-        if "error" in response and response["error"]:
-            if isinstance(response["error"], dict):
-                raise ApiException(
-                    response["error"].get("message", get_string(TEXT_HTTP_REQUEST_ERROR_ID)),
-                    response["error"].get("code", Api.E_UNKNOW_ERROR)
-                )
-            raise ApiException(response["error"], Api.E_UNKNOW_ERROR)
+        is_error, error = Api.is_error_response(response)
+        if is_error:
+            raise ApiException(error.get("message"), error.get("code"))
+        Ottplayer.raise_api_exception_on_error(response["error"])
         return response["result"]
 
     def register_device(self):
         # type: () -> str
         response = self.make_api_request("register_device", [self.DEVICE_TYPE, "unknown"], 2)
+        is_error, error = Api.is_error_response(response)
+        if is_error:
+            raise ApiException(
+                error.get("message", get_string(TEXT_HTTP_REQUEST_ERROR_ID)),
+                error.get("code", Api.E_UNKNOW_ERROR)
+            )
         if "error" in response and response["error"]:
-            if isinstance(response["error"], dict):
-                raise ApiException(
-                    response["error"].get("message", get_string(TEXT_HTTP_REQUEST_ERROR_ID)),
-                    response["error"].get("code", Api.E_UNKNOW_ERROR)
-                )
-            raise ApiException(response["error"], Api.E_UNKNOW_ERROR)
-        return response["result"]
-
-    def get_channels(self, playlist_id):
-        # type: (int) -> list[dict]
-        response = self.make_api_request("get_channels", [playlist_id], 0)
-        if "error" in response and response["error"]:
-            if isinstance(response["error"], dict):
-                raise ApiException(
-                    response["error"].get("message", get_string(TEXT_HTTP_REQUEST_ERROR_ID)),
-                    response["error"].get("code", Api.E_UNKNOW_ERROR)
-                )
-            raise ApiException(response["error"], Api.E_UNKNOW_ERROR)
+            raise ApiException(response["error"], Api.E_API_ERROR)
         return response["result"]
 
     def get_groups(self):
@@ -161,13 +161,10 @@ class Ottplayer(Api):
         results = self.send_parallel_requests(requests)
 
         get_groups_response = results[get_groups_request.ident]
-        if "error" in get_groups_response and get_groups_response["error"]:
-            if isinstance(get_groups_response["error"], dict):
-                raise ApiException(
-                    get_groups_response["error"].get("message", get_string(TEXT_HTTP_REQUEST_ERROR_ID)),
-                    get_groups_response["error"].get("code", Api.E_UNKNOW_ERROR)
-                )
-            raise ApiException(get_groups_response["error"], Api.E_UNKNOW_ERROR)
+        is_error, error = Api.is_error_response(get_groups_response)
+        if is_error:
+            raise ApiException(error.get("message"), error.get("code"))
+        Ottplayer.raise_api_exception_on_error(get_groups_response["error"])
 
         groups = OrderedDict()
         number = 1
@@ -179,13 +176,10 @@ class Ottplayer(Api):
             number += 1
 
         get_playlists_response = results[get_playlists_request.ident]
-        if "error" in get_playlists_response and get_playlists_response["error"]:
-            if isinstance(get_playlists_response["error"], dict):
-                raise ApiException(
-                    get_playlists_response["error"].get("message", get_string(TEXT_HTTP_REQUEST_ERROR_ID)),
-                    get_playlists_response["error"].get("code", Api.E_UNKNOW_ERROR)
-                )
-            raise ApiException(get_playlists_response["error"], Api.E_UNKNOW_ERROR)
+        is_error, error = Api.is_error_response(get_playlists_response)
+        if is_error:
+            raise ApiException(error.get("message"), error.get("code"))
+        Ottplayer.raise_api_exception_on_error(get_playlists_response["error"])
         
         playlists = get_playlists_response.get("result")  # type: list[dict]
         if len(playlists) == 0:
@@ -201,13 +195,10 @@ class Ottplayer(Api):
 
         results = self.send_parallel_requests(requests)
         for playlist_id, result in results.iteritems():
-            if "error" in result and result["error"]:
-                if isinstance(result["error"], dict):
-                    raise ApiException(
-                        result["error"].get("message", get_string(TEXT_HTTP_REQUEST_ERROR_ID)),
-                        result["error"].get("code", Api.E_UNKNOW_ERROR)
-                    )
-                raise ApiException(result["error"], Api.E_UNKNOW_ERROR)
+            is_error, error = Api.is_error_response(result)
+            if is_error:
+                raise ApiException(error.get("message"), error.get("code"))
+            Ottplayer.raise_api_exception_on_error(result["error"])
             for channel_data in result["result"]:
                 if self.adult is False and bool(channel_data.get("adult", False)) is True:
                     continue
@@ -238,13 +229,10 @@ class Ottplayer(Api):
         # type: (str) -> OrderedDict[int, Program]
         channel = self.channels[cid]
         response = self.make_api_request("get_epg2", [channel.epg_id, 2, int(self.archive_ttl / DAY)])
-        if "error" in response and response["error"]:
-            if isinstance(response["error"], dict):
-                raise ApiException(
-                    response["error"].get("message", get_string(TEXT_HTTP_REQUEST_ERROR_ID)),
-                    response["error"].get("code", Api.E_UNKNOW_ERROR)
-                )
-            raise ApiException(response["error"], Api.E_UNKNOW_ERROR)
+        is_error, error = Api.is_error_response(response)
+        if is_error:
+            raise ApiException(error.get("message"), error.get("code"))
+        Ottplayer.raise_api_exception_on_error(response["error"])
 
         epg = dict()
         for v in response["result"]:

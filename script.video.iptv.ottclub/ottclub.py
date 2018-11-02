@@ -128,6 +128,12 @@ class Ottclub(Api):
         # type: (str) -> OrderedDict[int, Program]
         programs = OrderedDict()
         json_data = self.make_request("channel/%s" % cid)
+        is_error, error = Api.is_error_response(json_data)
+        if is_error:
+            raise ApiException(
+                error.get("message", get_string(TEXT_SERVICE_ERROR_OCCURRED_ID)),
+                error.get("code", Api.E_UNKNOW_ERROR)
+            )
         response = json.loads(json_data)
         prev = None
         response = {int(k):v for k,v in response.items()}

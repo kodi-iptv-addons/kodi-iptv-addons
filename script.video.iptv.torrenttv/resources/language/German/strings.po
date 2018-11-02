@@ -21,3 +21,35 @@ msgstr "Kennwort"
 msgctxt "#30004"
 msgid "Show adult channels"
 msgstr "Zeige Kanäle für Erwachsene"
+
+msgctxt "#30005"
+msgid "error_unknown"
+msgstr "Unbekannter Fehler"
+
+msgctxt "#30006"
+msgid "error_noparam"
+msgstr "Falscher oder fehlender Eingabeparameter"
+
+msgctxt "#30007"
+msgid "error_noconnect"
+msgstr "Keine Datenbankverbindung"
+
+msgctxt "#30008"
+msgid "error_incorrect"
+msgstr "Falsche Anmeldedaten oder Sitzung ist abgelaufen"
+
+msgctxt "#30009"
+msgid "error_noreg"
+msgstr "Registrierung benötigt"
+
+msgctxt "#30010"
+msgid "error_nochannel"
+msgstr "Kanal nicht gefunden"
+
+msgctxt "#30011"
+msgid "error_notsproxy"
+msgstr "Sie haben keinen Zugriff auf diesen Kanal"
+
+msgctxt "#30011"
+msgid "error_noepg"
+msgstr "Kein EPG verfügbar"

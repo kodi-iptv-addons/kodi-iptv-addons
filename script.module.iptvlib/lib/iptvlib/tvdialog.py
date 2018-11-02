@@ -147,11 +147,50 @@ class TvDialog(xbmcgui.WindowXMLDialog, WindowMixin):
             self.play_program(program)
             self.load_lists()
             self.reset_idle_timer()
+        except ApiException, ex:
+            log("Exception %s: message=%s" % (type(ex), ex.message))
+            log(traceback.format_exc(), xbmc.LOGDEBUG)
+            dialog = xbmcgui.Dialog()
+            if ex.code == Api.E_API_ERROR:
+                dialog.ok(
+                    addon.getAddonInfo("name"),
+                    get_string(TEXT_SERVICE_ERROR_OCCURRED_ID) + ":",
+                    ex.message
+                )
+            elif ex.code == Api.E_HTTP_REQUEST_FAILED:
+                error = ex.message
+                if "Errno 8" in ex.message:
+                    error = get_string(TEXT_PLEASE_CHECK_INTERNET_CONNECTION_ID)
+                dialog.ok(
+                    addon.getAddonInfo("name"),
+                    get_string(TEXT_HTTP_REQUEST_ERROR_ID) + ":",
+                    error
+                )
+            elif ex.code == Api.E_JSON_DECODE:
+                dialog.ok(
+                    addon.getAddonInfo("name"),
+                    get_string(TEXT_UNEXPECTED_RESPONSE_FROM_SERVICE_PROVIDER_ID) + ":",
+                    ex.message
+                )
+            else:
+                dialog.ok(
+                    addon.getAddonInfo("name"),
+                    get_string(TEXT_UNEXPECTED_ERROR_OCCURRED_ID) + ":",
+                    ex.message
+                )
+            self.main_window.close()
         except Exception, ex:
             self.preload_icon(self.ICON_ERROR, quote(ex.message.encode('utf-8')))
+            log("Exception %s: message=%s" % (type(ex), ex.message))
+            log(traceback.format_exc(), xbmc.LOGDEBUG)
             line1, line2 = (ex.message + "\n").split("\n", 1)
             dialog = xbmcgui.Dialog()
-            dialog.ok(addon.getAddonInfo("name"), "", line1, line2)
+            dialog.ok(
+                addon.getAddonInfo("name"),
+                get_string(TEXT_UNEXPECTED_ERROR_OCCURRED_ID) + ":",
+                line1,
+                line2
+            )
             self.main_window.close()
 
     def reset_idle_timer(self):
@@ -290,6 +329,8 @@ class TvDialog(xbmcgui.WindowXMLDialog, WindowMixin):
 
         except ApiException, ex:
             self.preload_icon(self.ICON_ERROR, quote(ex.message.encode('utf-8')))
+            log("Exception %s: message=%s, code=%s" % (type(ex), ex.message, ex.code))
+            log(traceback.format_exc(), xbmc.LOGDEBUG)
             dialog = xbmcgui.Dialog()
             dialog.ok(addon.getAddonInfo("name"), get_string(TEXT_SERVICE_ERROR_OCCURRED_ID), ex.message)
 
@@ -617,5 +658,5 @@ class TvDialog(xbmcgui.WindowXMLDialog, WindowMixin):
             self.defer_update_playback_info()
         except Exception, ex:
             self.preload_icon(self.ICON_ERROR, quote(ex.message.encode('utf-8')))
-            log("Exception %s: %s" % (type(ex), ex.message))
+            log("Exception %s: message=%s" % (type(ex), ex.message))
             log(traceback.format_exc(), xbmc.LOGDEBUG)

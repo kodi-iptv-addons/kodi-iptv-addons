@@ -68,6 +68,7 @@ class Api:
     E_HTTP_REQUEST_FAILED = 1001
     E_JSON_DECODE = 1002
     E_AUTH_ERROR = 1003
+    E_API_ERROR = 1004
 
     auth_status = AUTH_STATUS_NONE  # type: int
     username = None  # type: str
@@ -75,7 +76,6 @@ class Api:
     working_path = None  # type: str
     cookie_file = None  # type: str
     settings_file = None  # type: str
-    _last_error = None  # type: dict
     _attempt = 0  # type: int
     _groups = None  # type: OrderedDict[str, Group]
     _channels = None  # type: OrderedDict[str, Channel]
@@ -90,7 +90,6 @@ class Api:
             os.makedirs(self.working_path)
         self.cookie_file = os.path.join(self.working_path, "%s.cookie.txt" % self.__class__.__name__)
         self.settings_file = os.path.join(self.working_path, "%s.settings.txt" % self.__class__.__name__)
-        self._last_error = None
         self._groups = OrderedDict()
         self._channels = OrderedDict()
 
@@ -299,10 +298,10 @@ class Api:
                 return content
             response = json.loads(content)
         except urllib2.URLError, ex:
-            log("Exception %s: %s" % (type(ex), ex.message))
+            log("Exception %s: message=%s" % (type(ex), ex.message))
             log(traceback.format_exc(), xbmc.LOGDEBUG)
             response = {
-                "error": {
+                "__error": {
                     "message": str(ex),
                     "code": self.E_HTTP_REQUEST_FAILED,
                     "details": {
@@ -314,10 +313,10 @@ class Api:
             }
             pass
         except ValueError, ex:
-            log("Exception %s: %s" % (type(ex), ex.message))
+            log("Exception %s: message=%s" % (type(ex), ex.message))
             log(traceback.format_exc(), xbmc.LOGDEBUG)
             response = {
-                "error": {
+                "__error": {
                     "message": "Unable decode server response: %s" % str(ex),
                     "code": self.E_JSON_DECODE,
                     "details": {
@@ -327,10 +326,10 @@ class Api:
             }
             pass
         except Exception, ex:
-            log("Exception %s: %s" % (type(ex), ex.message))
+            log("Exception %s: message=%s" % (type(ex), ex.message))
             log(traceback.format_exc(), xbmc.LOGDEBUG)
             response = {
-                "error": {
+                "__error": {
                     "message": "%s: %s" % (type(ex), str(ex)),
                     "code": self.E_UNKNOW_ERROR
                 }
@@ -355,10 +354,7 @@ class Api:
         request = self.prepare_request(uri, payload, method, headers)
         response = self.send_request(request)
 
-        self._last_error = None
-
-        if "error" in response and response["error"]:
-            self._last_error = response
+        if "__error" in response:
             if self.is_login_request(uri, payload):
                 self.auth_status = self.AUTH_STATUS_NONE
                 try:
@@ -398,3 +394,10 @@ class Api:
         stop_event.set()
 
         return results
+
+    @staticmethod
+    def is_error_response(response):
+        # type: (dict) -> (bool, dict or None)
+        if "__error" in response:
+            return True, response["__error"]
+        return False, None

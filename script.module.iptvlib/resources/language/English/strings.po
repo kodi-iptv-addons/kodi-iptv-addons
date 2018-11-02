@@ -75,6 +75,18 @@ msgctxt "#30116"
 msgid "This add-on needs to install some extra resources."
 msgstr "This add-on needs to install some extra resources. This installation requires a manual KODI restart."
 
+msgctxt "#30117"
+msgid "Please check your internet connection"
+msgstr "Please check your internet connection"
+
+msgctxt "#30118"
+msgid "Unexpected response from service provider"
+msgstr "Unexpected response from service provider"
+
+msgctxt "#30119"
+msgid "Unexpected error occurred"
+msgstr "Unexpected error occurred"
+
 # Application's strings
 msgctxt "#30201"
 msgid "No information available"

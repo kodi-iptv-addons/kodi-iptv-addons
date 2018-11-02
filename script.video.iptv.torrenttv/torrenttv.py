@@ -67,6 +67,23 @@ class Torrenttv(Api):
     def is_login_request(self, uri, payload=None, method=None, headers=None):
         return uri == "auth.php"
 
+    def raise_api_exception_on_error(self, error):
+        if not error:
+            return
+        map = {
+            "unknown": 30005,
+            "noparam": 30006,
+            "noconnect": 30007,
+            "incorrect": 30008,
+            "noreg": 30009,
+            "nochannel": 30010,
+            "notsproxy": 30011,
+            "noepg": 30012,
+        }
+        string_id = map.get(error, 30005)
+        raise ApiException(addon.getLocalizedString(string_id), Api.E_API_ERROR)
+
+
     def login(self):
         payload = {
             "username": self.username,
@@ -76,8 +93,11 @@ class Torrenttv(Api):
             "guid": self._guid
         }
         response = self.make_request("auth.php", payload)
-        if "error" in response and response["error"] != "":
-            raise ApiException(response["error"], Api.E_AUTH_ERROR)
+        is_error, error = Api.is_error_response(response)
+        if is_error:
+            raise ApiException(error.get("message"), error.get("code"))
+
+        self.raise_api_exception_on_error(response["error"])
 
         self.auth_status = self.AUTH_STATUS_OK
         self.write_cookie_file("%s" % response["session"])
@@ -96,8 +116,11 @@ class Torrenttv(Api):
     def get_groups(self):
         payload = self.auth_payload({"type": "channel",})
         response = self.make_request("translation_list.php", payload)
-        if "error" in response and response["error"]:
-            raise ApiException(response["error"], Api.E_UNKNOW_ERROR)
+        is_error, error = Api.is_error_response(response)
+        if is_error:
+            raise ApiException(error.get("message"), error.get("code"))
+
+        self.raise_api_exception_on_error(response["error"])
 
         groups = OrderedDict()
         channels = OrderedDict()
@@ -116,7 +139,9 @@ class Torrenttv(Api):
             if self.adult is False and bool(channel_data["adult"]):
                 continue
 
-            if bool(channel_data.get("access_user_http_stream", 0)) is False:
+            access = channel_data.get("ts_on_air", 0) and \
+                     (channel_data.get("access_user", 0) or channel_data.get("access_free", 0))
+            if bool(access) is False:
                 continue
 
             cid = str(channel_data["id"])
@@ -126,7 +151,7 @@ class Torrenttv(Api):
                 name=channel_data["name"],
                 icon=self.base_icon_url % channel_data["logo"],
                 epg=channel_data["epg_id"] > 0,
-                archive=bool(channel_data.get("access_user_archive_http", 0)),
+                archive=bool(channel_data.get("access_archive", 0)),
                 protected=bool(channel_data["adult"])
             )
             channel.data.update({"epg_id": channel_data["epg_id"]})
@@ -136,8 +161,12 @@ class Torrenttv(Api):
     def get_stream_url(self, cid, ut_start=None):
         payload = self.auth_payload({"zone_id": "1", "nohls": "0", "channel_id": cid})
         response = self.make_request("translation_http.php", payload)
-        if "error" in response and response["error"]:
-            raise ApiException(response["error"], Api.E_UNKNOW_ERROR)
+        is_error, error = Api.is_error_response(response)
+        if is_error:
+            raise ApiException(error.get("message"), error.get("code"))
+
+        self.raise_api_exception_on_error(response["error"])
+
         url = response["source"]
         if ut_start is not None:
             url = "%s%sutc=%s&lutc=%s" % (url, "&" if "?" in url else "?", ut_start, int(time_now()))
@@ -166,7 +195,8 @@ class Torrenttv(Api):
         prev_ts = None
         for key in sorted(results.iterkeys()):
             response = results[key]
-            if "success" in response and response["success"] == 1:
+            is_error, error = Api.is_error_response(response)
+            if not is_error and "success" in response and response["success"] == 1:
                 data = response["records"] if "records" in response else response["data"] if "data" in response else []
                 for entry in data:
                     time = int(entry["time"]) if "time" in entry else int(entry["btime"]) if "btime" in entry else 0
@@ -181,7 +211,7 @@ class Torrenttv(Api):
                         epg[prev_ts]["time_to"] = time
                     prev_ts = time
             else:
-                log("error: %s" % response, xbmc.LOGDEBUG)
+                log("error: %s" % error if is_error else response, xbmc.LOGDEBUG)
 
         programs = OrderedDict()
         prev = None  # type: Program

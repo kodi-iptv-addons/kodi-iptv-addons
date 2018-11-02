@@ -75,6 +75,18 @@ msgctxt "#30116"
 msgid "This add-on needs to install some extra resources."
 msgstr "Это дополнение требует установки дополнительных ресурсов. После этого потребуется перезагрузка KODI."
 
+msgctxt "#30117"
+msgid "Please check your internet connection"
+msgstr "Проверьте подключение к Интернету"
+
+msgctxt "#30118"
+msgid "Unexpected response from service provider"
+msgstr "Неожиданный ответ от IPTV провайдера"
+
+msgctxt "#30119"
+msgid "Unexpected error occurred"
+msgstr "Произошла непредвиденная ошибка"
+
 # Application's strings
 msgctxt "#30201"
 msgid "No information available"

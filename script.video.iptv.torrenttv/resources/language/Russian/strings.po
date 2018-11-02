@@ -21,3 +21,35 @@ msgstr "Пароль"
 msgctxt "#30004"
 msgid "Show adult channels"
 msgstr "Показывать каналы для взрослых"
+
+msgctxt "#30005"
+msgid "error_unknown"
+msgstr "Неизвестная ошибка"
+
+msgctxt "#30006"
+msgid "error_noparam"
+msgstr "Ошибка входных параметров"
+
+msgctxt "#30007"
+msgid "error_noconnect"
+msgstr "Ошибка соединения с базой данных"
+
+msgctxt "#30008"
+msgid "error_incorrect"
+msgstr "Неверные учетные данные или истекшая сессия"
+
+msgctxt "#30009"
+msgid "error_noreg"
+msgstr "Необходима сессия зарегистрированного пользователя"
+
+msgctxt "#30010"
+msgid "error_nochannel"
+msgstr "Канал не найден"
+
+msgctxt "#30011"
+msgid "error_notsproxy"
+msgstr "У Вас нет доступа к этому каналу"
+
+msgctxt "#30011"
+msgid "error_noepg"
+msgstr "EPG отсутствует"

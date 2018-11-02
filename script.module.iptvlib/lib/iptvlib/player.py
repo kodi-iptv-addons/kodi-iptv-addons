@@ -81,7 +81,7 @@ class Player(xbmc.Player):
 
             return self.getTime() + self.offset
         except Exception, ex:
-            log("Exception %s: %s" % (type(ex), ex.message))
+            log("Exception %s: message=%s" % (type(ex), ex.message))
             log(traceback.format_exc(), xbmc.LOGDEBUG)
             return -1
 

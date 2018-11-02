@@ -54,7 +54,7 @@ class Novoetv(Api):
 
     @property
     def archive_ttl(self):
-        return TREEDAYS
+        return TWOWEEKS
 
     def get_cookie(self):
         return ""
@@ -68,11 +68,12 @@ class Novoetv(Api):
             "pass": self.password,
             "settings": "all"
         }
-        response = self.make_request("login.php", payload=payload, method="GET")
-        if "error" in response:
+        response = self.make_request("login.php", payload=payload)
+        is_error, error = Api.is_error_response(response)
+        if is_error:
             raise ApiException(
-                response["error"].get("message", get_string(TEXT_AUTHENTICATION_FAILED_ID)),
-                response["error"].get("code", Api.E_AUTH_ERROR)
+                error.get("message", get_string(TEXT_AUTHENTICATION_FAILED_ID)),
+                error.get("code", Api.E_AUTH_ERROR)
             )
 
         self.auth_status = self.AUTH_STATUS_OK
@@ -93,11 +94,12 @@ class Novoetv(Api):
         return payload
 
     def get_groups(self):
-        response = self.make_request("channel_list.php", payload=self.auth_payload(), method="GET")
-        if self._last_error:
+        response = self.make_request("channel_list.php", payload=self.auth_payload())
+        is_error, error = Api.is_error_response(response)
+        if is_error:
             raise ApiException(
-                self._last_error.get("message", get_string(TEXT_SERVICE_ERROR_OCCURRED_ID)),
-                self._last_error.get("code", Api.E_UNKNOW_ERROR)
+                error.get("message", get_string(TEXT_SERVICE_ERROR_OCCURRED_ID)),
+                error.get("code", Api.E_UNKNOW_ERROR)
             )
 
         groups = OrderedDict()
@@ -129,10 +131,11 @@ class Novoetv(Api):
         if ut_start:
             payload["gmt"] = int(ut_start)
         response = self.make_request("get_url.php", self.auth_payload(payload))
-        if self._last_error:
+        is_error, error = Api.is_error_response(response)
+        if is_error:
             raise ApiException(
-                self._last_error.get("message", get_string(TEXT_SERVICE_ERROR_OCCURRED_ID)),
-                self._last_error.get("code", Api.E_UNKNOW_ERROR)
+                error.get("message", get_string(TEXT_SERVICE_ERROR_OCCURRED_ID)),
+                error.get("code", Api.E_UNKNOW_ERROR)
             )
         url = response["url"]
         return url.replace("http/ts", "http").split()[0]
@@ -153,7 +156,8 @@ class Novoetv(Api):
         prev_ts = None
         for key in sorted(results.iterkeys()):
             response = results[key]
-            if "error" not in response:
+            is_error, error = Api.is_error_response(response)
+            if not is_error:
                 for entry in response["epg"]:
                     title, descr = (HTMLParser().unescape(entry["progname"]) + "\n").split("\n", 1)
                     ts = int(entry["ut_start"])
@@ -168,7 +172,7 @@ class Novoetv(Api):
                         epg[prev_ts]["time_to"] = ts
                     prev_ts = ts
             else:
-                log("error: %s" % response, xbmc.LOGDEBUG)
+                log("error: %s" % error, xbmc.LOGDEBUG)
 
         programs = OrderedDict()
         prev = None  # type: Program

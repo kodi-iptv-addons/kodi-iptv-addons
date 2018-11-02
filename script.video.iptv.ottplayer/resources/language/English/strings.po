@@ -37,3 +37,15 @@ msgstr "No playlists is bound to device KODI"
 msgctxt "#30008"
 msgid "You can bind a playlist to device KODI on http://ottplayer.es"
 msgstr "You can bind a playlist to device KODI on http://ottplayer.es"
+
+msgctxt "#30009"
+msgid "error_unknown"
+msgstr "Unknown error"
+
+msgctxt "#300010"
+msgid "error_login_failed"
+msgstr "Incorrect credentials or session is expired"
+
+msgctxt "#300011"
+msgid "error_method_not_found"
+msgstr "Incorrect credentials or session is expired"

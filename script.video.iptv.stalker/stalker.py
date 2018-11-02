@@ -87,8 +87,14 @@ class Stalker(Api):
             "password": self.password
         }
         response = self.make_request("auth/token.php", payload, method="POST")
+        is_error, error = Api.is_error_response(response)
+        if is_error:
+            raise ApiException(error.get("message"), error.get("code"))
         if "error" in response:
-            self.raise_exception(response, Api.E_AUTH_ERROR)
+            raise ApiException(
+                response.get("error_description", get_string(TEXT_SERVICE_ERROR_OCCURRED_ID)),
+                Api.E_API_ERROR
+            )
 
         self.auth_status = self.AUTH_STATUS_OK
         token_type = self.get_token_type(response)
@@ -104,8 +110,17 @@ class Stalker(Api):
             return self.get_groups()
         uri = "api/api_v2.php?_resource=users/%s/tv-genres" % settings.get("user_id")
         response = self.make_request(uri, headers=self.default_headers())
+        is_error, error = Api.is_error_response(response)
+        if is_error:
+            raise ApiException(
+                error.get("message", get_string(TEXT_SERVICE_ERROR_OCCURRED_ID)),
+                error.get("code", Api.E_UNKNOW_ERROR)
+            )
         if "error" in response:
-            self.raise_exception(response)
+            raise ApiException(
+                response.get("error_description", get_string(TEXT_SERVICE_ERROR_OCCURRED_ID)),
+                Api.E_API_ERROR
+            )
 
         groups = OrderedDict()
         for group_data in response.get("results"):
@@ -143,8 +158,17 @@ class Stalker(Api):
             return self.get_channels()
         uri = "api/api_v2.php?_resource=users/%s/tv-channels" % settings.get("user_id")
         response = self.make_request(uri, headers=self.default_headers())
+        is_error, error = Api.is_error_response(response)
+        if is_error:
+            raise ApiException(
+                error.get("message", get_string(TEXT_SERVICE_ERROR_OCCURRED_ID)),
+                error.get("code", Api.E_UNKNOW_ERROR)
+            )
         if "error" in response:
-            self.raise_exception(response)
+            raise ApiException(
+                response.get("error_description", get_string(TEXT_SERVICE_ERROR_OCCURRED_ID)),
+                Api.E_API_ERROR
+            )
         return response.get("results")
 
     def get_stream_url(self, cid, ut_start=None):
@@ -184,6 +208,12 @@ class Stalker(Api):
         uri = "api/api_v2.php?_resource=users/%s/tv-channels/%s/epg&from=%s&to=%s" % \
               (settings.get("user_id"), cid, start, end)
         response = self.make_request(uri, headers=self.default_headers())
+        is_error, error = Api.is_error_response(response)
+        if is_error:
+            raise ApiException(
+                error.get("message", get_string(TEXT_SERVICE_ERROR_OCCURRED_ID)),
+                error.get("code", Api.E_UNKNOW_ERROR)
+            )
 
         programs = OrderedDict()
         prev = None  # type: Program
@@ -203,10 +233,3 @@ class Stalker(Api):
                 prev.next_program = program
             programs[program.ut_start] = prev = program
         return programs
-
-    def raise_exception(self, response, code=Api.E_UNKNOW_ERROR):
-        # type: (dict, int) -> None
-        if isinstance(response["error"], dict):
-            error = response["error"]
-            raise ApiException(error.get("message", ""), error.get("code", code))
-        raise ApiException(response.get("error_description", response["error"]), code)

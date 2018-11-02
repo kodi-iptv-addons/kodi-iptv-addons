@@ -75,13 +75,12 @@ class Itv(Api):
         if isinstance(response, list) and len(response) and response[0].get("response") == "No Token":
             raise ApiException(
                 addon.getLocalizedString(self.TEXT_ERROR_WRONG_KEY_ID),
-                Api.E_AUTH_ERROR
+                Api.E_API_ERROR
             )
-        elif "error" in response and isinstance(response, dict):
-            raise ApiException(
-                response["error"].get("message", get_string(TEXT_SERVICE_ERROR_OCCURRED_ID)),
-                response["error"].get("code", Api.E_UNKNOW_ERROR)
-            )
+        else:
+            is_error, error = Api.is_error_response(response)
+            if is_error:
+                raise ApiException(error.get("message"), error.get("code"))
 
         self._player_info = response
         self.auth_status = self.AUTH_STATUS_OK
@@ -142,10 +141,11 @@ class Itv(Api):
             }))
 
         response = self.make_request("epg.php?obj=%s" % obj)  # type: dict[str, list[dict]]
-        if self._last_error:
+        is_error, error = Api.is_error_response(response)
+        if is_error:
             raise ApiException(
-                self._last_error.get("message", get_string(TEXT_SERVICE_ERROR_OCCURRED_ID)),
-                self._last_error.get("code", Api.E_UNKNOW_ERROR)
+                error.get("message", get_string(TEXT_SERVICE_ERROR_OCCURRED_ID)),
+                error.get("code", Api.E_UNKNOW_ERROR)
             )
 
         programs = OrderedDict()
