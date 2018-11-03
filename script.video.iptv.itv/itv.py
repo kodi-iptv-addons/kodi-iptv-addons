@@ -131,22 +131,11 @@ class Itv(Api):
 
     def get_epg(self, cid):
         # type: (str) -> OrderedDict[int, Program]
-        channel = self.channels[cid]
-        obj = quote(json.dumps({
-                "action": "epg",
-                "chid": cid,
-                "name": channel.name,
-                "token": channel.data["token"],
-                "serv": channel.data["server"],
-            }))
-
+        obj = quote(json.dumps({"action": "epg", "chid": cid}))
         response = self.make_request("epg.php?obj=%s" % obj)  # type: dict[str, list[dict]]
         is_error, error = Api.is_error_response(response)
         if is_error:
-            raise ApiException(
-                error.get("message", get_string(TEXT_SERVICE_ERROR_OCCURRED_ID)),
-                error.get("code", Api.E_UNKNOW_ERROR)
-            )
+            raise ApiException(error.get("message"), error.get("code"))
 
         programs = OrderedDict()
         prev = None

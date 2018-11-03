@@ -202,6 +202,17 @@ def time_now():
     return time.time()
 
 
+def timestamp_to_midnight(timestamp):
+    # type: (float) -> int
+    # noinspection PyTypeChecker
+    return int(time.mktime(
+        datetime.datetime.combine(
+            datetime.datetime.fromtimestamp(timestamp),
+            datetime.datetime.min.time()
+        ).timetuple()
+    ))
+
+
 def str_to_datetime(str_date, fmt):
     # type: (str, str) -> datetime.datetime
     try:

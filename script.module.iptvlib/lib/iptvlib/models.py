@@ -137,7 +137,11 @@ class Channel(Model):
                 last_program = programs[next(reversed(list(programs.iterkeys())))]  # type: Program
 
                 # prepend epg with dummy entries
-                start_time = first_program.ut_start - DAY
+                if first_program.ut_start > time_now() - self.API.archive_ttl:
+                    start_time = int(time_now() - self.API.archive_ttl) - DAY
+                else:
+                    start_time = first_program.ut_start - DAY
+                start_time = timestamp_to_midnight(start_time)
                 prepend_programs = Program.get_dummy_programs(self, start_time, first_program.ut_start)
                 last_prepend_program = prepend_programs[next(reversed(list(prepend_programs.iterkeys())))]
                 programs.update(prepend_programs)
@@ -147,7 +151,8 @@ class Channel(Model):
                 # append epg with dummy entries
                 if last_program.ut_end == 0:
                     last_program.ut_end = last_program.ut_start + HOUR
-                append_programs = Program.get_dummy_programs(self, last_program.ut_end, last_program.ut_end + DAY)
+                end_time = timestamp_to_midnight(last_program.ut_end + DAY * 2)
+                append_programs = Program.get_dummy_programs(self, last_program.ut_end, end_time)
                 first_append_program = append_programs[next(iter(append_programs.iterkeys()))]  # type: Program
                 programs.update(append_programs)
                 last_program.next_program = first_append_program
@@ -157,9 +162,14 @@ class Channel(Model):
                     self._programs[key] = programs[key]
 
             except:
-                start_time = int(time.mktime(
-                    datetime.datetime.combine(datetime.date.today(),
-                                              datetime.datetime.min.time()).timetuple()) - (WEEK * 2))
+                start_time = int(
+                    time.mktime(
+                        datetime.datetime.combine(
+                            datetime.date.today(),
+                            datetime.datetime.min.time()
+                        ).timetuple()
+                    ) - (WEEK * 2)
+                )
                 end_time = start_time + (WEEK * 4)
                 self._programs = Program.get_dummy_programs(self, start_time, end_time)
         return self._programs

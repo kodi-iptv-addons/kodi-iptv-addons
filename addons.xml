@@ -13,7 +13,7 @@
       <platform>all</platform>
     </extension>
   </addon>
-  <addon id="script.module.iptvlib" name="IPTV Library" version="1.0.15" provider-name="Dmitry Vinogradov">
+  <addon id="script.module.iptvlib" name="IPTV Library" version="1.0.16" provider-name="Dmitry Vinogradov">
     <requires>
       <import addon="xbmc.python" version="2.24.0"/>
     </requires>
@@ -30,6 +30,8 @@
       <license>GNU LESSER GENERAL PUBLIC LICENSE Version 3, June 2007</license>
       <source>https://github.com/kodi-iptv-addons</source>
       <news>
+v1.0.16 (2018-11-03)
+- Improved EPG generation
 v1.0.15 (2018-11-02)
 - Improved error handling
 - Added fonts used in skin
