@@ -18,6 +18,7 @@
 # Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
 # Boston, MA  02110-1301, USA.
 #
+import traceback
 from collections import OrderedDict
 
 import xbmcgui
@@ -120,8 +121,7 @@ class Channel(Model):
 
     def get_program_by_time(self, timestamp):
         # type: (int) -> Program
-        for key in sorted(self.programs.iterkeys()):
-            program = self.programs[key]
+        for ut_start, program in self.programs.items():
             if program.ut_start == timestamp:
                 return program
             if program.ut_start > timestamp and program.prev_program is not None:
@@ -132,9 +132,9 @@ class Channel(Model):
     def programs(self):
         if len(self._programs) == 0:
             try:
-                programs = self.API.get_epg(self.cid)  # type: OrderedDict
-                first_program = programs[next(iter(programs.iterkeys()))]  # type: Program
-                last_program = programs[next(reversed(list(programs.iterkeys())))]  # type: Program
+                real_programs = self.API.get_epg(self.cid)  # type: OrderedDict
+                first_program = real_programs[next(iter(real_programs.iterkeys()))]  # type: Program
+                last_program = real_programs[next(reversed(list(real_programs.iterkeys())))]  # type: Program
 
                 # prepend epg with dummy entries
                 if first_program.ut_start > time_now() - self.API.archive_ttl:
@@ -142,9 +142,9 @@ class Channel(Model):
                 else:
                     start_time = first_program.ut_start - DAY
                 start_time = timestamp_to_midnight(start_time)
-                prepend_programs = Program.get_dummy_programs(self, start_time, first_program.ut_start)
-                last_prepend_program = prepend_programs[next(reversed(list(prepend_programs.iterkeys())))]
-                programs.update(prepend_programs)
+                programs = Program.get_dummy_programs(self, start_time, first_program.ut_start)
+                last_prepend_program = programs[next(reversed(list(programs.iterkeys())))]
+                programs.update(real_programs)
                 first_program.prev_program = last_prepend_program
                 last_prepend_program.next_program = first_program
 
@@ -158,19 +158,19 @@ class Channel(Model):
                 last_program.next_program = first_append_program
                 first_append_program.prev_program = last_program
 
+                prev = None  # type: Program
                 for key in sorted(programs.iterkeys()):
-                    self._programs[key] = programs[key]
+                    program = programs[key]
+                    if prev:
+                        program.prev_program = prev
+                        program.prev_program.next_program = program
+                    self._programs[key] = prev = programs[key]
 
-            except:
-                start_time = int(
-                    time.mktime(
-                        datetime.datetime.combine(
-                            datetime.date.today(),
-                            datetime.datetime.min.time()
-                        ).timetuple()
-                    ) - (WEEK * 2)
-                )
-                end_time = start_time + (WEEK * 4)
+            except Exception, ex:
+                log("Exception %s: message=%s" % (type(ex), ex.message))
+                log(traceback.format_exc(), xbmc.LOGDEBUG)
+                start_time = timestamp_to_midnight(time_now() - self.API.archive_ttl - DAY)
+                end_time = timestamp_to_midnight(time_now() + TWODAYS)
                 self._programs = Program.get_dummy_programs(self, start_time, end_time)
         return self._programs
 

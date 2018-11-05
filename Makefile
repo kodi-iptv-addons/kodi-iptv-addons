@@ -1,4 +1,5 @@
 SELF_PATH=`pwd`
+KODI_ADDONS=~/Library/Application\ Support/Kodi/addons/
 
 addons = $(SELF_PATH)/repository.iptv \
 	$(SELF_PATH)/script.module.iptvlib \
@@ -25,7 +26,6 @@ zip:
 		rm -f "$$addon_name/$$addon_name-$$version.zip" ; \
     	zip -r "$$addon_name/$$addon_name-$$version.zip" "$$addon_name" -x "*.zip" ; \
     	git add "$$addon_name/$$addon_name-$$version.zip" ; \
-    	git tag $$addon_name-$$version ; \
     	mv $$dir/../addon.xml.bak $$dir/addon.xml ; \
 	done
 
@@ -39,3 +39,8 @@ repo:
 	@cat $(SELF_PATH)/addons.xml | md5 > $(SELF_PATH)/addons.xml.md5
 	@rm -f $(SELF_PATH)/addons.xml.tmp
 
+dev:
+	@for dir in $(addons) ; do \
+	    rm -f ${KODI_ADDONS}`basename $$dir`-DEV ; \
+	    ln -s $$dir ${KODI_ADDONS}`basename $$dir`-DEV ; \
+	done

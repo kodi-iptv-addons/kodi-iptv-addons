@@ -5,7 +5,7 @@
        provider-name="Dmitry Vinogradov">
     <requires>
         <import addon="xbmc.python" version="2.24.0"/>
-        <import addon="script.module.iptvlib" version="1.0.0"/>
+        <import addon="script.module.iptvlib-DEV" version="1.0.0"/>
     </requires>
     <extension point="xbmc.python.script" library="default.py">
         <provides>video</provides>

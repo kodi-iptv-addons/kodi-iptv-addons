@@ -48,6 +48,7 @@ MIN = 60  # type: int
 HALFHOUR = 1800  # type: int
 HOUR = 3600  # type: int
 DAY = 86400  # type: int
+TWODAYS = 172800  # type: int
 TREEDAYS = 259200  # type: int
 WEEK = 604800  # type: int
 TWOWEEKS = 1209600  # type: int
@@ -122,7 +123,7 @@ class WindowMixin(object):
 
 
 def get_string(id):
-    return xbmcaddon.Addon('script.module.iptvlib').getLocalizedString(id).encode('utf-8')
+    return xbmcaddon.Addon(os.path.basename(os.path.abspath(os.path.dirname(__file__) + "/../../"))).getLocalizedString(id).encode('utf-8')
 
 
 def show_small_popup(title='', msg='', delay=5000, image=''):
