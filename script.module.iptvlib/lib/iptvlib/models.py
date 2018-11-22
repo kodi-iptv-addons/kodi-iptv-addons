@@ -133,6 +133,10 @@ class Channel(Model):
         if len(self._programs) == 0:
             try:
                 real_programs = self.API.get_epg(self.cid)  # type: OrderedDict
+                if len(real_programs) == 0:
+                    ut_start = timestamp_to_midnight(time_now())
+                    real_programs[ut_start] = Program.factory(self, ut_start, ut_start + HOUR)
+
                 first_program = real_programs[next(iter(real_programs.iterkeys()))]  # type: Program
                 last_program = real_programs[next(reversed(list(real_programs.iterkeys())))]  # type: Program
 
