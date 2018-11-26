@@ -581,7 +581,7 @@
                     <!-- hide program list if focus is on channelgroup list -->
                     <visible allowhiddenfocus="true">
                         [Control.IsVisible(4200)|Control.IsVisible(4300)]
-                        +StringCompare(Container(4200).ListItem.Property(cid), Container(4300).ListItem.Property(cid))
+                        +String.IsEqual(Container(4200).ListItem.Property(cid), Container(4300).ListItem.Property(cid))
                     </visible>
                     <animation type="Visible">
                         <effect type="fade" start="0" end="100" time="300"/>
