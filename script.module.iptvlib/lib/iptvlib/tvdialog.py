@@ -271,8 +271,10 @@ class TvDialog(xbmcgui.WindowXMLDialog, WindowMixin):
         # type: (int, bool) -> ListItem
         for index in range(self.ctrl_programs.size()):
             item = self.ctrl_programs.getListItem(index)
+            next_item = self.ctrl_programs.getListItem(index+1)
             ut_start = int(item.getProperty("ut_start"))
-            ut_end = int(item.getProperty("ut_end"))
+            ut_end = int(next_item.getProperty("ut_start")) \
+                if next_item else int(item.getProperty("ut_end"))
             if ut_start <= int(timestamp) < ut_end:
                 self.ctrl_programs.selectItem(index)
                 if select_channel is True:

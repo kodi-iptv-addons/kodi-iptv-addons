@@ -247,6 +247,11 @@ def run_async(func):
 
 
 def log(msg, level=xbmc.LOGNOTICE):
+    if level == xbmc.LOGDEBUG:
+        import inspect
+        mod = inspect.getmodule(inspect.stack()[1][0])
+        calframe = inspect.getouterframes(inspect.currentframe(), 2)
+        msg = "------- [%s.%s] : %s" % (mod.__name__, calframe[1][3], msg)
     xbmc.log('%s: %s' % (addon.getAddonInfo('name'), msg), level)
 
 
