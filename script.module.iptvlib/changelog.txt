@@ -1,3 +1,5 @@
+v1.0.20 (2018-12-02)
+- Adapted skin for KODI 18
 v1.0.19 (2018-11-26)
 - Adapted skin for KODI 18
 v1.0.18 (2018-11-22)
