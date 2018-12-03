@@ -85,6 +85,8 @@ class TvDialog(xbmcgui.WindowXMLDialog, WindowMixin):
     timer_load_program_list = None  # type: Timer
     timer_idle = None  # type: Timer
 
+    is_closing = False  # type: bool
+
     def __init__(self, *args, **kwargs):
         self.main_window = kwargs.pop("main_window", None)
         self.player = Player()
@@ -97,6 +99,10 @@ class TvDialog(xbmcgui.WindowXMLDialog, WindowMixin):
         return "%s:%s" % (self.api.__class__.__name__, addon.getAddonInfo('version'))
 
     def close(self):
+        if self.is_closing:
+            return
+        self.is_closing = True
+
         self.preload_icon(self.ICON_CLOSE, self.addon_id)
 
         if self.timer_refocus:
@@ -338,6 +344,8 @@ class TvDialog(xbmcgui.WindowXMLDialog, WindowMixin):
 
     def on_playback_callback(self, event, **kwargs):
         # type: (str, dict) -> None
+        if self.is_closing:
+            return
         log(event, xbmc.LOGDEBUG)
         if event == "onPlayBackEnded":
             if self.player.program:
