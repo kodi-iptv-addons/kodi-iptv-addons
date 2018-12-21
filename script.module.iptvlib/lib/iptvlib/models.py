@@ -192,6 +192,7 @@ class Program(Model):
     descr = None  # type: str
     epg = None  # type: bool
     archive = None  # type: bool
+    image = None  # type: str
     prev_program = None  # type: Program
     next_program = None  # type: Program
 
@@ -221,8 +222,8 @@ class Program(Model):
             ut_start = ut_start + HOUR
         return programs
 
-    def __init__(self, cid, gid, ut_start, ut_end, title, descr, archive=False):
-        # type: (str, str, int, int, str, str, bool) -> Program
+    def __init__(self, cid, gid, ut_start, ut_end, title, descr, archive=False, image=None):
+        # type: (str, str, int, int, str, str, bool, str) -> Program
         self.cid = cid
         self.gid = gid
         self.ut_start = ut_start
@@ -231,6 +232,7 @@ class Program(Model):
         self.title = title
         self.descr = descr
         self.archive = archive
+        self.image = image
         program_data = {
             "cid": self.cid,
             "gid": self.gid,

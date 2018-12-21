@@ -31,7 +31,7 @@ from urllib import urlencode, addinfourl
 from urllib2 import Request
 
 import xbmc
-from iptvlib import build_user_agent, log
+from iptvlib import build_user_agent, log, DAY, time_now, format_date
 from iptvlib.models import Group, Program, Channel
 
 
@@ -56,6 +56,9 @@ class HttpRequest(urllib2.Request):
 
     def get_method(self):
         return self.method or urllib2.Request.get_method(self)
+
+    def __repr__(self):
+        return "%s(%r)" % (self.__class__, self.__dict__)
 
 class Api:
     __metaclass__ = abc.ABCMeta
@@ -291,6 +294,7 @@ class Api:
         # type: (Request) -> dict|str
         json_data = ""
         try:
+            log("request: %s" % request, xbmc.LOGDEBUG)
             response = urllib2.urlopen(request)  # type: addinfourl
             content_type = response.headers.getheader("content-type")  # type: str
             content = response.read()
@@ -394,6 +398,54 @@ class Api:
         stop_event.set()
 
         return results
+
+    def get_epg_gh(self, channel):
+        # type: (Channel) -> OrderedDict[int, Program]
+        cid = 'RU/PERVYJ'
+
+        requests = []
+        days = (self.archive_ttl / DAY) + 5
+        start = int(time_now() - self.archive_ttl)
+        for i in range(days):
+            day = format_date(start + (i * DAY), custom_format="%Y-%m-%d")
+            request = self.prepare_request(
+                #"https://cdn.jsdelivr.net/gh/kodi-iptv-addons/EPG/%s/%s.json" % (cid, day)
+                "https://gitcdn.link/repo/kodi-iptv-addons/EPG/master/%s/%s.json" % (cid, day)
+                #"https://raw.githubusercontent.com/kodi-iptv-addons/EPG/master/%s/%s.json" % (cid, day)
+            )
+            requests.append(request)
+
+        results = self.send_parallel_requests(requests)
+
+        epg = dict()
+        for key in sorted(results.iterkeys()):
+            response = results[key]
+            is_error, error = Api.is_error_response(response)
+            if not is_error:
+                for k, v in response.iteritems():
+                    epg[int(k)] = v
+            else:
+                log("error: %s" % error if is_error else response, xbmc.LOGDEBUG)
+
+        programs = OrderedDict()
+        prev = None  # type: Program
+        for key in sorted(epg.iterkeys()):
+            val = epg[key]
+            program = Program(
+                channel.cid,
+                channel.gid,
+                val["start"],
+                val["stop"],
+                val["title"],
+                "%s. %s" % (val["descr"], val["releaseYear"] if val["releaseYear"] is not None else ''),
+                channel.archive,
+                val["image"]
+            )
+            if prev is not None:
+                program.prev_program = prev
+                prev.next_program = program
+            programs[program.ut_start] = prev = program
+        return programs
 
     @staticmethod
     def is_error_response(response):

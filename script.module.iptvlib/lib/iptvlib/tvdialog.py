@@ -464,12 +464,12 @@ class TvDialog(xbmcgui.WindowXMLDialog, WindowMixin):
 
                 if self.ctrl_slider.getPercent() == 0 and action_id == xbmcgui.ACTION_MOVE_LEFT:
                     self.playback_info_program = self.playback_info_program.prev_program
-                    self.ctrl_slider.setPercent(100.)
+                    self.set_slider(100.)
                     self.prev_skip_secs += self.skip_secs
                     self.skip_secs = 0
                 elif self.ctrl_slider.getPercent() == 100 and action_id == xbmcgui.ACTION_MOVE_RIGHT:
                     self.playback_info_program = self.playback_info_program.next_program
-                    self.ctrl_slider.setPercent(0.)
+                    self.set_slider(0.)
                     self.prev_skip_secs += self.skip_secs
                     self.skip_secs = 0
 
@@ -584,9 +584,12 @@ class TvDialog(xbmcgui.WindowXMLDialog, WindowMixin):
     def reset_skip_playback(self):
         self.skip_secs = self.prev_skip_secs = 0
         self.ctrl_skip_playback.setLabel(format_secs(self.skip_secs, "skip"))
-        self.ctrl_slider.setPercent(self.ctrl_progress.getPercent())
+        self.set_slider(self.ctrl_progress.getPercent())
         self.playback_info_program = None
         self.update_playback_info()
+
+    def set_slider(self, percent):
+        self.ctrl_slider.setPercent(percent)
 
     def defer_skip_playback(self):
         if self.timer_skip_playback:
@@ -654,7 +657,7 @@ class TvDialog(xbmcgui.WindowXMLDialog, WindowMixin):
                 percent, position = self.player.get_percent(True)
                 self.ctrl_progress.setPercent(percent)
                 if self.skip_secs + self.prev_skip_secs == 0:
-                    self.ctrl_slider.setPercent(percent)
+                    self.set_slider(percent)
                 program = self.player.get_program()
 
             self.ctrl_program_playtime.setLabel(format_secs(int(position)))
