@@ -31,7 +31,7 @@ from urllib import urlencode, addinfourl
 from urllib2 import Request
 
 import xbmc
-from iptvlib import build_user_agent, log, DAY, time_now, format_date
+from iptvlib import build_user_agent, log, DAY, time_now, format_date, normalize
 from iptvlib.models import Group, Program, Channel
 
 
@@ -401,6 +401,7 @@ class Api:
 
     def get_epg_gh(self, channel):
         # type: (Channel) -> OrderedDict[int, Program]
+        cid = "%s/%s" % (normalize(self.groups[channel.gid].name), normalize(channel.name))
         cid = 'RU/PERVYJ'
 
         requests = []
@@ -409,9 +410,7 @@ class Api:
         for i in range(days):
             day = format_date(start + (i * DAY), custom_format="%Y-%m-%d")
             request = self.prepare_request(
-                #"https://cdn.jsdelivr.net/gh/kodi-iptv-addons/EPG/%s/%s.json" % (cid, day)
-                "https://gitcdn.link/repo/kodi-iptv-addons/EPG/master/%s/%s.json" % (cid, day)
-                #"https://raw.githubusercontent.com/kodi-iptv-addons/EPG/master/%s/%s.json" % (cid, day)
+                "https://kodi-iptv-addons.github.io/EPG/%s/%s.json" % (cid, day)
             )
             requests.append(request)
 

@@ -812,6 +812,7 @@
                             <width>500</width>
                             <font>font14</font>
                             <wrapmultiline>true</wrapmultiline>
+                            <autoscroll>true</autoscroll>
                             <label>[B]$INFO[Container(4300).ListItem.Property(title)][/B] [I][COLOR grey]$INFO[Container(4300).ListItem.Property(category)][/COLOR][/I][CR][CR]$INFO[Container(4300).ListItem.Property(descr)]</label>
                         </control>
                     </control>

@@ -238,6 +238,7 @@ class Program(Model):
             "gid": self.gid,
             "title": self.title,
             "title_list": (self.title[:52] + '...') if len(self.title) > 55 else self.title,
+            "image": self.image if self.image is not None else "",
             "descr": self.descr,
             "t_start": format_date(self.ut_start, custom_format="%H:%M"),
             "t_end": format_date(self.ut_end, custom_format="%H:%M"),
