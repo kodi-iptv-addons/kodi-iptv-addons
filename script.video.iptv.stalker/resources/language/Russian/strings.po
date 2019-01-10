@@ -33,3 +33,7 @@ msgstr "Показывать каналы для взрослых"
 msgctxt "#30007"
 msgid "Timeshift"
 msgstr "Временной сдвиг"
+
+msgctxt "#30008"
+msgid "Sort channels"
+msgstr "Сортировать каналы"

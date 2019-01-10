@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addon id="script.video.iptv.torrenttv-DEV"
        name="TORRENTTV-DEV"
-       version="1.0.1"
+       version="1.0.2"
        provider-name="Dmitry Vinogradov">
     <requires>
         <import addon="xbmc.python" version="2.24.0"/>
@@ -22,6 +22,8 @@
         <license>GNU LESSER GENERAL PUBLIC LICENSE Version 3, June 2007</license>
         <source>https://github.com/kodi-iptv-addons</source>
         <news>
+v1.0.2 (2019-01-10)
+- Added setting for sorting of the channels
 v1.0.1 (2018-11-02)
 - Improved error handling
 - Bug fixes

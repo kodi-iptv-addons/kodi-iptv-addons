@@ -73,6 +73,7 @@ class Api:
     auth_status = AUTH_STATUS_NONE  # type: int
     username = None  # type: str
     password = None  # type: str
+    sort_channels = None  # type: bool
     working_path = None  # type: str
     cookie_file = None  # type: str
     settings_file = None  # type: str
@@ -81,11 +82,12 @@ class Api:
     _channels = None  # type: OrderedDict[str, Channel]
     _ident = None  # type: str
 
-    def __init__(self, username=None, password=None, working_path="./"):
+    def __init__(self, username=None, password=None, working_path="./", sort_channels=False):
         self.auth_status = self.AUTH_STATUS_NONE
         self.username = self._ident = username
         self.password = password
         self.working_path = working_path
+        self.sort_channels = sort_channels
         if not os.path.exists(self.working_path):
             os.makedirs(self.working_path)
         self.cookie_file = os.path.join(self.working_path, "%s.cookie.txt" % self.__class__.__name__)
@@ -112,7 +114,9 @@ class Api:
             self._groups = self.get_groups()
             self._channels = OrderedDict()
             for group in self._groups.values():
-                self._channels.update(group.channels)
+                channels = OrderedDict(sorted(group.channels.iteritems(), key=lambda item: item[1].name)) \
+                    if self.sort_channels else group.channels
+                self._channels.update(channels)
         return self._groups
 
     @property

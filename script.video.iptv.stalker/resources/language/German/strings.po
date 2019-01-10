@@ -33,3 +33,7 @@ msgstr "Zeige Kanäle für Erwachsene"
 msgctxt "#30007"
 msgid "Timeshift"
 msgstr "Zeitverschiebung"
+
+msgctxt "#30008"
+msgid "Sort channels"
+msgstr "Sortiere Kanäle"

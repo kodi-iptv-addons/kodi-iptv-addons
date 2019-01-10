@@ -58,13 +58,16 @@ class Main(object):
         hostname = addon.getSetting("hostname")
         adult = addon.getSetting("adult") == 'true' or \
                 addon.getSetting("adult") == True
+        sort_channels = addon.getSetting("sort_channels") == 'true' or \
+                        addon.getSetting("sort_channels") == True
 
         self.main_window.api = Kartina(
             hostname=hostname,
             adult=adult,
             username=username,
             password=password,
-            working_path=xbmc.translatePath(addon.getAddonInfo("profile"))
+            working_path=xbmc.translatePath(addon.getAddonInfo("profile")),
+            sort_channels=sort_channels
         )
 
         return True

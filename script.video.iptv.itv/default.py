@@ -59,9 +59,11 @@ class Main(object):
 
         adult = addon.getSetting("adult") == 'true' or \
                            addon.getSetting("adult") == True
+        sort_channels = addon.getSetting("sort_channels") == 'true' or \
+                           addon.getSetting("sort_channels") == True
 
         try:
-            self.main_window.api = Itv(hostname, key, adult)
+            self.main_window.api = Itv(hostname, key, adult, sort_channels=sort_channels)
         except ApiException, ex:
             if ex.code == Itv.E_HTTP_REQUEST_FAILED:
                 dialog = xbmcgui.Dialog()

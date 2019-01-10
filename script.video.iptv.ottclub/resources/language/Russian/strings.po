@@ -25,3 +25,7 @@ msgstr "Показывать каналы для взрослых"
 msgctxt "#30005"
 msgid "Empty or invalid playlist"
 msgstr "Ошибка при обработке плейлиста"
+
+msgctxt "#30006"
+msgid "Sort channels"
+msgstr "Сортировать каналы"

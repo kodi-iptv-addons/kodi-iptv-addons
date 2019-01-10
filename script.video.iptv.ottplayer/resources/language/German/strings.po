@@ -37,3 +37,7 @@ msgstr "An das gerät KODI sind keine Playlisten gebunden"
 msgctxt "#30008"
 msgid "You can bind a playlist to device KODI on http://ottplayer.es"
 msgstr "Zuweisen Sie mind. eine Playliste an KODI auf http://ottplayer.es"
+
+msgctxt "#30009"
+msgid "Sort channels"
+msgstr "Sortiere Kanäle"

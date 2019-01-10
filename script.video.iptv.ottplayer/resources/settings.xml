@@ -7,5 +7,6 @@
     <category label="30004">
         <setting id="hostname" type="text" label="30005" default="api.ottplayer.es:9000"/>
         <setting id="adult" type="bool" label="30006" default="false"/>
+        <setting id="sort_channels" type="bool" label="30009" default="false"/>
     </category>
 </settings>

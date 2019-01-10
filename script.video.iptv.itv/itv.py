@@ -31,11 +31,11 @@ class Itv(Api):
 
     key = None  # type: str
     adult = None  # type: bool
+    sort_channels = None  # type: bool
     hostname = None  # type: str
     _player_info = None  # type: list
 
     def __init__(self, hostname, key, adult, **kwargs):
-        # type: (str, str, bool, dict) -> None
         super(Itv, self).__init__(**kwargs)
         self.hostname = hostname
         self.key = self.username = key

@@ -50,6 +50,10 @@ msgctxt "#30011"
 msgid "error_notsproxy"
 msgstr "У Вас нет доступа к этому каналу"
 
-msgctxt "#30011"
+msgctxt "#30012"
 msgid "error_noepg"
 msgstr "EPG отсутствует"
+
+msgctxt "#30013"
+msgid "Sort channels"
+msgstr "Сортировать каналы"
