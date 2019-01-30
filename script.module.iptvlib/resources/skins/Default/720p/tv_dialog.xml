@@ -822,7 +822,7 @@
                             <description>Program Information</description>
                             <left>30</left>
                             <top>100</top>
-                            <height>225</height>
+                            <height>215</height>
                             <width>500</width>
                             <font>font14</font>
                             <wrapmultiline>true</wrapmultiline>
