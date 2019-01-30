@@ -184,6 +184,11 @@ class Kartina(Api):
         return programs
 
     def get_epg(self, cid):
+        # type: (str) -> OrderedDict[int, Program]
+        programs = self.get_epg_gh(self.channels[cid])
+        if len(programs):
+            return programs
+
         if self._open_epg_cids is None:
             try:
                 url = "https://iptv.kartina.tv/api/json/open_epg?get=channels"

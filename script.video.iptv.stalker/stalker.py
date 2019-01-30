@@ -193,10 +193,15 @@ class Stalker(Api):
         raise ApiException(get_string(TEXT_NOT_PLAYABLE_ID), Api.E_UNKNOW_ERROR)
 
     def get_epg(self, cid):
+        # type: (str) -> OrderedDict[int, Program]
+        programs = self.get_epg_gh(self.channels[cid])
+        if len(programs):
+            return programs
+
         settings = self.read_settings_file()
         if not settings:
             self.login()
-            return self.get_channels()
+            return self.get_epg(cid)
         start = int(time_now() - self.archive_ttl)
         end = int(time_now() + (DAY * 2))
         uri = "api/api_v2.php?_resource=users/%s/tv-channels/%s/epg&from=%s&to=%s" % \

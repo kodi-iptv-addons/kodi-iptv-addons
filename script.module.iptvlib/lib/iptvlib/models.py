@@ -233,13 +233,16 @@ class Program(Model):
         self.descr = descr
         self.archive = archive
         self.image = image
+        (img_s, img_m, img_l) = self.get_image_urls(self.image)
         program_data = {
             "cid": self.cid,
             "gid": self.gid,
             "title": self.title,
             "title_list": (self.title[:52] + '...') if len(self.title) > 55 else self.title,
-            "image": self.image if self.image is not None else "",
-            "descr": self.descr,
+            "img_s": img_s,
+            "img_m": img_m,
+            "img_l": img_l,
+            "descr": self.descr if self.descr is not None else "",
             "t_start": format_date(self.ut_start, custom_format="%H:%M"),
             "t_end": format_date(self.ut_end, custom_format="%H:%M"),
             "d_start": format_date(self.ut_start, custom_format="%A, %d.%m"),
@@ -247,6 +250,16 @@ class Program(Model):
             "ut_end": self.ut_end
         }
         super(Program, self).__init__(program_data)
+
+    @staticmethod
+    def get_image_urls(image):
+        # type: (str) -> (str, str, str)
+        if image is None:
+            return "", "", ""
+        if '/large' in image:
+            return image.replace('/large', '/small'), image.replace('/large', '/normal'), image
+        else:
+            return "%s/176x99" % image, "%s/350x197" % image, "%s/700x394" % image
 
     def is_playable(self):
         # type: () -> bool

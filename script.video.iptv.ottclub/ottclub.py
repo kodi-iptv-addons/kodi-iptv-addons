@@ -126,6 +126,10 @@ class Ottclub(Api):
 
     def get_epg(self, cid):
         # type: (str) -> OrderedDict[int, Program]
+        programs = self.get_epg_gh(self.channels[cid])
+        if len(programs):
+            return programs
+
         programs = OrderedDict()
         json_data = self.make_request("channel/%s" % cid)
         is_error, error = Api.is_error_response(json_data)

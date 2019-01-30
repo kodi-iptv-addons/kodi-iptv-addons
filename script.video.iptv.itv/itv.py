@@ -35,7 +35,6 @@ class Itv(Api):
     _player_info = None  # type: list
 
     def __init__(self, hostname, key, adult, **kwargs):
-        # type: (str, str, bool, dict) -> None
         super(Itv, self).__init__(**kwargs)
         self.hostname = hostname
         self.key = self.username = key
@@ -131,6 +130,10 @@ class Itv(Api):
 
     def get_epg(self, cid):
         # type: (str) -> OrderedDict[int, Program]
+        programs = self.get_epg_gh(self.channels[cid])
+        if len(programs):
+            return programs
+
         obj = quote(json.dumps({"action": "epg", "chid": cid}))
         response = self.make_request("epg.php?obj=%s" % obj)  # type: dict[str, list[dict]]
         is_error, error = Api.is_error_response(response)

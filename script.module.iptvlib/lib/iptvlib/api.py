@@ -83,6 +83,7 @@ class Api:
     _groups = None  # type: OrderedDict[str, Group]
     _channels = None  # type: OrderedDict[str, Channel]
     _ident = None  # type: str
+    _epg_map = None  # type: dict
 
     def __init__(self, username=None, password=None, working_path="./"):
         self.auth_status = self.AUTH_STATUS_NONE
@@ -401,8 +402,17 @@ class Api:
 
     def get_epg_gh(self, channel):
         # type: (Channel) -> OrderedDict[int, Program]
-        cid = "%s/%s" % (normalize(self.groups[channel.gid].name), normalize(channel.name))
-        cid = 'RU/PERVYJ'
+
+        programs = OrderedDict()
+
+        if self._epg_map is None:
+            self._epg_map = self.make_request("https://kodi-iptv-addons.github.io/EPG/map.json?%s" % time_now())
+
+        norm = normalize(channel.name)
+        if self._epg_map.has_key(norm) is False:
+            return programs
+
+        cid = self._epg_map.get(norm)
 
         requests = []
         days = (self.archive_ttl / DAY) + 5
@@ -426,7 +436,6 @@ class Api:
             else:
                 log("error: %s" % error if is_error else response, xbmc.LOGDEBUG)
 
-        programs = OrderedDict()
         prev = None  # type: Program
         for key in sorted(epg.iterkeys()):
             val = epg[key]
@@ -436,7 +445,7 @@ class Api:
                 val["start"],
                 val["stop"],
                 val["title"],
-                "%s. %s" % (val["descr"], val["releaseYear"] if val["releaseYear"] is not None else ''),
+                val["descr"],
                 channel.archive,
                 val["image"]
             )

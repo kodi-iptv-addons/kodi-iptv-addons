@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addon id="script.video.iptv.novoetv-DEV"
        name="NOVOETV-DEV"
-       version="1.0.5"
+       version="1.1.0"
        provider-name="Dmitry Vinogradov">
     <requires>
         <import addon="xbmc.python" version="2.24.0"/>
-        <import addon="script.module.iptvlib-DEV" version="1.0.0"/>
+        <import addon="script.module.iptvlib-DEV" version="1.1.0"/>
     </requires>
     <extension point="xbmc.python.script" library="default.py">
         <provides>video</provides>
@@ -25,6 +25,8 @@
         <license>GNU LESSER GENERAL PUBLIC LICENSE Version 3, June 2007</license>
         <source>https://github.com/kodi-iptv-addons</source>
         <news>
+v1.1.0 (2019-01-30)
+- Implemented usage of alternative EPG with program images
 v1.0.5 (2018-11-02)
 - Improved error handling
 - Fetch EPG for 2 weeks
