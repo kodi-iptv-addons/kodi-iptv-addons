@@ -25,3 +25,7 @@ msgstr "Zeige Kanäle für Erwachsene"
 msgctxt "#30005"
 msgid "Wrong key"
 msgstr "Falscher Key"
+
+msgctxt "#30006"
+msgid "Sort channels"
+msgstr "Sortiere Kanäle"

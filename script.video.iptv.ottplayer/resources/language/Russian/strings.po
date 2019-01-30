@@ -37,3 +37,7 @@ msgstr "К устройству KODI не привязан ни один пле�
 msgctxt "#30008"
 msgid "You can bind a playlist to device KODI on http://ottplayer.es"
 msgstr "Привязку плейлиста к устройству можно выполнить на http://ottplayer.es"
+
+msgctxt "#30009"
+msgid "Sort channels"
+msgstr "Сортировать каналы"

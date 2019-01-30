@@ -31,6 +31,7 @@ class Itv(Api):
 
     key = None  # type: str
     adult = None  # type: bool
+    sort_channels = None  # type: bool
     hostname = None  # type: str
     _player_info = None  # type: list
 

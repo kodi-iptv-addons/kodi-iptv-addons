@@ -58,13 +58,16 @@ class Main(object):
 
         adult = addon.getSetting("adult") == 'true' or \
                            addon.getSetting("adult") == True
+        sort_channels = addon.getSetting("sort_channels") == 'true' or \
+                        addon.getSetting("sort_channels") == True
 
         try:
             self.main_window.api = Torrenttv(
                 adult=adult,
                 username=username,
                 password=password,
-                working_path=xbmc.translatePath(addon.getAddonInfo("profile"))
+                working_path=xbmc.translatePath(addon.getAddonInfo("profile")),
+                sort_channels=sort_channels
             )
         except ApiException, ex:
             if ex.code == Torrenttv.E_HTTP_REQUEST_FAILED:

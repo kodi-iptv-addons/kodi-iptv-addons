@@ -25,3 +25,7 @@ msgstr "Show adult channels"
 msgctxt "#30005"
 msgid "Empty or invalid playlist"
 msgstr "Leere oder ungültige playliste"
+
+msgctxt "#30006"
+msgid "Sort channels"
+msgstr "Sort channels"

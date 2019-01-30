@@ -29,3 +29,7 @@ msgstr "Адрес API сервера"
 msgctxt "#30006"
 msgid "Show adult channels"
 msgstr "Показывать каналы для взрослых"
+
+msgctxt "#30007"
+msgid "Sort channels"
+msgstr "Сортировать каналы"

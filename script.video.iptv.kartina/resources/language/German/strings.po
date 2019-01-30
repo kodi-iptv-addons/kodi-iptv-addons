@@ -29,3 +29,7 @@ msgstr "API Hostname"
 msgctxt "#30006"
 msgid "Show adult channels"
 msgstr "Zeige Kanäle für Erwachsene"
+
+msgctxt "#30007"
+msgid "Sort channels"
+msgstr "Sortiere Kanäle"
