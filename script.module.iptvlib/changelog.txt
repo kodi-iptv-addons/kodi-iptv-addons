@@ -1,4 +1,4 @@
-v1.1.0 (2019-01-30)
+v1.1.1 (2019-01-30)
 - Implemented usage of alternative EPG with program images
 v1.0.21 (2018-12-03)
 - Bug fixes in EPG generation
