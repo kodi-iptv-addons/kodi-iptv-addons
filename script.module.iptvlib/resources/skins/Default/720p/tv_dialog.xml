@@ -822,12 +822,12 @@
                             <description>Program Information</description>
                             <left>30</left>
                             <top>100</top>
-                            <height>230</height>
+                            <height>225</height>
                             <width>500</width>
                             <font>font14</font>
                             <wrapmultiline>true</wrapmultiline>
                             <autoscroll delay="3000" time="1000" repeat="10000">true</autoscroll>
-                            <label>[B]$INFO[Container(4300).ListItem.Property(title)][/B] [I][COLOR grey]$INFO[Container(4300).ListItem.Property(category)][/COLOR][/I][CR][CR]$INFO[Container(4300).ListItem.Property(descr)]</label>
+                            <label>[B]$INFO[Container(4300).ListItem.Property(title)][/B][CR]$INFO[Container(4300).ListItem.Property(descr)]</label>
                         </control>
                         <control type="image">
                             <description>Program image</description>
