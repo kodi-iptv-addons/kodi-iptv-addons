@@ -1,5 +1,5 @@
-v1.0.22 (2019-01-10)
-- Implemented sorting of the channels
+v1.1.0 (2019-01-30)
+- Implemented usage of alternative EPG with program images
 v1.0.21 (2018-12-03)
 - Bug fixes in EPG generation
 v1.0.19 (2018-11-26)

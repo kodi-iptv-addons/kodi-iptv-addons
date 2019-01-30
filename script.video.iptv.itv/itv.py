@@ -131,6 +131,10 @@ class Itv(Api):
 
     def get_epg(self, cid):
         # type: (str) -> OrderedDict[int, Program]
+        programs = self.get_epg_gh(self.channels[cid])
+        if len(programs):
+            return programs
+
         obj = quote(json.dumps({"action": "epg", "chid": cid}))
         response = self.make_request("epg.php?obj=%s" % obj)  # type: dict[str, list[dict]]
         is_error, error = Api.is_error_response(response)

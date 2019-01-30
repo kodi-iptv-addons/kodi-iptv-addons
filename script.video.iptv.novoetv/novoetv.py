@@ -141,6 +141,11 @@ class Novoetv(Api):
         return url.replace("http/ts", "http").split()[0]
 
     def get_epg(self, cid):
+        # type: (str) -> OrderedDict[int, Program]
+        programs = self.get_epg_gh(self.channels[cid])
+        if len(programs):
+            return programs
+
         requests = []
         days = (self.archive_ttl / DAY) + 2
         while days % 4: days += 1

@@ -175,6 +175,10 @@ class Torrenttv(Api):
     def get_epg(self, cid):
         # type: (str) -> OrderedDict[int, Program]
         channel = self.channels[cid]
+        programs = self.get_epg_gh(self.channels[cid])
+        if len(programs):
+            return programs
+
         if channel.epg is False or channel.epg_id == 0:
             return OrderedDict()
 

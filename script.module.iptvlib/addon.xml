@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addon id="script.module.iptvlib-DEV"
        name="IPTV Library-DEV"
-       version="1.0.22"
+       version="1.1.0"
        provider-name="Dmitry Vinogradov">
     <requires>
         <import addon="xbmc.python" version="2.24.0"/>
@@ -19,8 +19,8 @@
         <license>GNU LESSER GENERAL PUBLIC LICENSE Version 3, June 2007</license>
         <source>https://github.com/kodi-iptv-addons</source>
         <news>
-v1.0.22 (2019-01-10)
-- Implemented sorting of the channels
+v1.1.0 (2019-01-30)
+- Implemented usage of alternative EPG with program images
 v1.0.21 (2018-12-03)
 - Bug fixes in EPG generation
 v1.0.19 (2018-11-26)

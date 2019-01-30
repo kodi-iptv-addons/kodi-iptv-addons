@@ -656,7 +656,7 @@
                                 <left>85</left>
                                 <top>2</top>
                                 <height>76</height>
-                                <width>400</width>
+                                <width>290</width>
                                 <font>script.module.iptvlib-font14</font>
                                 <aligny>top</aligny>
                                 <textcolor>white</textcolor>
@@ -672,6 +672,13 @@
                                 <height>80</height>
                                 <width>20</width>
                                 <visible>Control.HasFocus(4200)</visible>
+                            </control>
+                            <control type="image">
+                                <description>Program image</description>
+                                <right>10</right>
+                                <width>90</width>
+                                <texture>$INFO[ListItem.Property(img_s)]</texture>
+                                <aspectratio>keep</aspectratio>
                             </control>
                         </itemlayout>
                         <focusedlayout height="80" width="500">
@@ -736,7 +743,7 @@
                                 <left>85</left>
                                 <top>2</top>
                                 <height>76</height>
-                                <width>400</width>
+                                <width>290</width>
                                 <font>script.module.iptvlib-font14</font>
                                 <aligny>top</aligny>
                                 <textcolor>black</textcolor>
@@ -751,7 +758,7 @@
                                 <left>85</left>
                                 <top>2</top>
                                 <height>76</height>
-                                <width>400</width>
+                                <width>290</width>
                                 <font>script.module.iptvlib-font14</font>
                                 <aligny>top</aligny>
                                 <textcolor>white</textcolor>
@@ -769,6 +776,13 @@
                                 <height>80</height>
                                 <width>20</width>
                                 <visible>Control.HasFocus(4200)</visible>
+                            </control>
+                            <control type="image">
+                                <description>Program image</description>
+                                <right>10</right>
+                                <width>90</width>
+                                <texture>$INFO[ListItem.Property(img_s)]</texture>
+                                <aspectratio>keep</aspectratio>
                             </control>
                         </focusedlayout>
                     </control>
@@ -808,11 +822,20 @@
                             <description>Program Information</description>
                             <left>30</left>
                             <top>100</top>
-                            <height>500</height>
+                            <height>230</height>
                             <width>500</width>
                             <font>script.module.iptvlib-font14</font>
                             <wrapmultiline>true</wrapmultiline>
+                            <autoscroll delay="3000" time="1000" repeat="10000">true</autoscroll>
                             <label>[B]$INFO[Container(4300).ListItem.Property(title)][/B] [I][COLOR grey]$INFO[Container(4300).ListItem.Property(category)][/COLOR][/I][CR][CR]$INFO[Container(4300).ListItem.Property(descr)]</label>
+                        </control>
+                        <control type="image">
+                            <description>Program image</description>
+                            <left>30</left>
+                            <top>320</top>
+                            <width>500</width>
+                            <texture>$INFO[Container(4300).ListItem.Property(img_l)]</texture>
+                            <aspectratio>keep</aspectratio>
                         </control>
                     </control>
 

@@ -192,6 +192,7 @@ class Program(Model):
     descr = None  # type: str
     epg = None  # type: bool
     archive = None  # type: bool
+    image = None  # type: str
     prev_program = None  # type: Program
     next_program = None  # type: Program
 
@@ -221,8 +222,8 @@ class Program(Model):
             ut_start = ut_start + HOUR
         return programs
 
-    def __init__(self, cid, gid, ut_start, ut_end, title, descr, archive=False):
-        # type: (str, str, int, int, str, str, bool) -> Program
+    def __init__(self, cid, gid, ut_start, ut_end, title, descr, archive=False, image=None):
+        # type: (str, str, int, int, str, str, bool, str) -> Program
         self.cid = cid
         self.gid = gid
         self.ut_start = ut_start
@@ -231,12 +232,17 @@ class Program(Model):
         self.title = title
         self.descr = descr
         self.archive = archive
+        self.image = image
+        (img_s, img_m, img_l) = self.get_image_urls(self.image)
         program_data = {
             "cid": self.cid,
             "gid": self.gid,
             "title": self.title,
             "title_list": (self.title[:52] + '...') if len(self.title) > 55 else self.title,
-            "descr": self.descr,
+            "img_s": img_s,
+            "img_m": img_m,
+            "img_l": img_l,
+            "descr": self.descr if self.descr is not None else "",
             "t_start": format_date(self.ut_start, custom_format="%H:%M"),
             "t_end": format_date(self.ut_end, custom_format="%H:%M"),
             "d_start": format_date(self.ut_start, custom_format="%A, %d.%m"),
@@ -244,6 +250,16 @@ class Program(Model):
             "ut_end": self.ut_end
         }
         super(Program, self).__init__(program_data)
+
+    @staticmethod
+    def get_image_urls(image):
+        # type: (str) -> (str, str, str)
+        if image is None:
+            return "", "", ""
+        if '/large' in image:
+            return image.replace('/large', '/small'), image.replace('/large', '/normal'), image
+        else:
+            return "%s/176x99" % image, "%s/350x197" % image, "%s/700x394" % image
 
     def is_playable(self):
         # type: () -> bool
