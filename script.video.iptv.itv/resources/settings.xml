@@ -5,5 +5,6 @@
         <setting id="key" type="text" label="30003" default="" option="hidden"/>
         <setting id="adult" type="bool" label="30004" default="false"/>
         <setting id="sort_channels" type="bool" label="30006" default="false"/>
+        <setting id="stop_on_idle" type="bool" label="30007" default="true"/>
     </category>
 </settings>

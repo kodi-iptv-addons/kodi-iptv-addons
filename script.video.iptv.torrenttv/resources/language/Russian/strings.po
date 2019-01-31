@@ -57,3 +57,7 @@ msgstr "EPG отсутствует"
 msgctxt "#30013"
 msgid "Sort channels"
 msgstr "Сортировать каналы"
+
+msgctxt "#30014"
+msgid "Stop playback when idle"
+msgstr "Прекращать воспроизведение при неактивности"

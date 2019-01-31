@@ -1,5 +1,6 @@
-v1.1.0 (2019-01-30)
+v1.1.1 (2019-01-31)
 - Implemented usage of alternative EPG with program images
+- Added stop on idle addon settings
 v1.0.10 (2018-11-05)
 - Bug fixes
 v1.0.9 (2018-11-02)

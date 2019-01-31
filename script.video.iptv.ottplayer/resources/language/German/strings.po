@@ -41,3 +41,7 @@ msgstr "Zuweisen Sie mind. eine Playliste an KODI auf http://ottplayer.es"
 msgctxt "#30009"
 msgid "Sort channels"
 msgstr "Sortiere Kanäle"
+
+msgctxt "#30010"
+msgid "Stop playback when idle"
+msgstr "Wiedergabestop bei Inaktivität"

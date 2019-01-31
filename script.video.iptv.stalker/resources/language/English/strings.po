@@ -37,3 +37,7 @@ msgstr "Timeshift"
 msgctxt "#30008"
 msgid "Sort channels"
 msgstr "Sort channels"
+
+msgctxt "#30009"
+msgid "Stop playback when idle"
+msgstr "Stop playback when idle"

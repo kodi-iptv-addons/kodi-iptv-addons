@@ -9,5 +9,6 @@
         <setting id="adult" type="bool" label="30006" default="false"/>
         <setting id="timeshift" type="select" label="30007" values="-6|-5|-4|-3|-2|-1|0|1|2|3|4|5|6" default="0"/>
         <setting id="sort_channels" type="bool" label="30008" default="false"/>
+        <setting id="stop_on_idle" type="bool" label="30009" default="true"/>
     </category>
 </settings>

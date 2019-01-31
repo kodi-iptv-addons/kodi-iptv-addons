@@ -33,3 +33,7 @@ msgstr "Zeige Kanäle für Erwachsene"
 msgctxt "#30007"
 msgid "Sort channels"
 msgstr "Sortiere Kanäle"
+
+msgctxt "#30008"
+msgid "Stop playback when idle"
+msgstr "Wiedergabestop bei Inaktivität"

@@ -29,3 +29,7 @@ msgstr "Ошибка при обработке плейлиста"
 msgctxt "#30006"
 msgid "Sort channels"
 msgstr "Сортировать каналы"
+
+msgctxt "#30007"
+msgid "Stop playback when idle"
+msgstr "Прекращать воспроизведение при неактивности"

@@ -200,6 +200,9 @@ class TvDialog(xbmcgui.WindowXMLDialog, WindowMixin):
             self.main_window.close()
 
     def reset_idle_timer(self):
+        if addon.getSetting('stop_on_idle') == 'false' \
+                or addon.getSetting('stop_on_idle') is False:
+            return
         if self.timer_idle:
             self.timer_idle.cancel()
             del self.timer_idle

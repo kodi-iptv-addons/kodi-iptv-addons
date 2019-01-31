@@ -57,3 +57,7 @@ msgstr "No EPG available"
 msgctxt "#30013"
 msgid "Sort channels"
 msgstr "Sort channels"
+
+msgctxt "#30014"
+msgid "Stop playback when idle"
+msgstr "Stop playback when idle"

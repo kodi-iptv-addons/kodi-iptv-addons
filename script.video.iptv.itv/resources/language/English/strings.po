@@ -29,3 +29,7 @@ msgstr "Wrong key"
 msgctxt "#30006"
 msgid "Sort channels"
 msgstr "Sort channels"
+
+msgctxt "#30007"
+msgid "Stop playback when idle"
+msgstr "Stop playback when idle"

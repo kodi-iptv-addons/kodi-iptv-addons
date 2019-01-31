@@ -41,3 +41,7 @@ msgstr "You can bind a playlist to device KODI on http://ottplayer.es"
 msgctxt "#30009"
 msgid "Sort channels"
 msgstr "Sort channels"
+
+msgctxt "#30010"
+msgid "Stop playback when idle"
+msgstr "Stop playback when idle"

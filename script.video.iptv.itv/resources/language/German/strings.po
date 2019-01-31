@@ -29,3 +29,7 @@ msgstr "Falscher Key"
 msgctxt "#30006"
 msgid "Sort channels"
 msgstr "Sortiere Kanäle"
+
+msgctxt "#30007"
+msgid "Stop playback when idle"
+msgstr "Wiedergabestop bei Inaktivität"
