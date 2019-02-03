@@ -217,6 +217,10 @@ class Ottplayer(Api):
     def get_epg(self, cid):
         # type: (str) -> OrderedDict[int, Program]
         channel = self.channels[cid]
+        programs = self.get_epg_gh(channel)
+        if len(programs):
+            return programs
+
         response = self.make_api_request("get_epg2", [channel.epg_id, 2, int(self.archive_ttl / DAY)])
         is_error, error = Api.is_error_response(response)
         if is_error:

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addon id="script.video.iptv.ottplayer-DEV"
        name="OTTPLAYER-DEV"
-       version="1.1.1"
+       version="1.1.2"
        provider-name="Dmitry Vinogradov">
     <requires>
         <import addon="xbmc.python" version="2.24.0"/>
@@ -22,6 +22,8 @@
         <license>GNU LESSER GENERAL PUBLIC LICENSE Version 3, June 2007</license>
         <source>https://github.com/kodi-iptv-addons</source>
         <news>
+v1.1.2 (2019-02-03)
+- Bug fixes in alternative EPG
 v1.1.1 (2019-01-31)
 - Implemented usage of alternative EPG with program images
 - Added stop on idle addon settings
