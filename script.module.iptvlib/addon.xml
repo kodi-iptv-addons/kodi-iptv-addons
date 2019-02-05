@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addon id="script.module.iptvlib-DEV"
        name="IPTV Library-DEV"
-       version="1.1.2"
+       version="1.1.3"
        provider-name="Dmitry Vinogradov">
     <requires>
         <import addon="xbmc.python" version="2.24.0"/>
@@ -19,6 +19,8 @@
         <license>GNU LESSER GENERAL PUBLIC LICENSE Version 3, June 2007</license>
         <source>https://github.com/kodi-iptv-addons</source>
         <news>
+v1.1.3 (2019-02-05)
+- Increased scrolling timeout for program details
 v1.1.2 (2019-01-31)
 - Implemented usage of alternative EPG with program images
 - Respect stop on idle addon settings

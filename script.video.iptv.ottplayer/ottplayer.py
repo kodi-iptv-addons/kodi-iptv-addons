@@ -204,7 +204,10 @@ class Ottplayer(Api):
                     url=channel_data["href"]
                 )
                 channel.data['epg_id'] = channel_data["epg_id"]
-                groups[str(channel_data["group_id"])].channels[channel.cid] = channels[channel.cid] = channel
+                group_id = str(channel_data["group_id"])
+                if groups.has_key(group_id) is False:
+                    continue
+                groups[group_id].channels[channel.cid] = channels[channel.cid] = channel
         return groups
 
     def get_stream_url(self, cid, ut_start=None):

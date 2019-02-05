@@ -13,7 +13,7 @@
       <platform>all</platform>
     </extension>
   </addon>
-  <addon id="script.module.iptvlib" name="IPTV Library" version="1.1.2" provider-name="Dmitry Vinogradov">
+  <addon id="script.module.iptvlib" name="IPTV Library" version="1.1.3" provider-name="Dmitry Vinogradov">
     <requires>
       <import addon="xbmc.python" version="2.24.0"/>
     </requires>
@@ -30,6 +30,8 @@
       <license>GNU LESSER GENERAL PUBLIC LICENSE Version 3, June 2007</license>
       <source>https://github.com/kodi-iptv-addons</source>
       <news>
+v1.1.3 (2019-02-05)
+- Increased scrolling timeout for program details
 v1.1.2 (2019-01-31)
 - Implemented usage of alternative EPG with program images
 - Respect stop on idle addon settings
@@ -216,7 +218,7 @@ v1.0.0 (2018-10-10)
         </news>
     </extension>
   </addon>
-  <addon id="script.video.iptv.ottplayer" name="OTTPLAYER" version="1.1.2" provider-name="Dmitry Vinogradov">
+  <addon id="script.video.iptv.ottplayer" name="OTTPLAYER" version="1.1.3" provider-name="Dmitry Vinogradov">
     <requires>
       <import addon="xbmc.python" version="2.24.0"/>
       <import addon="script.module.iptvlib" version="1.1.0"/>
@@ -236,8 +238,8 @@ v1.0.0 (2018-10-10)
       <license>GNU LESSER GENERAL PUBLIC LICENSE Version 3, June 2007</license>
       <source>https://github.com/kodi-iptv-addons</source>
       <news>
-v1.1.2 (2019-02-03)
-- Bug fixes in alternative EPG
+v1.1.3 (2019-02-05)
+- Bug fixes
 v1.1.1 (2019-01-31)
 - Implemented usage of alternative EPG with program images
 - Added stop on idle addon settings
