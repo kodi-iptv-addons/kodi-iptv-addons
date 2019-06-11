@@ -103,7 +103,7 @@ class Ottclub(Api):
 
     @property
     def archive_ttl(self):
-        return TREEDAYS
+        return WEEK
 
     def get_cookie(self):
         return ""
