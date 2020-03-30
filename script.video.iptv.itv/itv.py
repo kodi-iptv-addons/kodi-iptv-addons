@@ -19,6 +19,7 @@
 # Boston, MA  02110-1301, USA.
 #
 import json
+import urllib2
 from urllib import quote
 
 from iptvlib.api import Api, ApiException
@@ -117,17 +118,24 @@ class Itv(Api):
                 archive=bool(channel_data.get("rec", 0)),
                 protected=group.name == self.PROTECTED_GROUP
             )
-            channel.data.update({"server": channel_data["server"], "token": channel_data["token"]})
+            channel.data.update({"server": channel_data["server_cdn"], "token": channel_data["token"], "port": channel_data["port_cdn"]})
             group.channels[cid] = channels[cid] = channel
         return groups
 
     def get_stream_url(self, cid, ut_start=None):
         channel = self.channels[cid]
-        url = "http://%s:25000/%s/" % (channel.data["server"], cid)
+        url = "http://%s:%s/%s/" % \
+              (channel.data["server"], channel.data["port"] if channel.data["port"] != "" else "80", cid)
         if ut_start is None:
-            return "%smono.m3u8?token=%s" % (url, channel.data["token"])
-        return "%sindex-%s-%s.m3u8?token=%s" % \
-               (url, int(ut_start), int(time_now() - ut_start), channel.data["token"])
+            url = "%smono.m3u8?token=%s" % (url, channel.data["token"])
+        else:
+            url = "%sindex-%s-%s.m3u8?token=%s" % (url, int(ut_start), int(time_now() - ut_start), channel.data["token"])
+        return self.resolve_url(url)
+
+    def resolve_url(self, url):
+        request = self.prepare_request(url)
+        response = urllib2.urlopen(request)
+        return response.url
 
     def get_epg(self, cid):
         # type: (str) -> OrderedDict[int, Program]
