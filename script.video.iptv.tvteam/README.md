@@ -1,6 +1,6 @@
-# KARTINA TV Addon for KODI
+# TV.TEAM Addon for KODI
 
-[![logo](https://raw.githubusercontent.com/kodi-iptv-addons/kodi-iptv-addons/master/script.video.iptv.kartina/resources/icon.png)](https://kartina.tv)
+[![logo](https://raw.githubusercontent.com/kodi-iptv-addons/kodi-iptv-addons/master/script.video.iptv.tvteam/resources/icon.png)](https://tv.team)
 
 
 
@@ -13,7 +13,7 @@
     * go to **Install from repository**
     * select **IPTV Add-ons repository**
     * open **Video Addons**
-    * Select and install **KARTINA** addon.
+    * Select and install **TV.TEAM** addon.
     
 ## Установка
 
@@ -24,7 +24,7 @@
     * Выбираем пункт **Установка из репозитория**
     * Выбираем репозиторий **IPTV Add-ons repository**
     * Открываем **Видеодополнения**
-    * Выбираем и устанавливаем **KARTINA** дополнение.
+    * Выбираем и устанавливаем **TV.TEAM** дополнение.
 
 ### Screenshots:
 

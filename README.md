@@ -30,7 +30,7 @@
 |[![Kartina.TV](https://raw.githubusercontent.com/kodi-iptv-addons/kodi-iptv-addons/master/script.video.iptv.kartina/resources/icon.png)](https://www.kartina.tv)|[![New-rus.tv](https://raw.githubusercontent.com/kodi-iptv-addons/kodi-iptv-addons/master/script.video.iptv.novoetv/resources/icon.png)](https://new-rus.tv)|[![ITV Live](https://raw.githubusercontent.com/kodi-iptv-addons/kodi-iptv-addons/master/script.video.iptv.itv/resources/icon.png)](https://goo.gl/LZQKVL)|
 |---|---|---|
 
-|[![Torrent-tv.ru](https://raw.githubusercontent.com/kodi-iptv-addons/kodi-iptv-addons/master/script.video.iptv.torrenttv/resources/icon.png)](http://torrent-tv.ru)|||
+|[![Torrent-tv.ru](https://raw.githubusercontent.com/kodi-iptv-addons/kodi-iptv-addons/master/script.video.iptv.torrenttv/resources/icon.png)](http://torrent-tv.ru)|[![tv.team](https://raw.githubusercontent.com/kodi-iptv-addons/kodi-iptv-addons/master/script.video.iptv.tvteam/resources/icon.png)](https://tv.team)||
 |---|---|---|
 
 ### Scrinshots:

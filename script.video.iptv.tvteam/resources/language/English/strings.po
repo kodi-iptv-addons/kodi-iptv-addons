@@ -1,0 +1,39 @@
+# XBMC Media Center language file
+# Addon Name: IPTV Client for TV.TEAM
+# Addon id: script.video.iptv.tvteam
+# Addon Provider: Dmitry Vinogradov
+msgid ""
+msgstr ""
+
+# Settings
+msgctxt "#30001"
+msgid "Account"
+msgstr "Account"
+
+msgctxt "#30002"
+msgid "Login"
+msgstr "Login"
+
+msgctxt "#30003"
+msgid "Password"
+msgstr "Password"
+
+msgctxt "#30004"
+msgid "Advanced"
+msgstr "Advanced"
+
+msgctxt "#30005"
+msgid "Api hostname"
+msgstr "Api hostname"
+
+msgctxt "#30006"
+msgid "Show adult channels"
+msgstr "Show adult channels"
+
+msgctxt "#30007"
+msgid "Sort channels"
+msgstr "Sort channels"
+
+msgctxt "#30008"
+msgid "Stop playback when idle"
+msgstr "Stop playback when idle"

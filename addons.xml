@@ -331,4 +331,29 @@ v1.0.0 (2018-10-23)
         </news>
     </extension>
   </addon>
+  <addon id="script.video.iptv.tvteam" name="TV.TEAM" version="1.0.0" provider-name="Dmitry Vinogradov">
+    <requires>
+      <import addon="xbmc.python" version="2.24.0"/>
+      <import addon="script.module.iptvlib" version="1.1.0"/>
+    </requires>
+    <extension point="xbmc.python.script" library="default.py">
+      <provides>video</provides>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+      <assets>
+        <icon>resources/icon.png</icon>
+        <fanart/>
+        <screenshot/>
+      </assets>
+      <platform>all</platform>
+      <summary lang="en">IPTV player for TV.TEAM</summary>
+      <description lang="en">IPTV player for TV.TEAM</description>
+      <license>GNU LESSER GENERAL PUBLIC LICENSE Version 3, June 2007</license>
+      <source>https://github.com/kodi-iptv-addons</source>
+      <news>
+v1.0.0 (2020-04-02)
+- Initial release
+        </news>
+    </extension>
+  </addon>
 </addons>

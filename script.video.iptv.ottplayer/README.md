@@ -1,6 +1,6 @@
 # OTTPLAYER Addon for KODI
 
-[![Ottclub.cc](https://raw.githubusercontent.com/kodi-iptv-addons/kodi-iptv-addons/master/script.video.iptv.ottplayer/resources/icon.png)](https://ottplayer.es)
+[![logo](https://raw.githubusercontent.com/kodi-iptv-addons/kodi-iptv-addons/master/script.video.iptv.ottplayer/resources/icon.png)](https://ottplayer.es)
 
 
 
@@ -26,20 +26,20 @@
     * Открываем **Видеодополнения**
     * Выбираем и устанавливаем **OTTPLAYER** дополнение.
 
-### Scrinshots:
+### Screenshots:
 
 
 
-[![Stalker](https://raw.githubusercontent.com/kodi-iptv-addons/kodi-iptv-addons/master/screenshot_01.png)](#)
+[![screenshot](https://raw.githubusercontent.com/kodi-iptv-addons/kodi-iptv-addons/master/screenshot_01.png)](#)
 
 
 
-[![Stalker](https://raw.githubusercontent.com/kodi-iptv-addons/kodi-iptv-addons/master/screenshot_02.png)](#)
+[![screenshot](https://raw.githubusercontent.com/kodi-iptv-addons/kodi-iptv-addons/master/screenshot_02.png)](#)
 
 
 
-[![Stalker](https://raw.githubusercontent.com/kodi-iptv-addons/kodi-iptv-addons/master/screenshot_03.png)](#)
+[![screenshot](https://raw.githubusercontent.com/kodi-iptv-addons/kodi-iptv-addons/master/screenshot_03.png)](#)
 
 
 
-[![Stalker](https://raw.githubusercontent.com/kodi-iptv-addons/kodi-iptv-addons/master/screenshot_04.png)](#)
+[![screenshot](https://raw.githubusercontent.com/kodi-iptv-addons/kodi-iptv-addons/master/screenshot_04.png)](#)
