@@ -47,6 +47,10 @@ class TvTeam(Api):
         return "https://%s/api/%%s" % self.hostname
 
     @property
+    def base_icon_url(self):
+        return "http://%s/icon/%%s" % self.hostname
+
+    @property
     def host(self):
         return self.hostname
 
