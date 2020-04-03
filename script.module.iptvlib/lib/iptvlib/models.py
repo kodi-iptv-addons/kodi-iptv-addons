@@ -73,7 +73,8 @@ class Group(Model):
         super(Group, self).__init__({"gid": gid, "group_name": name, "icon": "", "number": number})
 
     def get_icon(self):
-        return "%s.png" % (self.number if self.number is not None else self.data["gid"])
+        number = self.number if self.number is not None else int(self.data["gid"]) % 20
+        return "%s.png" % (number if number != 0 else 20)
 
     def __repr__(self):
         return "%s (%s)" % (self.name, self.gid)
