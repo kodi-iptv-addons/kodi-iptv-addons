@@ -20,6 +20,7 @@
 #
 import __builtin__
 import os
+import re
 
 setattr(__builtin__, 'addon_id', os.path.basename(os.path.abspath(os.path.dirname(__file__))))
 
@@ -27,7 +28,7 @@ import xbmcgui
 from ottplayer import Ottplayer
 from iptvlib import *
 from iptvlib.mainwindow import MainWindow
-
+from uuid import getnode as get_mac
 
 
 class Main(object):
@@ -62,9 +63,15 @@ class Main(object):
         sort_channels = addon.getSetting("sort_channels") == 'true' or \
                         addon.getSetting("sort_channels") == True
 
+        device_name = addon.getSetting("device_name")
+        if device_name == "":
+            device_name = "KODI_%s" % ''.join(re.findall('..', '%012x' % get_mac()))
+            addon.setSetting("device_name", device_name)
+
         self.main_window.api = Ottplayer(
             hostname=hostname,
             adult=adult,
+            device_name=device_name,
             username=username,
             password=password,
             working_path=xbmc.translatePath(addon.getAddonInfo("profile")),

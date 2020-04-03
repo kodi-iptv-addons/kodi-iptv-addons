@@ -28,20 +28,20 @@ class Ottplayer(Api):
     TEXT_NO_PLAYLIST_BOUND_ID = 30007  # type: int
     TEXT_YOU_CAN_BIND_DEVICE_ID = 30008  # type: int
 
-    DEVICE_TYPE = "KODI"
-
     hostname = None  # type: str
     use_origin_icons = None  # type: bool
     adult = None  # type: bool
+    device_name = None  # type: str
 
     _device_id = None  # type: str
     _api_calls = None  # type: list[str]
     _utc_local_offset = None  # type: float
 
-    def __init__(self, hostname, adult, **kwargs):
+    def __init__(self, hostname, adult, device_name, **kwargs):
         super(Ottplayer, self).__init__(**kwargs)
         self.hostname = hostname
         self.adult = adult
+        self.device_name = device_name
         self._api_calls = 0
         self._utc_local_offset = math.ceil(calendar.timegm(time.localtime()) - time.time())
         Model.API = self
@@ -108,7 +108,7 @@ class Ottplayer(Api):
             devices = self.get_devices()
             found = False
             for device in devices:
-                if device.get("name") == self.DEVICE_TYPE:
+                if device.get("name") == self.device_name:
                     self._device_id = device.get("key")
                     found = True
                     break
@@ -132,7 +132,7 @@ class Ottplayer(Api):
 
     def register_device(self):
         # type: () -> str
-        response = self.make_api_request("register_device", [self.DEVICE_TYPE, "unknown"], 2)
+        response = self.make_api_request("register_device", [self.device_name, "unknown"], 2)
         is_error, error = Api.is_error_response(response)
         if is_error:
             raise ApiException(
@@ -175,7 +175,7 @@ class Ottplayer(Api):
         playlists = get_playlists_response.get("result")  # type: list[dict]
         if len(playlists) == 0:
             raise ApiException("%s\n%s" % (
-                addon.getLocalizedString(self.TEXT_NO_PLAYLIST_BOUND_ID),
+                addon.getLocalizedString(self.TEXT_NO_PLAYLIST_BOUND_ID).replace("KODI", self.device_name),
                 addon.getLocalizedString(self.TEXT_YOU_CAN_BIND_DEVICE_ID)
             ), Api.E_UNKNOW_ERROR)
 

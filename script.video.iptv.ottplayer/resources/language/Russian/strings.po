@@ -45,3 +45,7 @@ msgstr "Сортировать каналы"
 msgctxt "#30010"
 msgid "Stop playback when idle"
 msgstr "Прекращать воспроизведение при неактивности"
+
+msgctxt "#30011"
+msgid "Device name"
+msgstr "Название устройства"

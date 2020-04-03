@@ -45,3 +45,7 @@ msgstr "Sort channels"
 msgctxt "#30010"
 msgid "Stop playback when idle"
 msgstr "Stop playback when idle"
+
+msgctxt "#30011"
+msgid "Device name"
+msgstr "Device name"
