@@ -115,7 +115,8 @@ class Api:
     @property
     def groups(self):
         if len(self._groups) == 0:
-            self._groups = self.get_groups()
+            self._groups = OrderedDict(sorted(self.get_groups().iteritems(), key=lambda item: item[1].name)) \
+                if self.sort_channels else self.get_groups()
             self._channels = OrderedDict()
             for group in self._groups.values():
                 channels = OrderedDict(sorted(group.channels.iteritems(), key=lambda item: item[1].name)) \

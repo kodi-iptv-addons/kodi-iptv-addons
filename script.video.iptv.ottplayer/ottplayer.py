@@ -18,6 +18,8 @@
 # Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
 # Boston, MA  02110-1301, USA.
 #
+import urllib2
+
 from iptvlib.api import Api, ApiException, HttpRequest
 from iptvlib.models import *
 
@@ -169,7 +171,7 @@ class Ottplayer(Api):
         if is_error:
             raise ApiException(error.get("message"), error.get("code"))
         Ottplayer.raise_api_exception_on_error(get_playlists_response["error"])
-        
+
         playlists = get_playlists_response.get("result")  # type: list[dict]
         if len(playlists) == 0:
             raise ApiException("%s\n%s" % (
@@ -214,8 +216,14 @@ class Ottplayer(Api):
         channels = self.channels
         url = channels[cid].url
         if ut_start is not None:
-            url = "%s?utc=%s&lutc=%s" % (url, ut_start, int(time_now()))
-        return url
+            # url = "%s%sarchive=%s&archive_end=%s" % (url, "&" if "?" in url else "?", ut_start, int(time_now()))
+            url = "%s%sutc=%s&lutc=%s" % (url, "&" if "?" in url else "?", ut_start, int(time_now()))
+        return self.resolve_url(url)
+
+    def resolve_url(self, url):
+        request = self.prepare_request(url)
+        response = urllib2.urlopen(request)
+        return response.url
 
     def get_epg(self, cid):
         # type: (str) -> OrderedDict[int, Program]

@@ -1,5 +1,5 @@
-v1.1.4 (2020-02-03)
-- Fixed group background image if amount of groups are more than 20
+v1.1.5 (2020-02-03)
+- Fixed bugs in group display
 v1.1.3 (2019-02-05)
 - Increased scrolling timeout for program details
 v1.1.2 (2019-01-31)
