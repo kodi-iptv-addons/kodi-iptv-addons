@@ -24,14 +24,12 @@
 
 ### Available Addons / Предлагаемые дополнения
 
-|[![logo](https://raw.githubusercontent.com/kodi-iptv-addons/kodi-iptv-addons/master/script.video.iptv.ottclub/resources/icon.png)](https://goo.gl/VHVSB5)|[![logo](https://raw.githubusercontent.com/kodi-iptv-addons/kodi-iptv-addons/master/script.video.iptv.ottplayer/resources/icon.png)](https://ottplayer.es)|[![logo](https://raw.githubusercontent.com/kodi-iptv-addons/kodi-iptv-addons/master/script.video.iptv.stalker/resources/icon.png)](#)|
+|[![logo](https://raw.githubusercontent.com/kodi-iptv-addons/kodi-iptv-addons/master/script.video.iptv.ottclub/resources/icon.png)](https://goo.gl/VHVSB5)|[![logo](https://raw.githubusercontent.com/kodi-iptv-addons/kodi-iptv-addons/master/script.video.iptv.ottplayer/resources/icon.png)](https://ottplayer.es)|[![logo](https://raw.githubusercontent.com/kodi-iptv-addons/kodi-iptv-addons/master/script.video.iptv.kartina/resources/icon.png)](https://www.kartina.tv)|
 |---|---|---|
 
-|[![logo](https://raw.githubusercontent.com/kodi-iptv-addons/kodi-iptv-addons/master/script.video.iptv.kartina/resources/icon.png)](https://www.kartina.tv)|[![logo](https://raw.githubusercontent.com/kodi-iptv-addons/kodi-iptv-addons/master/script.video.iptv.novoetv/resources/icon.png)](https://new-rus.tv)|[![logo](https://raw.githubusercontent.com/kodi-iptv-addons/kodi-iptv-addons/master/script.video.iptv.itv/resources/icon.png)](https://goo.gl/LZQKVL)|
+|[![logo](https://raw.githubusercontent.com/kodi-iptv-addons/kodi-iptv-addons/master/script.video.iptv.novoetv/resources/icon.png)](https://new-rus.tv)|[![logo](https://raw.githubusercontent.com/kodi-iptv-addons/kodi-iptv-addons/master/script.video.iptv.itv/resources/icon.png)](https://goo.gl/LZQKVL)|[![logo](https://raw.githubusercontent.com/kodi-iptv-addons/kodi-iptv-addons/master/script.video.iptv.tvteam/resources/logo.png)](https://tv.team)|
 |---|---|---|
 
-|[![logo](https://raw.githubusercontent.com/kodi-iptv-addons/kodi-iptv-addons/master/script.video.iptv.torrenttv/resources/icon.png)](http://torrent-tv.ru)|[![logo](https://raw.githubusercontent.com/kodi-iptv-addons/kodi-iptv-addons/master/script.video.iptv.tvteam/resources/logo.png)](https://tv.team)||
-|---|---|---|
 
 ### Screenshots:
 

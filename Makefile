@@ -8,8 +8,6 @@ addons = $(SELF_PATH)/repository.iptv \
 	$(SELF_PATH)/script.video.iptv.novoetv \
 	$(SELF_PATH)/script.video.iptv.ottclub \
 	$(SELF_PATH)/script.video.iptv.ottplayer\
-	$(SELF_PATH)/script.video.iptv.stalker \
-	$(SELF_PATH)/script.video.iptv.torrenttv \
 	$(SELF_PATH)/script.video.iptv.tvteam
 
 release: zip repo
