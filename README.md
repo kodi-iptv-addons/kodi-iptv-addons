@@ -2,7 +2,7 @@
 
 ## Installation guide
 
-* Download repository zip file: [https://goo.gl/NQ4CEY](https://goo.gl/NQ4CEY) (which is a shortcut to [repository.iptv.zip](https://raw.githubusercontent.com/dmitry-vinogradov/kodi-iptv-addons/master/repository.iptv.zip))
+* Download repository zip file: [https://goo.gl/NQ4CEY](https://goo.gl/NQ4CEY) (which is a shortcut to [repository.iptv.zip](https://raw.githubusercontent.com/kodi-iptv-addons/kodi-iptv-addons/master/repository.iptv.zip))
 * In KODI's _Add-ons / Add-on browser_ select **Install from zip file**
 * Navigate and choose the downloaded repository zip file **_repository.iptv.zip_**
 * After installation: 
@@ -13,7 +13,7 @@
     
 ## Установка
 
-* Скачиваем ZIP файл репозитория: [https://goo.gl/NQ4CEY](https://goo.gl/NQ4CEY) (это сокращенный URL для [repository.iptv.zip](https://raw.githubusercontent.com/dmitry-vinogradov/kodi-iptv-addons/master/repository.iptv.zip))
+* Скачиваем ZIP файл репозитория: [https://goo.gl/NQ4CEY](https://goo.gl/NQ4CEY) (это сокращенный URL для [repository.iptv.zip](https://raw.githubusercontent.com/kodi-iptv-addons/kodi-iptv-addons/master/repository.iptv.zip))
 * В разделе _Дополнения_ выбираем **Установить из файла ZIP**
 * Выбираем скаченный ZIP файл **_repository.iptv.zip_**
 * После установки репозитория: 
