@@ -122,7 +122,7 @@ class Ottclub(Api):
         url = channels[cid].url
         if ut_start is not None:
             url = "%s%sarchive=%s&archive_end=%s" % (url, "&" if "?" in url else "?", ut_start, int(time_now()))
-        return url
+        return self.resolve_url(url)
 
     def get_epg(self, cid):
         # type: (str) -> OrderedDict[int, Program]

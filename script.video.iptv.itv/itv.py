@@ -19,7 +19,6 @@
 # Boston, MA  02110-1301, USA.
 #
 import json
-import urllib2
 from urllib import quote
 
 from iptvlib.api import Api, ApiException
@@ -131,11 +130,6 @@ class Itv(Api):
         else:
             url = "%sindex-%s-%s.m3u8?token=%s" % (url, int(ut_start), int(time_now() - ut_start), channel.data["token"])
         return self.resolve_url(url)
-
-    def resolve_url(self, url):
-        request = self.prepare_request(url)
-        response = urllib2.urlopen(request)
-        return response.url
 
     def get_epg(self, cid):
         # type: (str) -> OrderedDict[int, Program]

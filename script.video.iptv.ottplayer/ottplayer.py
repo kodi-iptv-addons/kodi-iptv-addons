@@ -220,11 +220,6 @@ class Ottplayer(Api):
             url = "%s%sutc=%s&lutc=%s" % (url, "&" if "?" in url else "?", ut_start, int(time_now()))
         return self.resolve_url(url)
 
-    def resolve_url(self, url):
-        request = self.prepare_request(url)
-        response = urllib2.urlopen(request)
-        return response.url
-
     def get_epg(self, cid):
         # type: (str) -> OrderedDict[int, Program]
         channel = self.channels[cid]

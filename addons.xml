@@ -13,7 +13,7 @@
       <platform>all</platform>
     </extension>
   </addon>
-  <addon id="script.module.iptvlib" name="IPTV Library" version="1.1.5" provider-name="Dmitry Vinogradov">
+  <addon id="script.module.iptvlib" name="IPTV Library" version="1.1.6" provider-name="Dmitry Vinogradov">
     <requires>
       <import addon="xbmc.python" version="2.24.0"/>
     </requires>
@@ -30,6 +30,9 @@
       <license>GNU LESSER GENERAL PUBLIC LICENSE Version 3, June 2007</license>
       <source>https://github.com/kodi-iptv-addons</source>
       <news>
+v1.1.6 (2020-04-15)
+- Fixed minor bugs in EPG retrieval
+- Added API method to resolve redirections in stream urls
 v1.1.5 (2020-02-03)
 - Fixed bugs in group display
 v1.1.3 (2019-02-05)
@@ -63,7 +66,7 @@ v1.0.0 (2018-10-10)
         </news>
     </extension>
   </addon>
-  <addon id="script.video.iptv.itv" name="ITV" version="1.1.2" provider-name="Dmitry Vinogradov">
+  <addon id="script.video.iptv.itv" name="ITV" version="1.1.3" provider-name="Dmitry Vinogradov">
     <requires>
       <import addon="xbmc.python" version="2.24.0"/>
       <import addon="script.module.iptvlib" version="1.1.0"/>
@@ -83,6 +86,8 @@ v1.0.0 (2018-10-10)
       <license>GNU LESSER GENERAL PUBLIC LICENSE Version 3, June 2007</license>
       <source>https://github.com/kodi-iptv-addons</source>
       <news>
+v1.1.3 (2020-04-15)
+- Minor bug fixes
 v1.1.2 (2020-03-30)
 - Fixed stream URL resolving
 v1.1.1 (2019-01-31)
@@ -177,7 +182,7 @@ v1.0.0 (2018-10-16)
         </news>
     </extension>
   </addon>
-  <addon id="script.video.iptv.ottclub" name="OTTCLUB" version="1.1.3" provider-name="Dmitry Vinogradov">
+  <addon id="script.video.iptv.ottclub" name="OTTCLUB" version="1.1.4" provider-name="Dmitry Vinogradov">
     <requires>
       <import addon="xbmc.python" version="2.24.0"/>
       <import addon="script.module.iptvlib" version="1.1.0"/>
@@ -197,6 +202,8 @@ v1.0.0 (2018-10-16)
       <license>GNU LESSER GENERAL PUBLIC LICENSE Version 3, June 2007</license>
       <source>https://github.com/kodi-iptv-addons</source>
       <news>
+v1.1.4 (2020-04-15)
+- Minor bug fixes
 v1.1.3 (2019-06-11)
 - Extended archive TTL to one week
 v1.1.2 (2019-03-17)
@@ -226,7 +233,7 @@ v1.0.0 (2018-10-10)
         </news>
     </extension>
   </addon>
-  <addon id="script.video.iptv.ottplayer" name="OTTPLAYER" version="1.1.5" provider-name="Dmitry Vinogradov">
+  <addon id="script.video.iptv.ottplayer" name="OTTPLAYER" version="1.1.6" provider-name="Dmitry Vinogradov">
     <requires>
       <import addon="xbmc.python" version="2.24.0"/>
       <import addon="script.module.iptvlib" version="1.1.0"/>
@@ -246,7 +253,9 @@ v1.0.0 (2018-10-10)
       <license>GNU LESSER GENERAL PUBLIC LICENSE Version 3, June 2007</license>
       <source>https://github.com/kodi-iptv-addons</source>
       <news>
-v1.1.5 (2020-02-03)
+v1.1.6 (2020-04-15)
+- Minor bug fixes
+v1.1.5 (2020-04-03)
 - Added settings for device name
 - Bug fixes
 v1.1.3 (2019-02-05)
@@ -271,7 +280,7 @@ v1.0.0 (2018-10-15)
         </news>
     </extension>
   </addon>
-  <addon id="script.video.iptv.tvteam" name="TV.TEAM" version="1.0.1" provider-name="Dmitry Vinogradov">
+  <addon id="script.video.iptv.tvteam" name="TV.TEAM" version="1.0.2" provider-name="Dmitry Vinogradov">
     <requires>
       <import addon="xbmc.python" version="2.24.0"/>
       <import addon="script.module.iptvlib" version="1.1.0"/>
@@ -291,6 +300,8 @@ v1.0.0 (2018-10-15)
       <license>GNU LESSER GENERAL PUBLIC LICENSE Version 3, June 2007</license>
       <source>https://github.com/kodi-iptv-addons</source>
       <news>
+v1.0.2 (2020-04-15)
+- Minor bug fixes
 v1.0.1 (2020-04-02)
 - Initial release
         </news>

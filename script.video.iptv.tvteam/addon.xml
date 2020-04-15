@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addon id="script.video.iptv.tvteam-DEV"
        name="TV.TEAM-DEV"
-       version="1.0.1"
+       version="1.0.2"
        provider-name="Dmitry Vinogradov">
     <requires>
         <import addon="xbmc.python" version="2.24.0"/>
@@ -22,6 +22,8 @@
         <license>GNU LESSER GENERAL PUBLIC LICENSE Version 3, June 2007</license>
         <source>https://github.com/kodi-iptv-addons</source>
         <news>
+v1.0.2 (2020-04-15)
+- Minor bug fixes
 v1.0.1 (2020-04-02)
 - Initial release
         </news>

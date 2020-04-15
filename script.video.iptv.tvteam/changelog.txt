@@ -1,2 +1,4 @@
+v1.0.2 (2020-04-15)
+- Minor bug fixes
 v1.0.0 (2020-04-01)
 - Initial release

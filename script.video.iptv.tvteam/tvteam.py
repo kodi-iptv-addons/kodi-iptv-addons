@@ -159,19 +159,14 @@ class TvTeam(Api):
             url = "%smono.m3u8?token=%s" % (url, self._random_token)
         else:
             url = "%sindex-%s-%s.m3u8?token=%s" % (url, int(ut_start), int(time_now() - ut_start), self._random_token)
-        log("url: %s" % url, xbmc.LOGDEBUG)
-        return url
-
-    def resolve_url(self, url):
-        # type: (str) -> str
-        log("url: %s" % url, xbmc.LOGDEBUG)
-        request = self.prepare_request(url)
-        response = urllib2.urlopen(request)
-        log("response.url: %s" % response.url, xbmc.LOGDEBUG)
-        return response.url
+        return self.resolve_url(url)
 
     def get_epg(self, cid):
         # type: (str) -> OrderedDict[int, Program]
+        programs = self.get_epg_gh(self.channels[cid])
+        if len(programs):
+            return programs
+
         if self._session_id is None:
             self.login()
         payload = {

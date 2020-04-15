@@ -21,6 +21,7 @@
 import abc
 import json
 import os
+import ssl
 import threading
 import traceback
 import urllib2
@@ -207,6 +208,12 @@ class Api:
         :rtype: str
         """
         pass
+
+    def resolve_url(self, url):
+        # type: (str) -> str
+        request = self.prepare_request(url)
+        response = urllib2.urlopen(request, context=ssl.SSLContext(ssl.PROTOCOL_TLS))
+        return response.url
 
     @abc.abstractmethod
     def get_epg(self, cid):
@@ -435,11 +442,11 @@ class Api:
         for key in sorted(results.iterkeys()):
             response = results[key]
             is_error, error = Api.is_error_response(response)
-            if not is_error:
-                for k, v in response.iteritems():
-                    epg[int(k)] = v
-            else:
+            if is_error:
                 log("error: %s" % error if is_error else response, xbmc.LOGDEBUG)
+                return programs
+            for k, v in response.iteritems():
+                epg[int(k)] = v
 
         prev = None  # type: Program
         for key in sorted(epg.iterkeys()):
