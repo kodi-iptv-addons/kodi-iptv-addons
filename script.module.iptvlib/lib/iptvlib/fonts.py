@@ -77,3 +77,6 @@ class FontManager(object, SkinUtilsFontManager):
                 copy_skin_to_userdata(ask_user=False)
             return True
         return False
+
+    def __del__(self):
+        pass

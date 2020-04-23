@@ -13,7 +13,7 @@
       <platform>all</platform>
     </extension>
   </addon>
-  <addon id="script.module.iptvlib" name="IPTV Library" version="1.1.6" provider-name="Dmitry Vinogradov">
+  <addon id="script.module.iptvlib" name="IPTV Library" version="1.1.7" provider-name="Dmitry Vinogradov">
     <requires>
       <import addon="xbmc.python" version="2.24.0"/>
     </requires>
@@ -30,6 +30,8 @@
       <license>GNU LESSER GENERAL PUBLIC LICENSE Version 3, June 2007</license>
       <source>https://github.com/kodi-iptv-addons</source>
       <news>
+v1.1.7 (2020-04-23)
+- Fixed crash bug on exit
 v1.1.6 (2020-04-15)
 - Fixed minor bugs in EPG retrieval
 - Added API method to resolve redirections in stream urls

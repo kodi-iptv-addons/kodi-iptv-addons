@@ -212,8 +212,11 @@ class Api:
     def resolve_url(self, url):
         # type: (str) -> str
         request = self.prepare_request(url)
-        response = urllib2.urlopen(request, context=ssl.SSLContext(ssl.PROTOCOL_TLS))
-        return response.url
+        try:
+            response = urllib2.urlopen(request, context=ssl.SSLContext(ssl.PROTOCOL_TLS))
+            return response.url
+        except urllib2.HTTPError:
+            return url
 
     @abc.abstractmethod
     def get_epg(self, cid):
