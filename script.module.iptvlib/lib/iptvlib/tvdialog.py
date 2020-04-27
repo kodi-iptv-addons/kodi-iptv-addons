@@ -117,10 +117,6 @@ class TvDialog(xbmcgui.WindowXMLDialog, WindowMixin):
             self.timer_skip_playback.cancel()
             del self.timer_skip_playback
 
-        if self.player.isPlaying():
-            self.player.stop()
-        del self.player
-
         if self.timer_load_program_list:
             self.timer_load_program_list.cancel()
             del self.timer_load_program_list
@@ -128,6 +124,10 @@ class TvDialog(xbmcgui.WindowXMLDialog, WindowMixin):
         if self.timer_idle:
             self.timer_idle.cancel()
             del self.timer_idle
+
+        if self.player.isPlaying():
+            self.player.stop()
+        del self.player
 
         super(TvDialog, self).close()
 

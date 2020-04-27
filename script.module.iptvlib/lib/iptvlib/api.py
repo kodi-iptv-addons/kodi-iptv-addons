@@ -213,7 +213,7 @@ class Api:
         # type: (str) -> str
         request = self.prepare_request(url)
         try:
-            response = urllib2.urlopen(request, context=ssl.SSLContext(ssl.PROTOCOL_TLS))
+            response = urllib2.urlopen(request, context=ssl.create_default_context())
             return response.url
         except urllib2.HTTPError:
             return url
